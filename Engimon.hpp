@@ -10,15 +10,20 @@
 // #include "Nature.hpp"
 // #include "Ability.hpp"
 
+#define MAX_SKILLS 4
+#define MAX_C_EXP 5000
+#define MAX_EXP 100
+
 using namespace std;
 class Engimon{
     private:
-        int maxSkills = 4;
 
     protected:
         string name;
+        string species;
         string parentNames[2];
-        Skill skills[4];
+        string parentSpecieses[2];
+        vector<Skill> skills;
         vector<Element> elements;
         int level;
         int exp; // experience
@@ -27,9 +32,98 @@ class Engimon{
         // Ability ability;
         
     public:
-        int getMaxSkills(){
-            return maxSkills;
+        // ctor, dtor
+        Engimon (string n, string sp){
+            name = n;
+            species = sp;
+            parentNames[0] = "none";
+            parentNames[1] = "none";
+            parentSpecieses[0] = "none";
+            parentSpecieses[1] = "none";
+            level = 0;
+            exp = 0;
+            cExp = 0;
+            // nature = Nature();
+            // ability = Ability();
+            cout << skills.size() << endl;
+
         }
+        // Engimon (string n, const Engimon& p1, const Engimon& p2){
+
+        // }
+
+        ~Engimon(){
+            cout  << getName() << " telah mencapai batas Cumulative Experience (" << MAX_C_EXP << " exp).\nEngimon mati (\"x x)" << endl;
+        }
+
+
+
+        // GETTER
+        string getName(){
+            return name;
+        }
+        string* getParents(){
+            return parentNames;
+        }        
+        vector<Skill> getSkills(){
+            return skills;
+        }
+        vector<Element> getElements(){
+            return elements;
+        }
+        int getLevel(){
+            return level;
+        }
+        int getExp(){
+            return exp;
+        }
+        int getCExp(){
+            return cExp;
+        }
+        // Nature getNature(){
+        //     return nature;
+        // }
+        // Ability getAbility(){
+        //     return ability;
+        // }
+
+        // SETTER
+        void setName(string n){
+            name  = n;
+        }
+        void setParentNames (string p1, string p2){
+            parentNames[0] = p1;
+            parentNames[1] = p2;
+        }
+        void addSkill(Skill s){
+            if (skills.size() < 4){
+                skills.push_back(s);
+            }
+        }
+        void setLevel(int l){
+            level = l;
+        }
+        void setExp(int e){
+            exp = e;
+        }
+
+
+        // OTHER method
+        void levelUp(){
+            setLevel(this->level + 1);
+        }
+
+        // dipanggil di setiap loop/turn, melakukan update stats pokemon bila diperlukan
+        void updateStats(){ 
+            if (exp >= MAX_EXP){
+                this->levelUp();
+                setExp(exp-MAX_EXP);
+            }
+            if (cExp >= MAX_C_EXP){
+                this->~Engimon();
+            }
+        }
+        
 
 };
 
