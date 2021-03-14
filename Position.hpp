@@ -13,6 +13,6 @@ class Position{
         // Generic class entities
     public:
         
-}
+};
 
 #endif // _Position_hpp_
