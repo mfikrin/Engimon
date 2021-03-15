@@ -80,6 +80,8 @@ public:
 			Skill resultSkill = learnByElement(chosenElement);
 			chosenEngimon->addSkill(resultSkill);
 			number--;
+		}else{
+			cout << "There are no skill items left..." << endl;
 		}
 	}
 };
