@@ -19,6 +19,7 @@ class Engimon{
     private:
 
     protected:
+        int id;
         string name;
         string species;
         string parentNames[2];
