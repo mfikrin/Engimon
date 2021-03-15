@@ -1,0 +1,3 @@
+Earthquake,45.
+Terra Punch,35.
+Gravel Spit,39.

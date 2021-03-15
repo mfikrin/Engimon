@@ -1,0 +1,3 @@
+Ice Blast,43.
+Sub Zero,40.
+Freezing Snow,38.
