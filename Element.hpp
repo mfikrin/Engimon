@@ -8,5 +8,3 @@ enum class Element{
 	Ground,
 	Ice
 };
-
-#endif

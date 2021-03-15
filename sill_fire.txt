@@ -1,0 +1,3 @@
+Burning Breath,38.
+Magma Punch,42.
+Scorching Whip,38.
