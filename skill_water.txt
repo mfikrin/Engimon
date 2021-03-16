@@ -1,3 +1,19 @@
-Water Vortex,39.
-Tsunami,45.
-Splashing Canon,37.
+Water Vortex,39,2001.
+Tsunami,45,2002.
+Splashing Canon,37,2003.
+Assault Splash,50,2004.
+Bane Crasher,42,2005.
+Bane Splash,48,2006.
+Battler Submerge,38,2007.
+Battler Typhoon,36,2008.
+Cloud Submerge,53,2009.
+Fusion Monsoon,38,2010.
+Hydro Beam,52,2011.
+Water Jet,50,2012.
+Monsoon Beam,54,2013.
+Neptune Blaster,45,2014.
+Neptune Cascade,51,2015.
+Neptune Lance,35,2016.
+Ocean Whirlpool,45,2017.
+True Gush,44,2018.
+Typhoon Lance,46,2019.

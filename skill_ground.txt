@@ -1,3 +1,21 @@
-Earthquake,45.
-Terra Punch,35.
-Gravel Spit,39.
+Earthquake,45,1801.
+Terra Punch,35,1802.
+Gravel Spit,39,1803.
+Bane Crashing,36,1804.
+Battler Beam,39,1805.
+Blasting Bolt,38,1806.
+Blasting Earthquake,36,1807.
+Earth Avalanche,39,1808.
+Earthquake World,35,1809.
+Fault Attack,47,1810.
+Force Battler,48,1811.
+Gravel Attack,51,1812.
+Jewel Avalanche,55,1813.
+Jeweled Quake,52,1814.
+Omni Way,37,1815.
+Rock Landslide,47,1816.
+Soil Landslide,50,1817.
+Stone Battler,54,1818.
+Stone Earthquake,46,1819.
+Stone Fusion,55,1820.
+Volcano Avalanche,51,1821.

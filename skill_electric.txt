@@ -1,3 +1,22 @@
-Thunder Strike,46.
-Shock,39.
-Electron Blast,43.
+Thunder Strike,46,1601.
+Shock,39,1602.
+Electron Blast,43,1603.
+Assault Crasher,51,1604.
+Bane Blaster,39,1605.
+Beam Blaster,51,1606.
+Beam Reaction,40,1607.
+Blast Power,52,1608.
+Bolt Reaction,48,1609.
+Bolt Zap,37,1610.
+Charge Bane,39,1611.
+Charged Blast,41,1612.
+Charged Bolt,55,1613.
+Electric Battery,42,1614.
+Electric Way,53,1615.
+Electro Reaction,40,1616.
+Energy Crashing,41,1617.
+Jupiter Crasher,55,1618.
+Jupiter Electrocutioner,55,1619.
+Omni Charge,44,1620.
+Power Fusion,42,1621.
+Thunder Charge,38,1622.
