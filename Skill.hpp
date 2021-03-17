@@ -17,16 +17,19 @@ class Skill {
     public :
         Skill() : id(0), masteryLevel(0), numerikBasePower(0), skillName("No Name"), element(Element::NoElement){}
         Skill(int idSkill, int level, int basePWR, string skillName, Element el) : id(idSkill), masteryLevel(level), numerikBasePower(basePWR), skillName(skillName), element(el) {}
+        // Setter
+        void setSkillId(int id) {this->id = id;}
         void setMasteryLevel(int level){this->masteryLevel = level;}
         void setBasePower(int pwr) {this->numerikBasePower = pwr;}
         void setSkillName (string newskillname) {this->skillName = newskillname;}
+        void setElement(Element element) {this->element = element;}
+        // Getter
+        int getSkillId() {return id;}
         int getMasteryLevel() {return this->masteryLevel;}
         int getBasePower() {return this->numerikBasePower;}
         string getSkillName() {return this->skillName;}
-        int getSkillId() {return id;}
-        void setSkillId(int id) {this->id = id;}
         Element getElement() {return element;}
-        void setElement(Element element) {this->element = element;}
+        
         void printSkill(){
             cout << "[";
             cout << "id:" << id <<" | ";
