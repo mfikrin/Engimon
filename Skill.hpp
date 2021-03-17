@@ -1,6 +1,8 @@
 #ifndef SKILL_H
 #define SKILL_H
 
+#define LEVEL_UP_RATE 1.25
+
 #include <string>
 #include "Element.hpp"
 #include <iostream>
@@ -11,12 +13,19 @@ class Skill {
         int id;
         int masteryLevel;
         int numerikBasePower;
+        int power;
         string skillName;
         Element element;
 
     public :
-        Skill() : id(0), masteryLevel(0), numerikBasePower(0), skillName("No Name"), element(Element::NoElement){}
-        Skill(int idSkill, int level, int basePWR, string skillName, Element el) : id(idSkill), masteryLevel(level), numerikBasePower(basePWR), skillName(skillName), element(el) {}
+        // Skill() : id(0), masteryLevel(0), numerikBasePower(0), skillName("No Name"), element(Element::NoElement){}
+        Skill(int idSkill, int level, int basePWR, string skillName, Element el) : id(idSkill), masteryLevel(level), numerikBasePower(basePWR), skillName(skillName), element(el) {
+            power = numerikBasePower;
+        }
+        void levelUpMastery(){
+            power = power * LEVEL_UP_RATE;
+            masteryLevel++;
+        }
         // Setter
         void setSkillId(int id) {this->id = id;}
         void setMasteryLevel(int level){this->masteryLevel = level;}

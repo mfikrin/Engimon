@@ -10,6 +10,7 @@ class Position{
     protected:
         int x;
         int y;
+        // Landscape landscape;
         // Generic class entities
     public:
         
