@@ -1,0 +1,10 @@
+Hamstun,Inenian Engimon.
+Rabbyte,Inenian Engimon.
+Staranzee,Kheolian Engimon.
+Blastster,Kheolian Engimon.
+Voltphant,Zomaidae Engimon.
+Vultaid,Ipal Engimon.
+Electritopus,Qottunsian Engimon.
+Koalite,Inenian Engimon.
+Steelhawk,Ipal Engimon.
+Dractric,Dragers Engimon.

@@ -1,0 +1,10 @@
+Irodine,Zomaidae Engimon.
+Drasaur,Dragers Engimon.
+Sandopus,Qottunsian Engimon.
+Gazite,Kheolian Engimon.
+Mountadillo,Dorid Engimon.
+Termime,Niaceous Engimon.
+Pandithe,Inenian Engimon.
+Shelmite,Dorid Engimon.
+Gorinite,Zomaidae Engimon.
+Komodough,Dragers Engimon.

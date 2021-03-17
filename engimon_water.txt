@@ -1,0 +1,10 @@
+Pelicanine,Ipal Engimon.
+Stingrage,Niaceous Engimon.
+Camosquido,Qottunsian Engimon.
+Slowtopus,Qottunsian Engimon.
+Pelizar,Ipal Engimon.
+Geishark,Drarsusin Engimon.
+Waropus,Drarsusin Engimon.
+Propelican,Ipal Engimon.
+Aquabat,Umuthyes Engimon.
+Venoray,Umuthyes Engimon.

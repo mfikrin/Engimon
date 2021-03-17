@@ -7,8 +7,8 @@
 
 class BookOfLore{
 private:
-	vector<vector<Engimon>> engimonLore; //by element
-	vector<vector<Skill>> skillLore; //by element
+	// vector<vector<Engimon>> engimonLore; //by element
+	// vector<vector<Skill>> skillLore; //by element
 public:
 	vector<Skill> generateSkillPerElement(const Element& el){
 		string filename;
@@ -27,6 +27,9 @@ public:
 		}else if (el == Element::Ice)
 		{
 			filename = "skill_ice.txt";
+		}else if (el == Element::NoElement)
+		{
+			filename = "skill_basic.txt";
 		}
 		ifstream listSkill(filename);
 		string line;
@@ -57,15 +60,17 @@ public:
 
 	vector<vector<Skill>> allSkill(){
 		vector<vector<Skill>> result;
-		Element elements[5] = {Element::Fire,Element::Water,Element::Electric,Element::Ground,Element::Ice};
+		Element elements[5] = {Element::Fire,
+			Element::Water,
+			Element::Electric,
+			Element::Ground,
+			Element::Ice,
+			Element::NoElement};
 		for (int i = 0; i < 5; ++i)
 		{
 			result.push_back(generateSkillPerElement(elements[i]));
 		}
 		return result;
-	}
-	BookOfLore(){
-		skillLore = allSkill();
 	}
 };
 

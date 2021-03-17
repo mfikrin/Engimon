@@ -22,7 +22,7 @@ public:
 		vector<Element> chosensElement = chosen->getElements();
 		for (int i = 0; i < chosensElement.size(); ++i)
 		{
-			if (chosensElement[i] == containedSkill.getElement())
+			if (chosensElement[i] == containedSkill.getElement() || containedSkill.getElement() == Element::NoElement)
 			{
 				chosen->addSkill(containedSkill);
 			}
