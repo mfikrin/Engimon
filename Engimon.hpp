@@ -48,16 +48,16 @@ class Engimon{
             elements = el;
             // nature = Nature();
             // ability = Ability();
-            cout << skills.size() << endl;
+            // cout << skills.size() << endl;
 
         }
         // Engimon (string n, const Engimon& p1, const Engimon& p2){
 
         // }
 
-        ~Engimon(){
-            cout  << getName() << " telah mencapai batas Cumulative Experience (" << MAX_C_EXP << " exp).\nEngimon mati (\"x x)" << endl;
-        }
+        // ~Engimon(){
+        //     cout  << getName() << " telah mencapai batas Cumulative Experience (" << MAX_C_EXP << " exp).\nEngimon mati (\"x x)" << endl;
+        // }
 
 
 

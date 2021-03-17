@@ -48,6 +48,7 @@ public:
 			i++; //offset ','
 			while(line[i] != '.'){
 				id += line[i];
+				i++;
 			}
 			result.push_back(Skill(stoi(id),0,stoi(numBase),name,el));
 		}
@@ -110,9 +111,12 @@ public:
 				id += line[i];
 				i++;
 			}
-			engimons.push_back(Engimon(name,species,stoi(id)));
+			vector<Element> base;
+			base.push_back(el);
+			engimons.push_back(Engimon(name,species,stoi(id),base));
 		}
 		listEngimon.close();
+		return engimons;
 	}
 
 	vector<vector<Engimon>> allEngimon(){
