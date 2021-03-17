@@ -26,6 +26,10 @@ public:
 		number++;
 	}
 
+	int getId(){
+		return containedSkill.getSkillId();
+	}
+
 	void learn(Engimon * chosen){
 		if (number > 0)
 		{
