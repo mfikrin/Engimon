@@ -34,7 +34,7 @@ class Engimon{
         
     public:
         // ctor, dtor
-        Engimon (string n, string sp){
+        Engimon (string n, string sp, int i, const vector<Element>& el){
             name = n;
             species = sp;
             parentNames[0] = "none";
@@ -44,6 +44,8 @@ class Engimon{
             level = 0;
             exp = 0;
             cExp = 0;
+            id = i;
+            elements = el;
             // nature = Nature();
             // ability = Ability();
             cout << skills.size() << endl;
@@ -124,8 +126,54 @@ class Engimon{
                 this->~Engimon();
             }
         }
-        
 
+        int getId(){
+            return id;
+        }
+
+        void setId(int id){
+            this->id = id;
+        }
+
+        void printEngimon(){
+            cout << "[" << "ID:" << id << " | " << "Name:" << name << " | " << "Species:" << species << " | ";
+            cout << "Element(s):";
+            for (int i = 0; i < elements.size(); ++i)
+             {
+                if (i != 0)
+                {
+                    cout << ",";
+                }
+                 if (elements[i] == Element::Fire)
+                {
+                    cout << "Fire";
+                }else if (elements[i] == Element::Water)
+                {
+                    cout << "Water";
+                }else if (elements[i] == Element::Electric)
+                {
+                    cout << "Electric";
+                }else if (elements[i] == Element::Ground)
+                {
+                    cout << "Ground";
+                }else if (elements[i] == Element::Ice)
+                {
+                    cout << "Ice";
+                }else if (elements[i] == Element::NoElement)
+                {
+                    cout << "No Element";
+                }
+             }
+            cout << "]" << endl;
+        }
+
+        void printSkills(){
+            cout << name << "'s Skills :" << endl;
+            for (int i = 0; i < skills.size(); ++i)
+            {
+                skills[i].printSkill();
+            }
+        }
 };
 
 #endif // _Engimon_hpp_

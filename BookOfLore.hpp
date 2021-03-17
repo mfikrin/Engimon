@@ -6,9 +6,6 @@
 #include <fstream>
 
 class BookOfLore{
-private:
-	// vector<vector<Engimon>> engimonLore; //by element
-	// vector<vector<Skill>> skillLore; //by element
 public:
 	vector<Skill> generateSkillPerElement(const Element& el){
 		string filename;
@@ -60,17 +57,76 @@ public:
 
 	vector<vector<Skill>> allSkill(){
 		vector<vector<Skill>> result;
-		Element elements[5] = {Element::Fire,
+		Element elements[6] = {Element::Fire,
 			Element::Water,
 			Element::Electric,
 			Element::Ground,
 			Element::Ice,
 			Element::NoElement};
-		for (int i = 0; i < 5; ++i)
+		for (int i = 0; i < 6; ++i)
 		{
 			result.push_back(generateSkillPerElement(elements[i]));
 		}
 		return result;
+	}
+
+	vector<Engimon> engimonByElement(const Element& el){
+		string filename;
+		if (el == Element::Fire)
+		{
+			filename = "engimon_fire.txt";
+		}else if (el == Element::Water)
+		{
+			filename = "engimon_water.txt";
+		}else if (el == Element::Electric)
+		{
+			filename = "engimon_electric.txt";
+		}else if (el == Element::Ground)
+		{
+			filename = "engimon_ground.txt";
+		}else if (el == Element::Ice)
+		{
+			filename = "engimon_ice.txt";
+		}
+		ifstream listEngimon(filename);
+		string line;
+		vector<Engimon> engimons;
+		while(getline(listEngimon,line)){
+			string name = "";
+			string species = "";
+			string id = "";
+			int i = 0;
+			while(line[i] != ','){
+				name += line[i];
+				i++;
+			}
+			i++; //offset ','
+			while(line[i] != ','){
+				species =+ line[i];
+				i++;
+			}
+			i++; //offset ','
+			while(line[i] != '.'){
+				id += line[i];
+				i++;
+			}
+			engimons.push_back(Engimon(name,species,stoi(id)));
+		}
+		listEngimon.close();
+	}
+
+	vector<vector<Engimon>> allEngimon(){
+		Element elements[5] = {Element::Fire,
+			Element::Water,
+			Element::Electric,
+			Element::Ground,
+			Element::Ice};
+		vector<vector<Engimon>> listAllEngimon;
+		for (int i = 0; i < 5; ++i)
+		{
+			listAllEngimon.push_back(engimonByElement(elements[i]));
+		}
+		return listAllEngimon;
 	}
 };
 

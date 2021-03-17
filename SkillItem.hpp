@@ -18,14 +18,35 @@ public:
 		return number;
 	}
 
+	void setNumber(int number){
+		this->number = number;
+	}
+
+	void addNumber(){
+		number++;
+	}
+
 	void learn(Engimon * chosen){
-		vector<Element> chosensElement = chosen->getElements();
-		for (int i = 0; i < chosensElement.size(); ++i)
+		if (number > 0)
 		{
-			if (chosensElement[i] == containedSkill.getElement() || containedSkill.getElement() == Element::NoElement)
+			vector<Element> chosensElement = chosen->getElements();
+			bool added = false;
+			for (int i = 0; i < chosensElement.size(); ++i)
 			{
-				chosen->addSkill(containedSkill);
+				if (chosensElement[i] == containedSkill.getElement() || containedSkill.getElement() == Element::NoElement)
+				{
+					chosen->addSkill(containedSkill);
+					added = true;
+					number--;
+					break;
+				}
 			}
+			if (!added)
+			{
+				cout << "Not Compatible!" << endl;
+			}
+		}else{
+			cout << "Can't learn!" << endl;
 		}
 	}
 };
