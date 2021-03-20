@@ -17,11 +17,11 @@ class Landscape {
         void SpawnEngimon(vector<vector<Engimon>> Ensiklopedia) {
             if (this->type == LandscapeType::Grassland)
             {
-                int randomElement = rand() % 5;
+                int randomElement = rand() % 4;
                 
-                while (randomElement == 1 || randomElement == 4) // KALAU NO ELEMENT GIMANA??
+                while (randomElement == 1 || randomElement == 4) 
                 {
-                    randomElement = rand() % 5;
+                    randomElement = rand() % 4;
                 }
                 
                 int randomEngimon = rand() % Engimon[randomElement].size();
@@ -30,10 +30,10 @@ class Landscape {
                 
             } else // (this->type == LandscapeType::Sea)
             {
-                int randomElement = rand() % 5;
-                while (randomElement == 0 || randomElement == 2 || randomElement == 3) // KALAU NO ELEMENT GIMANA??
+                int randomElement = rand() % 4;
+                while (randomElement == 0 || randomElement == 2 || randomElement == 3) 
                 {
-                    randomElement = rand() % 5;
+                    randomElement = rand() % 4;
                 }
             }
             
