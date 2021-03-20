@@ -13,11 +13,19 @@ class Position{
         // Landscape landscape;
         // Generic class entities
     public:
-    Position();
-    Position(int x_, int y_){
-        x = x_;
-        y = y_;
-    }
+        Position() : x(0), y(0) {}
+        Position(int x_, int y_){
+            x = x_;
+            y = y_;
+        }
+        
+        // Getter X,Y 
+        int getXPos(){
+            return x;
+        }
+        int getYPos(){
+            return x;
+        }
         
 };
 
