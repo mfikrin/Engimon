@@ -13,7 +13,6 @@
 #define MAX_SKILLS 4
 #define MAX_C_EXP 5000
 #define MAX_EXP 100
-#define RATE_HP_UP 1.45
 
 using namespace std;
 class Engimon{
@@ -28,7 +27,6 @@ class Engimon{
         vector<Skill> skills;
         vector<Element> elements;
         int level;
-        int health;
         int exp; // experience
         int cExp; // cumulative experience
         
@@ -83,12 +81,6 @@ class Engimon{
         int getCExp(){
             return cExp;
         }
-        // Nature getNature(){
-        //     return nature;
-        // }
-        // Ability getAbility(){
-        //     return ability;
-        // }
 
         // SETTER
         void setName(string n){
@@ -99,8 +91,19 @@ class Engimon{
             parentNames[1] = p2;
         }
         void addSkill(Skill s){
-            if (skills.size() < 4){
-                skills.push_back(s);
+            if (skills.size() < MAX_SKILLS){
+                bool valid = true;
+                for (int i=0; i<skills.size(); i++){
+                    if (skills[i].getSkillId() == s.getSkillId()){
+                        valid = false;
+                    }
+                }
+                if (valid){
+                    skills.push_back(s);
+                }
+                else{
+                    // ERROR di sini
+                }
             }
         }
         void setLevel(int l){
@@ -109,18 +112,14 @@ class Engimon{
         void setExp(int e){
             exp = e;
         }
-        void setHealth(int h){
-            health = h;
-        }
 
 
         // OTHER method
         void levelUp(){
             setLevel(this->level + 1);
-            for (int i=0; i< skills.size(); i++{
+            for (int i=0; i< skills.size(); i++){
                 skills[i].levelUpMastery();
             }
-            setHealth(health * RATE_HP_UP);
             setExp(exp - MAX_EXP);
         }
 

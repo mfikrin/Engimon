@@ -50,7 +50,7 @@ public:
 				id += line[i];
 				i++;
 			}
-			result.push_back(Skill(stoi(id),0,stoi(numBase),name,el));
+			result.push_back(Skill(stoi(id),1,stoi(numBase),name,el));
 		}
 		listSkill.close();
 		return result;
