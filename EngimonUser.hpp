@@ -8,10 +8,10 @@ class EngimonUser : public Engimon {
     private:
         Position engimonUserPosition;
     public:
-        // EngimonUser (const Position& p, string n, string sp, int i, const vector<Element>& el) 
-        // : Engimon (n,sp,i,el) {
-        //     this->engimonUserPosition = p;
-        // }
+        EngimonUser (const Position& p, string n, string sp, int i, const vector<Element>& el) 
+        : Engimon (n,sp,i,el) {
+            this->engimonUserPosition = p;
+        }
 
         void moveEngimonUser(const Position& p){
             this->engimonUserPosition = p;
