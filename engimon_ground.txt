@@ -1,10 +1,10 @@
-Irodine,Zomaidae Engimon,2801.
-Drasaur,Dragers Engimon,2802.
-Sandopus,Qottunsian Engimon,2803.
-Gazite,Kheolian Engimon,2804.
-Mountadillo,Dorid Engimon,2805.
-Termime,Niaceous Engimon,2806.
-Pandithe,Inenian Engimon,2807.
-Shelmite,Dorid Engimon,2808.
-Gorinite,Zomaidae Engimon,2809.
-Komodough,Dragers Engimon,2810.
+Irodine,2801.
+Drasaur,2802.
+Sandopus,2803.
+Gazite,2804.
+Mountadillo,2805.
+Termime,2806.
+Pandithe,2807.
+Shelmite,2808.
+Gorinite,2809.
+Komodough,2810.

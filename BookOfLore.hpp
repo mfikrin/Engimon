@@ -94,7 +94,6 @@ public:
 		vector<Engimon> engimons;
 		while(getline(listEngimon,line)){
 			string name = "";
-			string species = "";
 			string id = "";
 			int i = 0;
 			while(line[i] != ','){
@@ -102,11 +101,7 @@ public:
 				i++;
 			}
 			i++; //offset ','
-			while(line[i] != ','){
-				species =+ line[i];
-				i++;
-			}
-			i++; //offset ','
+			species = name;
 			while(line[i] != '.'){
 				id += line[i];
 				i++;

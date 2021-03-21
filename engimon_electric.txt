@@ -1,10 +1,10 @@
-Hamstun,Inenian Engimon,2601.
-Rabbyte,Inenian Engimon,2602.
-Staranzee,Kheolian Engimon,2603.
-Blastster,Kheolian Engimon,2604.
-Voltphant,Zomaidae Engimon,2605.
-Vultaid,Ipal Engimon,2606.
-Electritopus,Qottunsian Engimon,2607.
-Koalite,Inenian Engimon,2608.
-Steelhawk,Ipal Engimon,2609.
-Dractric,Dragers Engimon,2610.
+Hamstun,2601.
+Rabbyte,2602.
+Staranzee,2603.
+Blastster,2604.
+Voltphant,2605.
+Vultaid,2606.
+Electritopus,2607.
+Koalite,2608.
+Steelhawk,2609.
+Dractric,2610.

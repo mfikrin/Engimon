@@ -1,10 +1,10 @@
-Pengyle,Ipal Engimon,2901.
-Glacerine,Dorid Engimon,2902.
-Gazetone,Zomaidae Engimon,2903.
-Hyereon,Kheolian Engimon,2904.
-Armadora,Qottunsian Engimon,2905.
-Walruse,Inenian Engimon,2906.
-Gladacle,Qottunsian Engimon,2907.
-Flusel,Niaceous Engimon,2908.
-Beavermin,Inenian Engimon,2909.
-Pengotic,Ipal Engimon,2910.
+Pengyle,2901.
+Glacerine,2902.
+Gazetone,2903.
+Hyereon,2904.
+Armadora,2905.
+Walruse,2906.
+Gladacle,2907.
+Flusel,2908.
+Beavermin,2909.
+Pengotic,2910.
