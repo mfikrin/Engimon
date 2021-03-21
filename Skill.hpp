@@ -18,7 +18,7 @@ class Skill {
         Element element;
 
     public :
-        // Skill() : id(0), masteryLevel(0), numerikBasePower(0), skillName("No Name"), element(Element::NoElement){}
+        Skill() : id(0), masteryLevel(0), numerikBasePower(0), skillName("No Name"), element(Element::NoElement){}
         Skill(int idSkill, int level, int basePWR, string skillName, Element el) : id(idSkill), masteryLevel(level), numerikBasePower(basePWR), skillName(skillName), element(el) {
             power = numerikBasePower;
         }
