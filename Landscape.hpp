@@ -7,7 +7,7 @@
 class Landscape {
     private:
         LandscapeType type;
-        Engimon engimonLiar;
+        Engimon engimonLiar; // kalau yang di-spawn engimonLiar, harusnya pakai class EngimonEnemy
 
     public:
         Landscape(LandscapeType type) {
@@ -24,7 +24,7 @@ class Landscape {
                     randomElement = rand() % 5;
                 }
                 
-                int randomEngimon = rand() % Engimon[randomElement].size();
+                int randomEngimon = rand() % Engimon[randomElement].size(); // ini apa gk typo vaz? mungkin maksudnya Ensiklopedia[randomElement].size()
                 engimonLiar = Ensiklopedia[randomElement][randomEngimon];
 
                 
@@ -37,7 +37,7 @@ class Landscape {
                 }
             }
             
-            int randomEngimon = rand() % Engimon[randomElement].size();
+            int randomEngimon = rand() % Engimon[randomElement].size(); // ini juga
                 engimonLiar = Ensiklopedia[randomElement][randomEngimon];
             
         }
