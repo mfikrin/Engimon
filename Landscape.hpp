@@ -3,7 +3,7 @@
 #include "LandscapeType.hpp"
 #include "Engimon.hpp"
 #include <stdlib.h>
-#include <time>
+#include <time.h>
 
 class Landscape
 {

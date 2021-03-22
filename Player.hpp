@@ -7,6 +7,7 @@
 #define INIT_ACTIVEMON_Y 0
 
 #include <string.h>
+#include <stdlib.h>
 
 #include "Position.hpp"
 #include "Inventory.hpp"
@@ -14,6 +15,7 @@
 #include "SkillItem.hpp"
 // #include "Map.hpp"
 #include "EngimonUser.hpp"
+#include "Element.hpp"
 
 
 class Player{
@@ -72,6 +74,70 @@ class Player{
         // void getActiveEngimon(Engimon& engimon){
         //     activeEngimon = EngimonUser(Position(0,0),engimon.getName(),engimon.getSpecies(),engimon.getId(),engimon.getElements());
         // }
+
+        void breeding(Engimon parent1, Engimon parent2){
+            if (false/* Inventory penuh */)
+            {
+                cout << "Inventory penuh!" << endl;
+            } else {
+                if (true/* parent ga ada di inventory */)
+                {
+                    cout << "Parent tidak ada di inventory" << endl;
+                } else {
+                    vector<Element> elementParent;
+                    vector<Element> elementParent1 = parent1.getElements();
+                    vector<Element> elementParent2 = parent2.getElements();
+                    
+                    // Mengoleksi element parent 1 ke dalam elementParent
+                    for (int i = 0; i < elementParent1.size(); i++)
+                    {
+                        elementParent.push_back(elementParent1[i]);
+                    }
+
+                    // Mengoleksi element parent 2 ke dalam elementParent
+                    for (int i = 0; i < elementParent2.size(); i++)
+                    {
+                        // Mengecek apakah element dari elementParent2 sudah ada di elementParent
+                        bool present = false;
+                        for (int j = 0; j < elementParent.size(); j++)
+                        {
+                            if (elementParent2[i] == elementParent[j])
+                            {
+                                present = true;
+                            }
+                            
+                        }
+                        
+                        // Mengoleksi elementParent2 ke dalam elementParent
+                        if (!present)
+                        {
+                            elementParent.push_back(elementParent2[i]);
+                        }
+                        
+                    }
+                    
+                    if (elementParent.size() > 2)
+                    {
+                        int duaElement = rand() % 2;
+                        if (duaElement)
+                        {
+                            int element1Index = rand() % elementParent.size();
+                            int element2Index = rand() % elementParent.size();    
+                        } else {
+                            int elementIndex = rand() % elementParent.size();
+                        }
+                    
+                    }
+                }
+                
+            
+
+
+
+
+            }
+            
+        }
 
 };
 
