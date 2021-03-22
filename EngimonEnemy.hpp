@@ -11,13 +11,14 @@ class EngimonEnemy : public Engimon
 private:
     int idEngimonLiar;
     Position engimonEnemyPosition;
-    static vector<EngimonEnemy> listEngimonLiar;
+    // static vector<EngimonEnemy> listEngimonLiar;
 
 public:
     EngimonEnemy(const Position &p, string n, string sp, int i, const vector<Element> &el)
         : Engimon(n, sp, i, el)
     {
         this->engimonEnemyPosition = p;
+        // listEngimonLiar.push_back(&this);
     }
 
     void moveEngimonEnemy(const Position &p)
@@ -30,15 +31,17 @@ public:
         return engimonEnemyPosition;
     }
 
-    // GETTER
-    vector<EngimonEnemy> getListEngimonLiar(){
-        return listEngimonLiar;
-    }
+    // // GETTER
+    // vector<EngimonEnemy> getListEngimonLiar()
+    // {
+    //     return listEngimonLiar;
+    // }
 
-    // SETTER/DELETER
-    void deleteEngimonEnemy(int idEngimon){
-        // 
-    }
+    // // SETTER/DELETER
+    // void deleteEngimonEnemy(int idEngimon)
+    // {
+    //     id = idEngimon;
+    // }
 };
 
 #endif // _EngimonEnemy_hpp_

@@ -4,12 +4,15 @@
 #include <iostream>
 // #include <string>
 #include <fstream>
+// #include <time>
 
 //#include "EngimonEnemy.hpp"
 //#include "EngimonUser.hpp"
 #include "Position.hpp"
 #include "Player.hpp"
 #include <vector>
+#include "EngimonEnemy.hpp"
+#include "Engimon.hpp"
 
 using namespace std;
 
@@ -22,6 +25,8 @@ private:
     vector<string> render;
     Position playerPosition;
     Position activeEngimonPosition;
+    Position engimonPosition;
+
     // vector<EngimonEnemy> listEnemy;
 
 public:
@@ -73,14 +78,36 @@ public:
             cout << "Unable to open file";
     }
 
-    void Render(Player &player)
+    void Render(Player &player, vector<EngimonEnemy> listEngimonLiar)
     {
+        // srand(time(NULL));
         playerPosition = player.getPosition();
         activeEngimonPosition = player.getActiveEngimonPosition();
+
+        // // DEFINISIKAN POSITION ENGIMON YANG BARU
+        // int x = rand() % 12;
+        // int y = rand() % 10;
+
+        // Position engimonPosition(x, y);
+        //
+        // //INISIALISASI ENEMY BARU
+        // vector<Element> el;
+        // EngimonEnemy enemy(engimonPosition, "bebas", "bebas", 1, el);
+        // this->enemy
+
         for (int i = 0; i < render.size(); ++i)
         {
             for (int j = 0; j < render[i].size(); ++j)
             {
+                // ITERASI listEngimonLiar
+                for (int k = 0; k < listEngimonLiar.size(); k++)
+                {
+                    if (i == listEngimonLiar[k].getPosition().getYPos() && j == listEngimonLiar[k].getPosition().getYPos())
+                    {
+                        cout << 'W';
+                    }
+                }
+
                 if (i == playerPosition.getYPos() && j == playerPosition.getXPos())
                 {
                     cout << 'P';
@@ -89,6 +116,11 @@ public:
                 {
                     cout << 'X';
                 }
+
+                // else if (i == engimonPosition.getYPos() && j == engimonPosition.getXPos())
+                // {
+                //     cout << 'W';
+                // }
                 else
                 {
                     cout << render[i][j];
@@ -107,6 +139,23 @@ public:
     // {
     //     return User.getPosition().getYPos() == i && User.getPosition().getXPos() == j;
     // }
+
+    vector<EngimonEnemy> addEngimonEnemy(vector<EngimonEnemy> listEngimonLiar)
+    {
+        int x = rand() % 12;
+        int y = rand() % 10;
+
+        Position engimonPosition(x, y);
+
+        //INISIALISASI ENEMY BARU
+        vector<Element> el;
+        EngimonEnemy enemy(engimonPosition, "bebas", "bebas", 1, el);
+
+        // TAMBAHKAN KE listEngimonLiar
+        listEngimonLiar.push_back(enemy);
+
+        return listEngimonLiar;
+    }
 };
 
 #endif
