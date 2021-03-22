@@ -43,14 +43,14 @@ public:
                 //dan tampilkan di sini
                 for (int j = 0; j < 12; j++)
                 {
-                    if (isEnemy(i, j))
-                    {
-                        cout << "E";
-                    }
-                    else if (isUser(i, j))
-                    {
-                        cout << "P";
-                    }
+                    // if (isEnemy(i, j))
+                    // {
+                    //     cout << "E";
+                    // }
+                    // else if (isUser(i, j))
+                    // {
+                    //     cout << "P";
+                    // }
 
                     cout << baris[j];
                 }
