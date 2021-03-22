@@ -1,10 +1,10 @@
-Pelicanine,Ipal Engimon,3001.
-Stingrage,Niaceous Engimon,3002.
-Camosquido,Qottunsian Engimon,3003.
-Slowtopus,Qottunsian Engimon,3004.
-Pelizar,Ipal Engimon,3005.
-Geishark,Drarsusin Engimon,3006.
-Waropus,Drarsusin Engimon,3007.
-Propelican,Ipal Engimon,3008.
-Aquabat,Umuthyes Engimon,3009.
-Venoray,Umuthyes Engimon,3010.
+Pelicanine,3001.
+Stingrage,3002.
+Camosquido,3003.
+Slowtopus,3004.
+Pelizar,3005.
+Geishark,3006.
+Waropus,3007.
+Propelican,3008.
+Aquabat,3009.
+Venoray,3010.

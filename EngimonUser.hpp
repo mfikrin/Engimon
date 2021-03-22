@@ -4,21 +4,27 @@
 #include "Engimon.hpp"
 #include "Position.hpp"
 
-class EngimonUser : public Engimon {
-    private:
-        Position engimonUserPosition;
-    public:
-        // EngimonUser (const Position& p, string n, string sp, int i, const vector<Element>& el) 
-        // : Engimon (n,sp,i,el) {
-        //     this->engimonUserPosition = p;
-        // }
+class EngimonUser : public Engimon
+{
+private:
+    Position engimonUserPosition;
 
-        void moveEngimonUser(const Position& p){
-            this->engimonUserPosition = p;
-        }
+public:
+    EngimonUser(const Position &p, string n, string sp, int i, const vector<Element> &el)
+        : Engimon(n, sp, i, el)
+    {
+        this->engimonUserPosition = p;
+    }
+
+    void moveEngimonUser(const Position &p)
+    {
+        this->engimonUserPosition = p;
+    }
+
+    Position getPosition()
+    {
+        return engimonUserPosition;
+    }
 };
-
-
-
 
 #endif // _EngimonUser_hpp_

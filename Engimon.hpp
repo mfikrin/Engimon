@@ -181,6 +181,12 @@ class Engimon{
                 skills[i].printSkill();
             }
         }
+
+        friend ostream &operator<<(ostream &os, const Engimon &engimon)
+        {
+            os << "[" << engimon.name << "]";
+            return os;
+        }
 };
 
 #endif // _Engimon_hpp_
