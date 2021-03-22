@@ -22,6 +22,7 @@ private:
     vector<string> render;
     Position playerPosition;
     Position activeEngimonPosition;
+    // vector<EngimonEnemy> listEnemy;
 
 public:
     Map(string namaFile)

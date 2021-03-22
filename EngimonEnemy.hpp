@@ -4,10 +4,14 @@
 #include "Engimon.hpp"
 #include "Position.hpp"
 
+#include <vector>
+
 class EngimonEnemy : public Engimon
 {
 private:
+    int idEngimonLiar;
     Position engimonEnemyPosition;
+    static vector<EngimonEnemy> listEngimonLiar;
 
 public:
     EngimonEnemy(const Position &p, string n, string sp, int i, const vector<Element> &el)
@@ -24,6 +28,16 @@ public:
     Position getPosition()
     {
         return engimonEnemyPosition;
+    }
+
+    // GETTER
+    vector<EngimonEnemy> getListEngimonLiar(){
+        return listEngimonLiar;
+    }
+
+    // SETTER/DELETER
+    void deleteEngimonEnemy(int idEngimon){
+        // 
     }
 };
 
