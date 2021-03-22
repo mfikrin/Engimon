@@ -27,17 +27,24 @@ class Player{
 
 
         // OTHER METHOD
-        // void Move(const Map& m, char direction); 
-        void showAllEngimons();
-        void showEngimonData(const Engimon& e); 
-        void handleShowEngimonData();  
-        void changeActiveEngimon();
-        void showSkillItems();
-        void useSkillItem(SkillItem& si, Engimon& e);
-        Engimon breed(const Engimon& a, const Engimon& b);
+        void Move(const Map& m, char direction){
+            switch(direction){
+                case 'w': position.up(); break;
+                case 'a': position.left(); break;
+                case 's': position.down(); break;
+                case 'd': position.right(); break;
+            }
+        } 
+        //void showAllEngimons();
+        //void showEngimonData(const Engimon& e); 
+        //void handleShowEngimonData();  
+        //void changeActiveEngimon();
+        //void showSkillItems();
+        //void useSkillItem(SkillItem& si, Engimon& e);
+        //Engimon breed(const Engimon& a, const Engimon& b);
         // void battle(const Map& m);
-        void interact();
-        void switchActiveEngimon();
+        //void interact();
+        //void switchActiveEngimon();
 
 
         // CTOR
