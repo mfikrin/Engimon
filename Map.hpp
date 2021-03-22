@@ -74,7 +74,7 @@ public:
 
     void Render(Player& player){
         playerPosition = player.getPosition();
-        //activeEngimonPosition = player.getActiveEngimonPosition();
+        activeEngimonPosition = player.getActiveEngimonPosition();
         for (int i = 0; i < render.size(); ++i)
         {
             for (int j = 0; j < render[i].size(); ++j)

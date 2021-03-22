@@ -57,21 +57,21 @@ class Player{
 
 
         // CTOR
-        Player(string name_){
+        Player(string name_ , Engimon& active) : activeEngimon(Position(INIT_ACTIVEMON_X,INIT_ACTIVEMON_Y),active.getName(),active.getSpecies(),active.getId(),active.getElements()){
             name = name_;
             position = Position(INIT_PLAYER_X, INIT_PLAYER_Y);
-            vector<Element> apakek;
-            apakek.push_back(Element::Fire);
-            activeEngimon = EngimonUser(Position(0,0),"a","a",123,apakek);
+            //vector<Element> apakek;
+            //apakek.push_back(Element::Fire);
+            //activeEngimon = EngimonUser(Position(0,0),"a","a",123,apakek);
             //activeEngimon = EngimonUser(Position(0,0),active.getName(),active.getSpecies(),active.getId(),active.getElements());
             // inventory = Inventory();
             //activeEngimon = EngimonUser(Position(INIT_ACTIVEMON_X,INIT_ACTIVEMON_Y),active.getName(),active.getSpecies(),active.getId(),active.getElements());
             //activeEngimon = EngimonUser(Position(0,0),active);
         }
 
-        void getActiveEngimon(Engimon& engimon){
-            activeEngimon = EngimonUser(Position(0,0),engimon.getName(),engimon.getSpecies(),engimon.getId(),engimon.getElements());
-        }
+        // void getActiveEngimon(Engimon& engimon){
+        //     activeEngimon = EngimonUser(Position(0,0),engimon.getName(),engimon.getSpecies(),engimon.getId(),engimon.getElements());
+        // }
 
 };
 
