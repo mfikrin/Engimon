@@ -24,7 +24,23 @@ class Position{
             return x;
         }
         int getYPos(){
-            return x;
+            return y;
+        }
+
+        void up(){
+            y--;
+        }
+
+        void down(){
+            y++;
+        }
+
+        void left(){
+            x--;
+        }
+
+        void right(){
+            x++;
         }
         
 };

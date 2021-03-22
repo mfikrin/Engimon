@@ -2,6 +2,7 @@
 #define SKILLITEM_HPP
 
 #include "Engimon.hpp"
+
 //string and vectors from engimon
 
 class SkillItem{
@@ -16,6 +17,11 @@ public:
 
 	int getNumber(){
 		return number;
+	}
+
+	string getName()
+	{
+		return containedSkill.getSkillName();
 	}
 
 	void setNumber(int number){
@@ -52,6 +58,12 @@ public:
 		}else{
 			cout << "Can't learn!" << endl;
 		}
+	}
+
+	friend ostream &operator<<(ostream &os, SkillItem &skill_item)
+	{
+		os << "[" << skill_item.getName() << "]"; //
+		return os;
 	}
 };
 

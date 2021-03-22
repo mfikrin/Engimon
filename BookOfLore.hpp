@@ -101,7 +101,7 @@ public:
 				i++;
 			}
 			i++; //offset ','
-			species = name;
+			string species = name;
 			while(line[i] != '.'){
 				id += line[i];
 				i++;

@@ -138,6 +138,10 @@ class Engimon{
             return id;
         }
 
+        string getSpecies(){
+            return species;
+        }
+
         void setId(int id){
             this->id = id;
         }
@@ -180,6 +184,12 @@ class Engimon{
             {
                 skills[i].printSkill();
             }
+        }
+
+        friend ostream &operator<<(ostream &os, const Engimon &engimon)
+        {
+            os << "[" << engimon.name << "]";
+            return os;
         }
 };
 
