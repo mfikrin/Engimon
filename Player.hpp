@@ -13,7 +13,7 @@
 #include "Engimon.hpp"
 #include "SkillItem.hpp"
 // #include "Map.hpp"
-// #include "EngimonUser.hpp"
+#include "EngimonUser.hpp"
 
 
 class Player{
@@ -21,20 +21,29 @@ class Player{
         string name;
         Position position;
         // Inventory inventory; 
-        // EngimonUser activeEngimon; 
+        EngimonUser activeEngimon; 
     public:
         
 
 
         // OTHER METHOD
-        void Move(const Map& m, char direction){
+        void Move(char direction){
+            activeEngimon.moveEngimonUser(position);
             switch(direction){
                 case 'w': position.up(); break;
                 case 'a': position.left(); break;
                 case 's': position.down(); break;
                 case 'd': position.right(); break;
             }
-        } 
+        }
+
+        Position getPosition(){
+            return position;
+        }
+
+        Position getActiveEngimonPosition(){
+            return activeEngimon.getPosition();
+        }
         //void showAllEngimons();
         //void showEngimonData(const Engimon& e); 
         //void handleShowEngimonData();  
@@ -51,8 +60,17 @@ class Player{
         Player(string name_){
             name = name_;
             position = Position(INIT_PLAYER_X, INIT_PLAYER_Y);
+            vector<Element> apakek;
+            apakek.push_back(Element::Fire);
+            activeEngimon = EngimonUser(Position(0,0),"a","a",123,apakek);
+            //activeEngimon = EngimonUser(Position(0,0),active.getName(),active.getSpecies(),active.getId(),active.getElements());
             // inventory = Inventory();
-            // activeEngimon = EngimonUser();
+            //activeEngimon = EngimonUser(Position(INIT_ACTIVEMON_X,INIT_ACTIVEMON_Y),active.getName(),active.getSpecies(),active.getId(),active.getElements());
+            //activeEngimon = EngimonUser(Position(0,0),active);
+        }
+
+        void getActiveEngimon(Engimon& engimon){
+            activeEngimon = EngimonUser(Position(0,0),engimon.getName(),engimon.getSpecies(),engimon.getId(),engimon.getElements());
         }
 
 };

@@ -138,6 +138,10 @@ class Engimon{
             return id;
         }
 
+        string getSpecies(){
+            return species;
+        }
+
         void setId(int id){
             this->id = id;
         }

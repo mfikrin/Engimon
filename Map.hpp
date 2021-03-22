@@ -5,9 +5,10 @@
 // #include <string>
 #include <fstream>
 
-#include "EngimonEnemy.hpp"
-#include "EngimonUser.hpp"
+//#include "EngimonEnemy.hpp"
+//#include "EngimonUser.hpp"
 #include "Position.hpp"
+#include "Player.hpp"
 #include <vector>
 
 using namespace std;
@@ -19,6 +20,8 @@ private:
  //   EngimonEnemy Enemy;
  //   EngimonUser User;
     vector<string> render;
+    Position playerPosition;
+    Position activeEngimonPosition;
 
 public:
     Map(string namaFile)
@@ -39,7 +42,7 @@ public:
         if (infile.is_open())
         {
             //melakukan perulangan setiap barus
-            string row = "";
+            //string row = "";
             while (getline(infile, baris))
             {
                 //dan tampilkan di sini
@@ -69,12 +72,22 @@ public:
             cout << "Unable to open file";
     }
 
-    void Render(){
+    void Render(Player& player){
+        playerPosition = player.getPosition();
+        //activeEngimonPosition = player.getActiveEngimonPosition();
         for (int i = 0; i < render.size(); ++i)
         {
             for (int j = 0; j < render[i].size(); ++j)
             {
-                cout << render[i][j];
+                if (i == playerPosition.getYPos() && j == playerPosition.getXPos()){
+                    cout << 'P';
+                }else if (i == activeEngimonPosition.getYPos() && j == activeEngimonPosition.getXPos())
+                {
+                    cout << 'X';
+                }
+                else{
+                    cout << render[i][j];
+                }
             }
             cout << endl;
         }
