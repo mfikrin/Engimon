@@ -9,6 +9,7 @@
 //#include "EngimonEnemy.hpp"
 //#include "EngimonUser.hpp"
 #include "Position.hpp"
+#include "BookOfLore.hpp"
 #include "Player.hpp"
 #include <vector>
 #include "EngimonEnemy.hpp"
@@ -140,10 +141,42 @@ public:
     //     return User.getPosition().getYPos() == i && User.getPosition().getXPos() == j;
     // }
 
-    vector<EngimonEnemy> addEngimonEnemy(vector<EngimonEnemy> listEngimonLiar)
+    vector<EngimonEnemy> addEngimonEnemy(vector<EngimonEnemy> listEngimonLiar, Player pemain)
     {
-        int x = rand() % 12;
-        int y = rand() % 10;
+        BookOfLore ensiklopedia;
+        vector<vector<Engimon>> ensiklopediaEngimon = ensiklopedia.allEngimon();
+        vector<vector<Skill>> ensiklopediaSkill = ensiklopedia.allSkill();
+
+        // RANDOM ENGIMON YANG MUNCUL
+        int indexElementEngimon = rand() % ensiklopediaEngimon.size();
+        int indexEngimon = rand() % ensiklopediaEngimon[indexElementEngimon].size();
+        int x, y;
+        if (indexElementEngimon == 1 || indexElementEngimon == 4) //jika engimon liar yang muncul bertipe water atau ice
+        {
+            x = rand() % 12;
+            y = rand() % 10;
+            while ((x < 6 || y > 5) && (x == pemain.getPosition().getXPos() && y == pemain.getPosition().getYPos())) // ulangi terus, karena daerah ini daerah land
+            {
+                x = rand() % 12;
+                y = rand() % 10;
+            }
+        }
+        else
+        {
+            x = rand() % 12;
+            y = rand() % 10;
+
+            while ((x > 5 && y < 6) && (x == pemain.getPosition().getXPos() && y == pemain.getPosition().getYPos())) // ulangi terus, karena daerah ini daerah sea
+            {
+                x = rand() % 12;
+                y = rand() % 10;
+            }
+        }
+
+        Engimon dapet = ensiklopediaEngimon[indexElementEngimon][indexEngimon];
+
+        // int x = rand() % 12;
+        // int y = rand() % 10;
 
         Position engimonPosition(x, y);
 

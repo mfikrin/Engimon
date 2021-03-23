@@ -3,6 +3,7 @@
 #include "BookOfLore.hpp"
 #include "EngimonEnemy.hpp"
 #include "Position.hpp"
+#include "Engimon.hpp"
 //#include "EngimonUser.hpp"
 #include <iostream>
 using namespace std;
@@ -32,19 +33,59 @@ int main()
         cin >> command;
         pemain.Move(command);
 
-        // Nanti mau dibuat fungsi baru yang dibawah ini
-        // DEFINISIKAN POSITION ENGIMON YANG BARU
-        int x = rand() % 12;
-        int y = rand() % 10;
+        // // Nanti mau dibuat fungsi baru yang dibawah ini
 
-        Position engimonPosition(x, y);
+        // // RANDOM ENGIMON YANG MUNCUL
+        // indexElementEngimon = rand() % ensiklopediaEngimon.size();
+        // indexEngimon = rand() % ensiklopediaEngimon[indexElementEngimon].size();
+        // int x, y;
+        // if (indexElementEngimon == 1 || indexElementEngimon == 4) //jika engimon liar yang muncul bertipe water atau ice
+        // {
+        //     x = rand() % 12;
+        //     y = rand() % 10;
+        //     while ((x < 6 || y > 5) && (x == pemain.getPosition().getXPos() && y == pemain.getPosition().getYPos())) // ulangi terus, karena daerah ini daerah land
+        //     {
+        //         x = rand() % 12;
+        //         y = rand() % 10;
+        //     }
+        // }
+        // else
+        // {
+        //     x = rand() % 12;
+        //     y = rand() % 10;
 
-        //INISIALISASI ENEMY BARU
-        vector<Element> el;
-        EngimonEnemy enemy(engimonPosition, "bebas", "bebas", 1, el);
+        //     while ((x > 5 && y < 6) && (x == pemain.getPosition().getXPos() && y == pemain.getPosition().getYPos())) // ulangi terus, karena daerah ini daerah sea
+        //     {
+        //         x = rand() % 12;
+        //         y = rand() % 10;
+        //     }
+        // }
 
-        // TAMBAHKAN KE listEngimonLiar
-        listEngimonLiar.push_back(enemy);
+        // Engimon dapet = ensiklopediaEngimon[indexElementEngimon][indexEngimon];
+
+        // // DEFINISIKAN POSITION ENGIMON YANG BARU
+
+        // // int x = rand() % 12;
+        // // int y = rand() % 10;
+
+        // Position engimonPosition(x, y);
+
+        // //INISIALISASI ENEMY BARU
+        // vector<Element> el;
+
+        // EngimonEnemy enemy(engimonPosition, dapet.getName(), "bebas", 1, el);
+
+        // // TAMBAHKAN KE listEngimonLiar
+        // listEngimonLiar.push_back(enemy);
+
+        // // for (int i = 0; i < listEngimonLiar.size(); i++)
+        // // {
+        // //     listEngimonLiar[i].print();
+        // // }
+
+        // // batas bawah
+
+        listEngimonLiar = peta.addEngimonEnemy(listEngimonLiar, pemain);
 
         peta.Render(pemain, listEngimonLiar);
     } while (command != 'q');

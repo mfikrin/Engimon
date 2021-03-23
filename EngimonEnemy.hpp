@@ -42,6 +42,11 @@ public:
     // {
     //     id = idEngimon;
     // }
+
+    void print()
+    {
+        cout << Engimon::getName() << endl;
+    }
 };
 
 #endif // _EngimonEnemy_hpp_
