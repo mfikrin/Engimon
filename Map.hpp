@@ -14,6 +14,7 @@
 #include <vector>
 #include "EngimonEnemy.hpp"
 #include "Engimon.hpp"
+#include "Element.hpp"
 
 using namespace std;
 
@@ -82,6 +83,7 @@ public:
     void Render(Player &player, vector<EngimonEnemy> listEngimonLiar)
     {
         // srand(time(NULL));
+
         playerPosition = player.getPosition();
         activeEngimonPosition = player.getActiveEngimonPosition();
 
@@ -95,19 +97,12 @@ public:
         // vector<Element> el;
         // EngimonEnemy enemy(engimonPosition, "bebas", "bebas", 1, el);
         // this->enemy
-
+        int id;
+        bool isTidakAdaEngimon;
         for (int i = 0; i < render.size(); ++i)
         {
             for (int j = 0; j < render[i].size(); ++j)
             {
-                // ITERASI listEngimonLiar
-                for (int k = 0; k < listEngimonLiar.size(); k++)
-                {
-                    if (i == listEngimonLiar[k].getPosition().getYPos() && j == listEngimonLiar[k].getPosition().getYPos())
-                    {
-                        cout << 'W';
-                    }
-                }
 
                 if (i == playerPosition.getYPos() && j == playerPosition.getXPos())
                 {
@@ -118,19 +113,51 @@ public:
                     cout << 'X';
                 }
 
-                // else if (i == engimonPosition.getYPos() && j == engimonPosition.getXPos())
-                // {
-                //     cout << 'W';
-                // }
                 else
                 {
-                    cout << render[i][j];
+                    // ITERASI listEngimonLiar
+                    isTidakAdaEngimon = true;
+                    int k = 0;
+                    while (k < listEngimonLiar.size() && isTidakAdaEngimon)
+                    {
+                        // Jika terdapat Engimon Liar
+                        if (i == listEngimonLiar[k].getPosition().getYPos() && j == listEngimonLiar[k].getPosition().getYPos())
+                        {
+                            id = listEngimonLiar[k].getId();
+                            // Jika Tipenya Fire
+                            if (id > 2600 && id < 2700)
+                            {
+                                cout << "E";
+                            }
+                            else if (id > 2700 && id < 2800)
+                            {
+                                cout << "F";
+                            }
+                            else if (id > 2800 && id < 2900)
+                            {
+                                cout << "G";
+                            }
+                            else if (id > 2900 && id < 3000)
+                            {
+                                cout << "I";
+                            }
+                            else // artinya water
+                            {
+                                cout << "W";
+                            }
+                            isTidakAdaEngimon = false;
+                        }
+                        k++;
+                    }
+                    if (isTidakAdaEngimon)
+                    {
+                        cout << render[i][j];
+                    }
                 }
             }
             cout << endl;
         }
     }
-
     // bool isEnemy(int i, int j)
     // {
     //     return Enemy.getPosition().getYPos() == i && Enemy.getPosition().getXPos() == j;
@@ -182,7 +209,7 @@ public:
 
         //INISIALISASI ENEMY BARU
         vector<Element> el;
-        EngimonEnemy enemy(engimonPosition, "bebas", "bebas", 1, el);
+        EngimonEnemy enemy(engimonPosition, dapet.getName(), "bebas", dapet.getId(), el);
 
         // TAMBAHKAN KE listEngimonLiar
         listEngimonLiar.push_back(enemy);
