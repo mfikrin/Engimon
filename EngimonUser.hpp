@@ -15,7 +15,7 @@ public:
     {
         this->engimonUserPosition = p;
     }
-    
+
     void moveEngimonUser(const Position &p)
     {
         this->engimonUserPosition = p;
