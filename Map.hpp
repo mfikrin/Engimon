@@ -1,13 +1,10 @@
 #ifndef MAP_HPP
 #define MAP_HPP
-
+#define MINIMUM_LEVEL 2
 #include <iostream>
-// #include <string>
 #include <fstream>
 // #include <time>
 
-//#include "EngimonEnemy.hpp"
-//#include "EngimonUser.hpp"
 #include "Position.hpp"
 #include "BookOfLore.hpp"
 #include "Player.hpp"
@@ -86,18 +83,6 @@ public:
 
         playerPosition = player.getPosition();
         activeEngimonPosition = player.getActiveEngimonPosition();
-
-        // // DEFINISIKAN POSITION ENGIMON YANG BARU
-        // int x = rand() % 12;
-        // int y = rand() % 10;
-
-        // Position engimonPosition(x, y);
-        //
-        // //INISIALISASI ENEMY BARU
-        // vector<Element> el;
-        // EngimonEnemy enemy(engimonPosition, "bebas", "bebas", 1, el);
-        // this->enemy
-        int id;
         bool isTidakAdaEngimon;
         for (int i = 0; i < render.size(); ++i)
         {
@@ -123,28 +108,7 @@ public:
                         // Jika terdapat Engimon Liar
                         if (i == listEngimonLiar[k].getPosition().getYPos() && j == listEngimonLiar[k].getPosition().getYPos())
                         {
-                            id = listEngimonLiar[k].getId();
-                            // Jika Tipenya Fire
-                            if (id > 2600 && id < 2700)
-                            {
-                                cout << "E";
-                            }
-                            else if (id > 2700 && id < 2800)
-                            {
-                                cout << "F";
-                            }
-                            else if (id > 2800 && id < 2900)
-                            {
-                                cout << "G";
-                            }
-                            else if (id > 2900 && id < 3000)
-                            {
-                                cout << "I";
-                            }
-                            else // artinya water
-                            {
-                                cout << "W";
-                            }
+                            printEngimonLiar(listEngimonLiar[k]);
                             isTidakAdaEngimon = false;
                         }
                         k++;
@@ -201,10 +165,6 @@ public:
         }
 
         Engimon dapet = ensiklopediaEngimon[indexElementEngimon][indexEngimon];
-
-        // int x = rand() % 12;
-        // int y = rand() % 10;
-
         Position engimonPosition(x, y);
 
         //INISIALISASI ENEMY BARU
@@ -215,6 +175,68 @@ public:
         listEngimonLiar.push_back(enemy);
 
         return listEngimonLiar;
+    }
+
+    void printEngimonLiar(Engimon engimonLiar)
+    {
+        int id = engimonLiar.getId();
+        // Jika Tipenya Fire
+        // ANGKA 2 BISA DI GANTI DENGAN MINIMUM LEVEL
+        if (id > 2600 && id < 2700)
+        {
+            if (engimonLiar.getLevel() < MINIMUM_LEVEL)
+            {
+                cout << "e";
+            }
+            else
+            {
+                cout << "E";
+            }
+        }
+        else if (id > 2700 && id < 2800)
+        {
+            if (engimonLiar.getLevel() < MINIMUM_LEVEL)
+            {
+                cout << "f";
+            }
+            else
+            {
+                cout << "F";
+            }
+        }
+        else if (id > 2800 && id < 2900)
+        {
+            if (engimonLiar.getLevel() < MINIMUM_LEVEL)
+            {
+                cout << "g";
+            }
+            else
+            {
+                cout << "G";
+            }
+        }
+        else if (id > 2900 && id < 3000)
+        {
+            if (engimonLiar.getLevel() < MINIMUM_LEVEL)
+            {
+                cout << "i";
+            }
+            else
+            {
+                cout << "I";
+            }
+        }
+        else // artinya water
+        {
+            if (engimonLiar.getLevel() < MINIMUM_LEVEL)
+            {
+                cout << "w";
+            }
+            else
+            {
+                cout << "W";
+            }
+        }
     }
 };
 
