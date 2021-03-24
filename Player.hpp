@@ -78,8 +78,16 @@ class Player{
         //     activeEngimon = EngimonUser(Position(0,0),engimon.getName(),engimon.getSpecies(),engimon.getId(),engimon.getElements());
         // }
 
+        bool checkEngimonAvailability(int id){
+            for (auto &it:this->inv_engimon.map_item)
+            {
+                /* code */
+            }
+            
+        }
+
         void breeding(Engimon parent1, Engimon parent2){
-            if (false/* Inventory penuh */)
+            if (this->inv_engimon.get_nItem() == MAX_ENGIMON_INV) /* Inventory penuh */
             {
                 cout << "Inventory penuh!" << endl;
             } else {
