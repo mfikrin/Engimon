@@ -80,5 +80,18 @@ class Inventory
     		cout << endl;	 
 		}
 		
+		bool check_item_availability(int id){
+            bool available = false;
+			for (auto &it:map_item)
+            {
+                if (it.first == id)
+				{
+					available == true;
+					break;
+				}
+				
+            }
+            return available;
+        }
 };
 #endif
