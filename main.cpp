@@ -31,9 +31,9 @@ int main()
     do
     {
         cin >> command;
-        pemain.Move(command);
-
-        listEngimonLiar = peta.addEngimonEnemy(listEngimonLiar, pemain);
+        pemain.Move(command);                                                 // gerakan playernya
+        listEngimonLiar = peta.MoveListEngimonEnemy(listEngimonLiar, pemain); //gerakan engimon liarnya
+        listEngimonLiar = peta.addEngimonEnemy(listEngimonLiar, pemain);      // tambahkan engimonliar
 
         peta.Render(pemain, listEngimonLiar);
     } while (command != 'q');

@@ -144,23 +144,23 @@ public:
         int x, y;
         if (indexElementEngimon == 1 || indexElementEngimon == 4) //jika engimon liar yang muncul bertipe water atau ice
         {
-            x = rand() % 12;
-            y = rand() % 10;
+            x = rand() % render[0].size();
+            y = rand() % render.size();
             while ((x < 6 || y > 5) && (x == pemain.getPosition().getXPos() && y == pemain.getPosition().getYPos())) // ulangi terus, karena daerah ini daerah land
             {
-                x = rand() % 12;
-                y = rand() % 10;
+                x = rand() % render[0].size();
+                y = rand() % render.size();
             }
         }
         else
         {
-            x = rand() % 12;
-            y = rand() % 10;
+            x = rand() % render[0].size();
+            y = rand() % render.size();
 
             while ((x > 5 && y < 6) && (x == pemain.getPosition().getXPos() && y == pemain.getPosition().getYPos())) // ulangi terus, karena daerah ini daerah sea
             {
-                x = rand() % 12;
-                y = rand() % 10;
+                x = rand() % render[0].size();
+                y = rand() % render.size();
             }
         }
 
@@ -236,6 +236,78 @@ public:
             {
                 cout << "W";
             }
+        }
+    }
+
+    // OTHER METHOD
+    vector<EngimonEnemy> MoveListEngimonEnemy(vector<EngimonEnemy> listEngimonLiar, Player player)
+    {
+        // LOOPING SEMUA ENGIMON ENEMY pada LISTENGIMONLIAR
+        int a; // adalah arah gerakan engimon
+        for (int i = 0; i < listEngimonLiar.size(); i++)
+        {
+            a = rand() % 4; // angka 4 = 4 jenis gerakan
+
+            Position P;
+            Position oldPosition;
+            P = listEngimonLiar[i].getPosition(); // dapatkan posisi awalnya
+            oldPosition = P;
+            switch (a)
+            {
+            case 0:
+                P.up();
+                break;
+            case 1:
+                P.left();
+                break;
+            case 2:
+                P.down();
+                break;
+            case 3:
+                P.right();
+                break;
+            }
+            // cout << "a: " << a << " x: " << oldPosition.getXPos() << " y: " << oldPosition.getYPos() << " xbaru: " << P.getXPos() << " ybaru: " << P.getYPos();
+            P = MoveEnemy(listEngimonLiar, player, listEngimonLiar[i], oldPosition, P);
+            // cout << " x: " << P.getXPos() << " y: " << P.getYPos() << endl;
+            listEngimonLiar[i].moveEngimonEnemy(P);
+        }
+        return listEngimonLiar;
+    }
+
+    Position MoveEnemy(vector<EngimonEnemy> listEngimonLiar, Player player, EngimonEnemy enemy, Position oldPosition, Position newPosition)
+    {
+        bool sama = false;
+        if (enemy.getPosition().getXPos() == player.getPosition().getXPos() && enemy.getPosition().getYPos() == player.getPosition().getYPos())
+        {
+            for (int i = 0; i < listEngimonLiar.size(); i++)
+            {
+                if (isPositionSama(enemy, listEngimonLiar[i]))
+                {
+                    sama = true;
+                    break;
+                }
+            }
+        }
+        if (sama)
+        {
+            return oldPosition;
+        }
+        else
+        {
+            return newPosition;
+        }
+    }
+
+    bool isPositionSama(EngimonEnemy enemy1, EngimonEnemy enemy2)
+    {
+        if (enemy1.getPosition().getXPos() == enemy2.getPosition().getXPos() && enemy1.getPosition().getYPos() == enemy2.getPosition().getYPos())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 };
