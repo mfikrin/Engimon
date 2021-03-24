@@ -213,9 +213,9 @@ class Player{
             // }
             
         }
-        
 
-        void battle (EngimonEnemy enemy){
+        void battle(EngimonEnemy enemy)
+        {
             vector<Element> element_active = activeEngimon.getElements();
             vector<Element> element_enemy = enemy.getElements();
 
@@ -226,26 +226,51 @@ class Player{
             {
                 for (int j = 0; j < element_enemy.size(); j++)
                 {
-                    temp_adv_active.push_back(get_advantage(element_active[i],element_enemy[j]));
+                    temp_adv_active.push_back(get_advantage(element_active[i], element_enemy[j]));
                     temp_adv_enemy.push_back(get_advantage(element_enemy[j], element_active[i]));
                 }
             }
 
-            float adv_user = *max_element(temp_adv_active.begin(),temp_adv_active.end());
-            float adv_enemy = *max_element(temp_adv_enemy.begin(),temp_adv_enemy.end());
+            float adv_user = *max_element(temp_adv_active.begin(), temp_adv_active.end());
+            float adv_enemy = *max_element(temp_adv_enemy.begin(), temp_adv_enemy.end());
 
-            if (adv_user > adv_enemy)
+            vector<Skill> skill_user = activeEngimon.getSkills();
+    
+            float sum_skill_user = 0;
+
+            for (int i = 0; i < skill_user.size(); i++)
+            {
+                sum_skill_user += (skill_user[i].getBasePower() * skill_user[i].getMasteryLevel());
+            }
+
+            vector<Skill> skill_enemy = enemy.getSkills();
+
+            float sum_skill_enemy = 0;
+
+            for (int i = 0; i < skill_enemy.size(); i++)
+            {
+                sum_skill_enemy += (skill_enemy[i].getBasePower() * skill_enemy[i].getMasteryLevel());
+            }
+
+            float power_user = activeEngimon.getLevel() * adv_user * sum_skill_user;
+            float power_enemy = enemy.getLevel() * adv_enemy * sum_skill_enemy;
+
+            cout << "POWER KEDUA ENGIMON" << endl;
+            cout << "Power Engimon User : " << power_user << endl;
+            cout << "Power Engimon Enemy : " << power_enemy << endl;
+
+            if (power_user > power_enemy)
             {
                 try
                 {
                     inv_engimon.add_item(enemy);
                 }
-                catch(const Engimon& e)
+                catch (const Engimon &e)
                 {
                     cout << "Inventory Engimon penuh" << endl;
                 }
 
-                int new_exp = activeEngimon.getExp() + (abs(activeEngimon.getLevel() - enemy.getLevel()))*20; // rumus exp (bisa diubah lg rumusnya)
+                int new_exp = activeEngimon.getExp() + (abs(activeEngimon.getLevel() - enemy.getLevel())) * 20; // rumus exp (bisa diubah lg rumusnya)
 
                 activeEngimon.setExp(new_exp);
 
@@ -256,12 +281,13 @@ class Player{
 
                 vector<vector<Skill>> Skill_enemy;
 
-                for (int  i = 0; i < element_enemy.size(); i++)
+                for (int i = 0; i < element_enemy.size(); i++)
                 {
                     int idx = ensiklopedia.get_idx_skill(element_enemy[i]);
                     for (int j = 0; i < ensiklopediaSkill.size(); j++)
                     {
-                        if (idx == j){
+                        if (idx == j)
+                        {
                             Skill_enemy.push_back(ensiklopediaSkill[j]);
                         }
                     }
@@ -272,7 +298,7 @@ class Player{
 
                 Skill get_skill = Skill_enemy[idxElement][idxSkill];
 
-                Skill skill(get_skill.getSkillId(),get_skill.getMasteryLevel(),get_skill.getBasePower(), get_skill.getSkillName(),get_skill.getElement());
+                Skill skill(get_skill.getSkillId(), get_skill.getMasteryLevel(), get_skill.getBasePower(), get_skill.getSkillName(), get_skill.getElement());
 
                 SkillItem skill_item(skill);
 
@@ -280,11 +306,10 @@ class Player{
                 {
                     inv_skill.add_item(skill_item);
                 }
-                catch (const SkillItem& e)
+                catch (const SkillItem &e)
                 {
                     cout << "Inventory Skill Item penuh" << endl;
                 }
-   
             }
 
             else
@@ -292,19 +317,7 @@ class Player{
                 // engimon mati
                 // activeEngimon = select(); // select ENgimon dr inventory
             }
-
-
-
-
-                
-            
-
-
-
-
-
         }
-
 };
 
 #endif // PLAYER_HPP
