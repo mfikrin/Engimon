@@ -3,7 +3,7 @@
 #define MINIMUM_LEVEL 2
 #include <iostream>
 #include <fstream>
-// #include <time>
+#include <time.h>
 
 #include "Position.hpp"
 #include "BookOfLore.hpp"
@@ -19,14 +19,10 @@ class Map
 {
 private:
     string namaFile;
-    //   EngimonEnemy Enemy;
-    //   EngimonUser User;
     vector<string> render;
     Position playerPosition;
     Position activeEngimonPosition;
     Position engimonPosition;
-
-    // vector<EngimonEnemy> listEnemy;
 
 public:
     Map(string namaFile)
@@ -41,32 +37,10 @@ public:
         //menunjuk ke sebuah file
         infile.open(this->namaFile);
 
-        //cout << endl    << ">= Membuka dan membaca file " << endl;
-        //jika file ada maka
-        //int i = 0
         if (infile.is_open())
         {
-            //melakukan perulangan setiap barus
-            //string row = "";
             while (getline(infile, baris))
             {
-                //dan tampilkan di sini
-                //for (int j = 0; j < 12; j++)
-                //{
-                // if (isEnemy(i, j))
-                // {
-                //     cout << "E";
-                // }
-                // else if (isUser(i, j))
-                // {
-                //     cout << "P";
-                // }
-
-                //cout << baris[j];
-                // row += baris[j];
-                // }
-                //cout << '\n';
-                //i += 1;
                 render.push_back(baris);
             }
             //tutup file tersebut setelah selsai
@@ -79,7 +53,7 @@ public:
 
     void Render(Player &player, vector<EngimonEnemy> listEngimonLiar)
     {
-        // srand(time(NULL));
+        srand(time(NULL));
 
         playerPosition = player.getPosition();
         activeEngimonPosition = player.getActiveEngimonPosition();
@@ -106,14 +80,14 @@ public:
                     while (k < listEngimonLiar.size() && isTidakAdaEngimon)
                     {
                         // Jika terdapat Engimon Liar
-                        if (i == listEngimonLiar[k].getPosition().getYPos() && j == listEngimonLiar[k].getPosition().getYPos())
+                        if (j == listEngimonLiar[k].getPosition().getXPos() && i == listEngimonLiar[k].getPosition().getYPos())
                         {
                             printEngimonLiar(listEngimonLiar[k]);
                             isTidakAdaEngimon = false;
                         }
                         k++;
                     }
-                    if (isTidakAdaEngimon)
+                    if (isTidakAdaEngimon) // jika tidak ada engimon, print peta
                     {
                         cout << render[i][j];
                     }
@@ -122,16 +96,6 @@ public:
             cout << endl;
         }
     }
-    // bool isEnemy(int i, int j)
-    // {
-    //     return Enemy.getPosition().getYPos() == i && Enemy.getPosition().getXPos() == j;
-    // }
-
-    // bool isUser(int i, int j)
-    // {
-    //     return User.getPosition().getYPos() == i && User.getPosition().getXPos() == j;
-    // }
-
     vector<EngimonEnemy> addEngimonEnemy(vector<EngimonEnemy> listEngimonLiar, Player pemain)
     {
         BookOfLore ensiklopedia;
@@ -144,23 +108,26 @@ public:
         int x, y;
         if (indexElementEngimon == 1 || indexElementEngimon == 4) //jika engimon liar yang muncul bertipe water atau ice
         {
-            x = rand() % render[0].size();
-            y = rand() % render.size();
-            while ((x < 6 || y > 5) && (x == pemain.getPosition().getXPos() && y == pemain.getPosition().getYPos())) // ulangi terus, karena daerah ini daerah land
+            y = rand() % render.size();    // 10
+            x = rand() % render[0].size(); // 12
+            // Syarat
+            //  index x = 6-11 dan index y = 0-5
+            while ((x < 6 || y > 4) || (x == pemain.getPosition().getXPos() && y == pemain.getPosition().getYPos())) // ulangi terus, karena daerah ini daerah land
             {
-                x = rand() % render[0].size();
-                y = rand() % render.size();
+                y = rand() % render.size();    // 10
+                x = rand() % render[0].size(); // 12
             }
         }
         else
         {
-            x = rand() % render[0].size();
-            y = rand() % render.size();
-
-            while ((x > 5 && y < 6) && (x == pemain.getPosition().getXPos() && y == pemain.getPosition().getYPos())) // ulangi terus, karena daerah ini daerah sea
+            y = rand() % render.size();    // 10
+            x = rand() % render[0].size(); // 12
+            // Syarat
+            // tidak dalam index x = 6-11 dan index y = 0-5
+            while ((x > 5 && y < 5) || (x == pemain.getPosition().getXPos() && y == pemain.getPosition().getYPos())) // ulangi terus, karena daerah ini daerah sea
             {
-                x = rand() % render[0].size();
-                y = rand() % render.size();
+                y = rand() % render.size();    // 10
+                x = rand() % render[0].size(); // 12
             }
         }
 
@@ -280,15 +247,25 @@ public:
         bool sama = false;
         if (enemy.getPosition().getXPos() == player.getPosition().getXPos() && enemy.getPosition().getYPos() == player.getPosition().getYPos())
         {
+            sama = true;
+        }
+        else
+        {
             for (int i = 0; i < listEngimonLiar.size(); i++)
             {
-                if (isPositionSama(enemy, listEngimonLiar[i]))
+                if (isPositionSama(newPosition, listEngimonLiar[i]))
+                {
+                    sama = true;
+                    break;
+                }
+                if (PositionEnemyWrong(newPosition, enemy.getId()))
                 {
                     sama = true;
                     break;
                 }
             }
         }
+
         if (sama)
         {
             return oldPosition;
@@ -299,15 +276,41 @@ public:
         }
     }
 
-    bool isPositionSama(EngimonEnemy enemy1, EngimonEnemy enemy2)
+    bool isPositionSama(Position enemy1, EngimonEnemy enemy2)
     {
-        if (enemy1.getPosition().getXPos() == enemy2.getPosition().getXPos() && enemy1.getPosition().getYPos() == enemy2.getPosition().getYPos())
+        if (enemy1.getXPos() == enemy2.getPosition().getXPos() && enemy1.getYPos() == enemy2.getPosition().getYPos())
         {
             return true;
         }
         else
         {
             return false;
+        }
+    }
+
+    bool PositionEnemyWrong(Position enemy, int id)
+    {
+        if (id > 2900 && id < 3100) // artinya enemy memiliki tipe water dan ice
+        {
+            if (enemy.getXPos() < 6 || enemy.getYPos() > 4) // Jika berada di grassland
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else // artinya enemy memiliki tipe electric, fire dan ground
+        {
+            if (enemy.getXPos() > 5 && enemy.getYPos() < 5) // Jika berada di water
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 };
