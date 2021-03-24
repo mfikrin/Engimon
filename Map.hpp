@@ -124,7 +124,7 @@ public:
             x = rand() % render[0].size(); // 12
             // Syarat
             // tidak dalam index x = 6-11 dan index y = 0-5
-            while ((x > 5 && y < 5) || (x == pemain.getPosition().getXPos() && y == pemain.getPosition().getYPos())) // ulangi terus, karena daerah ini daerah sea
+            while ((x > 5 && y < 6) || (x == pemain.getPosition().getXPos() && y == pemain.getPosition().getYPos())) // ulangi terus, karena daerah ini daerah sea
             {
                 y = rand() % render.size();    // 10
                 x = rand() % render[0].size(); // 12
@@ -136,7 +136,8 @@ public:
 
         //INISIALISASI ENEMY BARU
         vector<Element> el;
-        EngimonEnemy enemy(engimonPosition, dapet.getName(), "bebas", dapet.getId(), el);
+        el.push_back(addElement(indexElementEngimon));
+        EngimonEnemy enemy(engimonPosition, dapet.getName(), dapet.getSpecies(), dapet.getId(), el);
 
         // TAMBAHKAN KE listEngimonLiar
         listEngimonLiar.push_back(enemy);
@@ -247,7 +248,11 @@ public:
         bool sama = false;
         if (enemy.getPosition().getXPos() == player.getPosition().getXPos() && enemy.getPosition().getYPos() == player.getPosition().getYPos())
         {
-            sama = true;
+            return oldPosition;
+        }
+        else if (newPosition.getXPos() < 0 || newPosition.getXPos() > 11 || newPosition.getYPos() < 0 || newPosition.getYPos() > 9)
+        {
+            return oldPosition;
         }
         else
         {
@@ -290,7 +295,7 @@ public:
 
     bool PositionEnemyWrong(Position enemy, int id)
     {
-        if (id > 2900 && id < 3100) // artinya enemy memiliki tipe water dan ice
+        if (id > 2900) // artinya enemy memiliki tipe water dan ice
         {
             if (enemy.getXPos() < 6 || enemy.getYPos() > 4) // Jika berada di grassland
             {
@@ -303,7 +308,7 @@ public:
         }
         else // artinya enemy memiliki tipe electric, fire dan ground
         {
-            if (enemy.getXPos() > 5 && enemy.getYPos() < 5) // Jika berada di water
+            if (enemy.getXPos() > 5 && enemy.getYPos() < 6) // Jika berada di water
             {
                 return true;
             }
@@ -311,6 +316,30 @@ public:
             {
                 return false;
             }
+        }
+    }
+
+    Element addElement(int tipeEngimon)
+    {
+        if (tipeEngimon == 0)
+        {
+            return Element::Fire;
+        }
+        else if (tipeEngimon == 1)
+        {
+            return Element::Water;
+        }
+        else if (tipeEngimon == 2)
+        {
+            return Element::Electric;
+        }
+        else if (tipeEngimon == 3)
+        {
+            return Element::Ground;
+        }
+        else
+        {
+            return Element::Ice;
         }
     }
 };
