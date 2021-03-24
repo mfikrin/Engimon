@@ -36,6 +36,7 @@ public:
     {
         name = n;
         species = sp;
+        elements = el;
         parentNames[0] = "none";
         parentNames[1] = "none";
         parentSpecieses[0] = "none";
@@ -44,10 +45,6 @@ public:
         exp = 0;
         cExp = 0;
         id = i;
-        elements = el;
-        // nature = Nature();
-        // ability = Ability();
-        // cout << skills.size() << endl;
     }
     // Engimon (string n, const Engimon& p1, const Engimon& p2){
 
@@ -62,9 +59,13 @@ public:
     {
         return name;
     }
-    string *getParents()
+    string *getParentNames()
     {
         return parentNames;
+    }
+    string *getParentSpecieses()
+    {
+        return parentSpecieses;
     }
     vector<Skill> getSkills()
     {

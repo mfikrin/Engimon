@@ -19,26 +19,30 @@
 #include "Element.hpp"
 #include "BookOfLore.hpp"
 
+#include "MAP_SIZE.hpp"
+
 
 class Player{
     protected:
         string name;
         Position position;
-        Inventory<Engimon, MAX_ENGIMON_INV> inv_engimon;
+        Inventory<EngimonUser, MAX_ENGIMON_INV> inv_engimon;
         Inventory<SkillItem, MAX_SKILL_ITEM_INV> inv_skill;
         EngimonUser activeEngimon; 
     public:
-        
-
 
         // OTHER METHOD
         void Move(char direction){
             activeEngimon.moveEngimonUser(position);
-            switch(direction){
-                case 'w': position.up(); break;
-                case 'a': position.left(); break;
-                case 's': position.down(); break;
-                case 'd': position.right(); break;
+            if((direction == 'w' && position.getXPos() == 0) || (direction == 'a' && position.getYPos() == 0) || (direction == 's' && position.getXPos() == MAP_HEIGHT-1) || (direction == 'd' && position.getXPos() == MAP_WIDTH-1)){
+                throw "KELUAR MAP CUY!!";
+            } else {
+                switch(direction){
+                    case 'w': position.up(); break;
+                    case 'a': position.left(); break;
+                    case 's': position.down(); break;
+                    case 'd': position.right(); break;
+                }
             }
         }
 
@@ -49,12 +53,49 @@ class Player{
         Position getActiveEngimonPosition(){
             return activeEngimon.getPosition();
         }
-        //void showAllEngimons();
-        //void showEngimonData(const Engimon& e); 
-        //void handleShowEngimonData();  
-        //void changeActiveEngimon();
-        //void showSkillItems();
-        //void useSkillItem(SkillItem& si, Engimon& e);
+        void showAllEngimons(){
+            inv_engimon.show_bag();
+        }
+        void showEngimonData(const EngimonUser& e){
+            cout << "-==Data Engimon==-\n";
+            cout << "Nama: " << e.getName() << endl;
+            cout << "Spesies: " << e.getSpecies() << endl;
+            cout << "Element(s): ";
+            for (int i=0; i<e.getElements().size(); i++){
+                cout << e.getElements()[i] << " ";
+            }
+            cout << endl;
+            cout << "Parents: <";
+            cout << "("<< e.getParentNames()[0] << e.getParentSpecieses[0] << "),";
+            cout << "("<< e.getParentNames()[1] << e.getParentSpecieses[1] << ")>" << endl;
+            cout << "Level: " << e.getLevel() << endl;
+            cout << "Exp: " << e.getExp() << endl;
+            cout << "Cumulative Exp: " << e.getCExp() << endl;
+        }
+        void handleShowEngimonData(){
+            inv_engimon.show_bag();
+            cout << "\ta\t[" << activeEngimon.getName() << "]" << endl << " >> "; 
+            string input;
+            cin >> input;
+            if (input == "a" || input =="A"){
+                showEngimonData(activeEngimon);
+            } else {
+                // Menunggu Inventory. getEngimon -> showEngimonData
+            }
+
+        }  
+        void changeActiveEngimon(){
+            // menunggu Inventory
+        }
+        //void showSkillItems(); // Nunggu Inventory
+        void useSkillItem(SkillItem& si, Engimon& e){
+            si.learn(&e);
+            
+            // UDAH BELUM YAK?????
+
+
+
+        }
         //Engimon breed(const Engimon& a, const Engimon& b);
         // void battle(const Map& m);
         //void interact();

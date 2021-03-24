@@ -25,6 +25,9 @@ public:
     {
         return engimonUserPosition;
     }
+    void setPosition(Position p){
+        engimonUserPosition = p;
+    }
 };
 
 #endif // _EngimonUser_hpp_
