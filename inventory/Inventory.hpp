@@ -8,6 +8,8 @@
 #include <string>
 #include "../SkillItem.hpp"
 #include "../Engimon.hpp"
+#include "../EngimonEnemy.hpp"
+#include "../EngimonUser.hpp"
 
 #define MAX_INV 1000
 #define MAX_ENGIMON_INV 500
