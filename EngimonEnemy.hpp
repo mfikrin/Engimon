@@ -9,7 +9,7 @@
 class EngimonEnemy : public Engimon
 {
 private:
-    int idEngimonLiar;
+    //int idEngimonLiar;
     Position engimonEnemyPosition;
     // static vector<EngimonEnemy> listEngimonLiar;
 

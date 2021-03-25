@@ -1,6 +1,8 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 #define MINIMUM_LEVEL 2
+#define MAP_HEIGHT 10 // ???
+#define MAP_WIDTH 12 /// ???
 #include <iostream>
 #include <fstream>
 #include <time.h>

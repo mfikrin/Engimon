@@ -9,12 +9,13 @@
 #include <string.h>
 #include <stdlib.h>
 #include <algorithm>
+#include <iostream>
 
 #include "Position.hpp"
 #include "inventory/Inventory.hpp"
 #include "Engimon.hpp"
 #include "SkillItem.hpp"
-// #include "Map.hpp"
+#include "Map.hpp"
 #include "EngimonUser.hpp"
 #include "Element.hpp"
 #include "BookOfLore.hpp"
@@ -72,43 +73,54 @@ public:
     {
         inv_engimon.show_bag();
     }
-    void showEngimonData(const EngimonUser &e)
-    {
-        cout << "-==Data Engimon==-\n";
-        cout << "Nama: " << e.getName() << endl;
-        cout << "Spesies: " << e.getSpecies() << endl;
-        cout << "Element(s): ";
-        for (int i = 0; i < e.getElements().size(); i++)
-        {
-            cout << e.getElements()[i] << " ";
-        }
-        cout << endl;
-        cout << "Parents: <";
-        cout << "(" << e.getParentNames()[0] << e.getParentSpecieses[0] << "),";
-        cout << "(" << e.getParentNames()[1] << e.getParentSpecieses[1] << ")>" << endl;
-        cout << "Level: " << e.getLevel() << endl;
-        cout << "Exp: " << e.getExp() << endl;
-        cout << "Cumulative Exp: " << e.getCExp() << endl;
-    }
-    void handleShowEngimonData()
-    {
-        inv_engimon.show_bag();
-        cout << "\ta\t[" << activeEngimon.getName() << "]" << endl
-             << " >> ";
-        string input;
-        cin >> input;
-        if (input == "a" || input == "A")
-        {
-            showEngimonData(activeEngimon);
-        }
-        else
-        {
-            // Menunggu Inventory. getEngimon -> showEngimonData
-        }
-    }
+    // void showEngimonData(const EngimonUser &e)
+    // {
+    //     cout << "-==Data Engimon==-\n";
+    //     cout << "Nama: " << e.getName() << endl;
+    //     cout << "Spesies: " << e.getSpecies() << endl;
+    //     cout << "Element(s): ";
+    //     for (int i = 0; i < e.getElements().size(); i++)
+    //     {
+    //         cout << e.getElements()[i] << " ";
+    //     }
+    //     cout << endl;
+    //     cout << "Parents: <";
+    //     cout << "(" << e.getParentNames()[0] << e.getParentSpecieses[0] << "),";
+    //     cout << "(" << e.getParentNames()[1] << e.getParentSpecieses[1] << ")>" << endl;
+    //     cout << "Level: " << e.getLevel() << endl;
+    //     cout << "Exp: " << e.getExp() << endl;
+    //     cout << "Cumulative Exp: " << e.getCExp() << endl;
+    // }
+    // void handleShowEngimonData()
+    // {
+    //     inv_engimon.show_bag();
+    //     cout << "\ta\t[" << activeEngimon.getName() << "]" << endl
+    //          << " >> ";
+    //     string input;
+    //     cin >> input;
+    //     if (input == "a" || input == "A")
+    //     {
+    //         showEngimonData(activeEngimon);
+    //     }
+    //     else
+    //     {
+    //         // Menunggu Inventory. getEngimon -> showEngimonData
+    //     }
+    // }
     void changeActiveEngimon()
     {
         // menunggu Inventory
+        if (inv_engimon.get_nItem() > 0){
+            inv_engimon.show_bag();
+            cout << "Input id : ";
+            int id;
+            cin >> id;
+            activeEngimon = inv_engimon.select_item(id);
+        }
+        else{
+            cout << "GAME OVER" << endl;
+            exit(1);
+        }
     }
     //void showSkillItems(); // Nunggu Inventory
     void useSkillItem(SkillItem &si, Engimon &e)
@@ -135,63 +147,65 @@ public:
         //activeEngimon = EngimonUser(Position(INIT_ACTIVEMON_X,INIT_ACTIVEMON_Y),active.getName(),active.getSpecies(),active.getId(),active.getElements());
         //activeEngimon = EngimonUser(Position(0,0),active);
     }
-    else
-    {
-        if (true /* parent ga ada di inventory */)
-        {
-            cout << "Parent tidak ada di inventory" << endl;
-        }
-        else
-        {
-            vector<Element> elementParent;
-            vector<Element> elementParent1 = parent1.getElements();
-            vector<Element> elementParent2 = parent2.getElements();
 
-            // Mengoleksi element parent 1 ke dalam elementParent
-            for (int i = 0; i < elementParent1.size(); i++)
-            {
-                elementParent.push_back(elementParent1[i]);
-            }
 
-            // Mengoleksi element parent 2 ke dalam elementParent
-            for (int i = 0; i < elementParent2.size(); i++)
-            {
-                // Mengecek apakah element dari elementParent2 sudah ada di elementParent
-                bool present = false;
-                for (int j = 0; j < elementParent.size(); j++)
-                {
-                    if (elementParent2[i] == elementParent[j])
-                    {
-                        present = true;
-                    }
-                }
+// METHOD BREEDING HILANG ???
+//     else
+//     {
+//         if (true /* parent ga ada di inventory */)
+//         {
+//             cout << "Parent tidak ada di inventory" << endl;
+//         }
+//         else
+//         {
+//             vector<Element> elementParent;
+//             vector<Element> elementParent1 = parent1.getElements();
+//             vector<Element> elementParent2 = parent2.getElements();
 
-                // Mengoleksi elementParent2 ke dalam elementParent
-                if (!present)
-                {
-                    elementParent.push_back(elementParent2[i]);
-                }
-            }
+//             // Mengoleksi element parent 1 ke dalam elementParent
+//             for (int i = 0; i < elementParent1.size(); i++)
+//             {
+//                 elementParent.push_back(elementParent1[i]);
+//             }
 
-            if (elementParent.size() > 2)
-            {
-                int duaElement = rand() % 2;
-                if (duaElement)
-                {
-                    int element1Index = rand() % elementParent.size();
-                    int element2Index = rand() % elementParent.size();
-                }
-                else
-                {
-                    int elementIndex = rand() % elementParent.size();
-                }
-            }
-        }
-    }
-}
+//             // Mengoleksi element parent 2 ke dalam elementParent
+//             for (int i = 0; i < elementParent2.size(); i++)
+//             {
+//                 // Mengecek apakah element dari elementParent2 sudah ada di elementParent
+//                 bool present = false;
+//                 for (int j = 0; j < elementParent.size(); j++)
+//                 {
+//                     if (elementParent2[i] == elementParent[j])
+//                     {
+//                         present = true;
+//                     }
+//                 }
 
-float
-get_advantage(Element e1, Element e2)
+//                 // Mengoleksi elementParent2 ke dalam elementParent
+//                 if (!present)
+//                 {
+//                     elementParent.push_back(elementParent2[i]);
+//                 }
+//             }
+
+//             if (elementParent.size() > 2)
+//             {
+//                 int duaElement = rand() % 2;
+//                 if (duaElement)
+//                 {
+//                     int element1Index = rand() % elementParent.size();
+//                     int element2Index = rand() % elementParent.size();
+//                 }
+//                 else
+//                 {
+//                     int elementIndex = rand() % elementParent.size();
+//                 }
+//             }
+//         }
+//     }
+// }
+
+float get_advantage(Element e1, Element e2)
 {
     if (e1 == Element::Fire)
     {
@@ -345,15 +359,6 @@ void battle(EngimonEnemy enemy)
 
     if (power_user > power_enemy)
     {
-        try
-        {
-            inv_engimon.add_item(enemy);
-        }
-        catch (const Engimon &e)
-        {
-            cout << "Inventory Engimon penuh" << endl;
-        }
-
         int new_exp = activeEngimon.getExp() + (abs(activeEngimon.getLevel() - enemy.getLevel())) * 20; // rumus exp (bisa diubah lg rumusnya)
 
         activeEngimon.setExp(new_exp);
@@ -386,13 +391,22 @@ void battle(EngimonEnemy enemy)
 
         SkillItem skill_item(skill);
 
+        // Convert EngimonEnemy to EngimonUser
+        //EngimonUser getEnemy(enemy.getPosition(), enemy.getName(), enemy.getParentSpecieses(), enemy.getId(), enemy.getElements());
+        // ATRIBUT EngimonUSer yg position ga bisa
+        
         try
         {
             inv_skill.add_item(skill_item);
+            //inv_engimon.add_item(enemy);
         }
         catch (const SkillItem &e)
         {
             cout << "Inventory Skill Item penuh" << endl;
+        }
+        catch (const Engimon &e)
+        {
+            cout << "Inventory Engimon penuh" << endl;
         }
     }
 
@@ -400,6 +414,14 @@ void battle(EngimonEnemy enemy)
     {
         // engimon mati
         // activeEngimon = select(); // select ENgimon dr inventory
+        // inv_engimon.show_bag();
+        // cout << "Input id : ";
+        // int id;
+        // cin >> id;
+        // activeEngimon = inv_engimon.select_item(id);
+
+        changeActiveEngimon();
+
     }
 }
 }

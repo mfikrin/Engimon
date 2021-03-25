@@ -6,11 +6,10 @@
 #include <iostream>
 #include <vector>
 
-
-
 using namespace std;
 
-int main(){
+int main()
+{
     vector<Element> elements;
     Engimon e1("digimon", "emon", 1, elements);
     Engimon e2("digimon2", "emon1", 1, elements);
@@ -31,9 +30,9 @@ int main(){
     cout << e1 << endl;
 
     // Inventory<Engimon,MAX_ENGIMON_INV> inv;
-    Inventory<Engimon,3> inv_engimon;
+    Inventory<Engimon, 3> inv_engimon;
 
-    cout <<"MAX : " <<inv_engimon.get_nMAX()<< endl;
+    cout << "MAX : " << inv_engimon.get_nMAX() << endl;
 
     // string name = e1.getName();
     // cout << name << endl;
@@ -44,7 +43,7 @@ int main(){
         inv_engimon.add_item(e3);
         inv_engimon.add_item(e4);
     }
-    catch(const Engimon& e)
+    catch (const Engimon &e)
     {
         cout << "Ga cukup lg euy (Engimon)" << endl;
     }
@@ -52,7 +51,7 @@ int main(){
     inv_engimon.show_bag();
 
     cout << inv_engimon.get_nItem() << endl;
-    
+
     inv_engimon.delete_item(1);
     cout << inv_engimon.get_nItem() << endl;
     inv_engimon.delete_item(4);
@@ -60,7 +59,7 @@ int main(){
 
     inv_engimon.show_bag();
     // Inventory<SkillItem,MAX_SKILL_ITEM_INV> inv;
-    Inventory<SkillItem,3> inv_skill_item;
+    Inventory<SkillItem, 3> inv_skill_item;
 
     try
     {
@@ -69,7 +68,7 @@ int main(){
         inv_skill_item.add_item(sk);
         inv_skill_item.add_item(sk_2);
     }
-    catch(const SkillItem& e)
+    catch (const SkillItem &e)
     {
         cout << "Ga cukup lg euy (skill)" << endl;
     }
@@ -77,10 +76,15 @@ int main(){
     inv_skill_item.show_bag();
 
     inv_skill_item.delete_item(2);
-    cout << "item :"<<inv_skill_item.get_nItem() << endl;
+    cout << "item :" << inv_skill_item.get_nItem() << endl;
 
     inv_skill_item.add_item(sk);
     cout << "item :" << inv_skill_item.get_nItem() << endl;
     inv_skill_item.show_bag();
 
+    Engimon e = inv_engimon.select_item(100);
+
+    cout << e.getName() << endl;
+
+    // cout << "Skill item : " << inv_engimon[2]. << endl;
 }
