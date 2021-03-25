@@ -424,6 +424,11 @@ void battle(EngimonEnemy enemy)
 
     }
 }
+
+Inventory<EngimonUser, MAX_ENGIMON_INV> get_inv_engimon() {
+    return this->inv_engimon;
+} 
+
 }
 ;
 
