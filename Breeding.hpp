@@ -6,13 +6,13 @@
 #include "Engimon.hpp"
 class Breeding {
     public:
-        void breeding(Player player, Engimon parent1, Engimon parent2){
-            if (player.get_inv_engimon.get_nItem() == MAX_ENGIMON_INV) /* Inventory penuh */
+        Engimon breeding(Player player, BookOfLore ensiklopedia, Engimon parent1, Engimon parent2){
+            if (player.get_inv_engimon().get_nItem() == MAX_ENGIMON_INV) /* Inventory penuh */
             {
                 cout << "Inventory penuh!" << endl;
             } else {
-                bool parent1Available = inv_engimon.check_item_availability(parent1.getId());
-                bool parent2Available = inv_engimon.check_item_availability(parent2.getId());
+                bool parent1Available = player.get_inv_engimon().check_item_availability(parent1.getId());
+                bool parent2Available = player.get_inv_engimon().check_item_availability(parent2.getId());
                 if (!parent1Available) // parent1 ga ada di inventory
                 {
                     if (parent2Available) // parent2 ada di inventory
@@ -104,28 +104,28 @@ class Breeding {
                             } else {// Elemen kedua parent berbeda
                                 if (parent1Element.size() == 1 && parent2Element.size() == 1)
                                 {
-                                    if (get_advantage(parent1Element[0], parent2Element[0]) > get_advantage(parent2Element[0], parent1Element[0]))
+                                    if (player.get_advantage(parent1Element[0], parent2Element[0]) > player.get_advantage(parent2Element[0], parent1Element[0]))
                                     {
                                         childSpecies = parent1.getSpecies();
                                         childID = parent1.getId();
                                         childElement = parent1.getElements();
 
-                                    } else if (get_advantage(parent1Element[0], parent2Element[0]) < get_advantage(parent2Element[0], parent1Element[0])){
+                                    } else if (player.get_advantage(parent1Element[0], parent2Element[0]) < player.get_advantage(parent2Element[0], parent1Element[0])){
                                         childSpecies = parent2.getSpecies();
                                         childID = parent2.getId();
                                         childElement = parent2.getElements();
                                     } else { // Element advantage sama
                                         
-                                        int speciesRandomizer = rand() % 10000;
-                                        childSpecies = parent1.getSpecies() + to_string(mutationRandomizer);
+                                        int indexRandomizer = rand() % ensiklopedia.allEngimon().size();
+                                        int speciesRandomizer = rand() % ensiklopedia.allEngimon()[indexRandomizer].size();
+                                        childSpecies = ensiklopedia.allEngimon()[indexRandomizer][speciesRandomizer].getSpecies();
                                         while (childSpecies == parent1.getSpecies() || childSpecies == parent2.getSpecies())
                                         {
-                                            mutationRandomizer = rand() % 10000;
-                                            childSpecies = parent1.getSpecies() + to_string(mutationRandomizer);
-                                            
+                                            indexRandomizer = rand() % ensiklopedia.allEngimon().size();
+                                            speciesRandomizer = rand() % ensiklopedia.allEngimon()[indexRandomizer].size();                                            childSpecies = parent1.getSpecies() + to_string(speciesRandomizer);
+                                            childSpecies = ensiklopedia.allEngimon()[indexRandomizer][speciesRandomizer].getSpecies();
                                         }
                                         childElement = parentElement;
-                                        childID = mutationRandomizer;
                                         
                                     }
                                     
@@ -153,27 +153,77 @@ class Breeding {
                             }
                             
                         } else {// Elemen kedua parent berbeda
-                            int mutationRandomizer = rand() % 10000;
-                                        childSpecies = parent1.getSpecies() + to_string(mutationRandomizer);
-                                        while (childSpecies == parent1.getSpecies() || childSpecies == parent2.getSpecies())
-                                        {
-                                            mutationRandomizer = rand() % 10000;
-                                            childSpecies = parent1.getSpecies() + to_string(mutationRandomizer);
-                                        }
+                            if (parent1Element.size() == 1 && parent2Element.size() == 1){
+                                if (player.get_advantage(parent1Element[0], parent2Element[0]) > player.get_advantage(parent2Element[0], parent1Element[0]))
+                                {
+                                    childSpecies = parent1.getSpecies();
+                                    childID = parent1.getId();
+                                    childElement = parent1.getElements();
+
+                                } else if (player.get_advantage(parent1Element[0], parent2Element[0]) < player.get_advantage(parent2Element[0], parent1Element[0])){
+                                    childSpecies = parent2.getSpecies();
+                                    childID = parent2.getId();
+                                    childElement = parent2.getElements();
+                                } else { // Element advantage sama
+                                        
+                                    int indexRandomizer = rand() % ensiklopedia.allEngimon().size();
+                                    int speciesRandomizer = rand() % ensiklopedia.allEngimon()[indexRandomizer].size();
+                                    childSpecies = ensiklopedia.allEngimon()[indexRandomizer][speciesRandomizer].getSpecies();
+                                    while (childSpecies == parent1.getSpecies() || childSpecies == parent2.getSpecies())
+                                    {
+                                        indexRandomizer = rand() % ensiklopedia.allEngimon().size();
+                                        speciesRandomizer = rand() % ensiklopedia.allEngimon()[indexRandomizer].size();                                            childSpecies = parent1.getSpecies() + to_string(speciesRandomizer);
+                                        childSpecies = ensiklopedia.allEngimon()[indexRandomizer][speciesRandomizer].getSpecies();
+                                    }
                                         childElement = parentElement;
+                                        
+                                }
+                                    
+                            } else {// Element parent lebih dari 1
+                                int duaElement = rand() % 2;
+                                if (duaElement)
+                                {
+                                    int element1Index = rand() % parentElement.size();
+                                    int element2Index = rand() % parentElement.size();
+                                    while (element2Index == element1Index)
+                                    {
+                                        element2Index = rand() % parentElement.size();
+                                    }
+                                    
+                                    childElement.push_back(parentElement[element1Index]);
+                                    childElement.push_back(parentElement[element2Index]);
+                                } else {
+                                        int elementIndex = rand() % parentElement.size();
+                                        childElement.push_back(parentElement[elementIndex]);
+                                }
+                            }
+                        }
+
+                    // MENENTUKAN ID
+                    int maxID = ensiklopedia.allEngimon()[0][0].getId();
+                    for (int i = 0; i < ensiklopedia.allEngimon().size(); i++)
+                    {
+                        for (int j = 0; j < ensiklopedia.allEngimon()[i].size(); j++)
+                        {
+                            if (maxID < ensiklopedia.allEngimon()[i][j].getId())
+                            {
+                                maxID = ensiklopedia.allEngimon()[i][j].getId();
+                            }
+                            
                         }
                         
+                    }
+                    childID = maxID + 1;
+
                     Engimon child(childName, childSpecies, childID, childElement);
                     
                     parent1.setLevel(parent1.getLevel() - 30);
                     parent2.setLevel(parent2.getLevel() - 30);
+
+                    return child;
                     }
-                    
 
                 }
-                
-        
-
 
             }
             
