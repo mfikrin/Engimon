@@ -1,6 +1,8 @@
 #ifndef MAP_HPP
 #define MAP_HPP
 #define MINIMUM_LEVEL 2
+#define MAP_HEIGHT 10 // ???
+#define MAP_WIDTH 12 /// ???
 #include <iostream>
 #include <fstream>
 #include <time.h>
@@ -12,6 +14,7 @@
 #include "EngimonEnemy.hpp"
 #include "Engimon.hpp"
 #include "Element.hpp"
+#include "Skill.hpp"
 
 using namespace std;
 
@@ -105,6 +108,9 @@ public:
         // RANDOM ENGIMON YANG MUNCUL
         int indexElementEngimon = rand() % ensiklopediaEngimon.size();
         int indexEngimon = rand() % ensiklopediaEngimon[indexElementEngimon].size();
+        // CARI SKILLNYA JUGA
+        int indexSkill = rand() % ensiklopediaSkill[indexElementEngimon].size();
+        Skill dapetSkill = ensiklopediaSkill[indexElementEngimon][indexSkill];
         int x, y;
         if (indexElementEngimon == 1 || indexElementEngimon == 4) //jika engimon liar yang muncul bertipe water atau ice
         {
@@ -136,8 +142,11 @@ public:
 
         //INISIALISASI ENEMY BARU
         vector<Element> el;
+        // tambahkan elemen
         el.push_back(addElement(indexElementEngimon));
         EngimonEnemy enemy(engimonPosition, dapet.getName(), dapet.getSpecies(), dapet.getId(), el);
+        // tambahkan skill
+        enemy.addSkill(dapetSkill);
 
         // TAMBAHKAN KE listEngimonLiar
         listEngimonLiar.push_back(enemy);

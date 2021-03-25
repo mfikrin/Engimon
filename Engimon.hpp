@@ -32,6 +32,22 @@ protected:
 
 public:
     // ctor, dtor
+    Engimon()
+    {
+        name = "NO NAME";
+        species = "SPECIES NONE";
+        parentNames[0] = "none";
+        parentNames[1] = "none";
+        parentSpecieses[0] = "none";
+        parentSpecieses[1] = "none";
+        level = 0;
+        exp = 0;
+        cExp = 0;
+        id = 0;
+        vector<Element> el;
+        elements = el;
+    }
+
     Engimon(string n, string sp, int i, const vector<Element> &el)
     {
         name = n;

@@ -83,17 +83,24 @@ public:
 		return result;
 	}
 
-	int get_idx_skill(Element el){
+	int get_idx_skill(Element el)
+	{
 		switch (el)
 		{
-		case Element::Fire: return 0;
-		case Element::Water: return 1;
-		case Element::Electric: return 2;
-		case Element::Ground: return 3;
-		case Element::Ice: return 4;
-		case Element::NoElement: return 5;
+		case Element::Fire:
+			return 0;
+		case Element::Water:
+			return 1;
+		case Element::Electric:
+			return 2;
+		case Element::Ground:
+			return 3;
+		case Element::Ice:
+			return 4;
+		case Element::NoElement:
+			return 5;
 		}
-	} 
+	}
 
 	vector<Engimon> engimonByElement(const Element &el)
 	{

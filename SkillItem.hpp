@@ -2,6 +2,9 @@
 #define SKILLITEM_HPP
 
 #include "Engimon.hpp"
+#include <iostream>
+
+using namespace std;
 
 //string and vectors from engimon
 

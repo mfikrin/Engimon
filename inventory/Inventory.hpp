@@ -93,5 +93,19 @@ class Inventory
             }
             return available;
         }
+
+		T select_item(int id_inven)
+		{
+			Engimon e;
+
+			for (auto &it : map_item)
+			{
+				if (it.first == id_inven)
+				{
+					e = it.second;
+				}
+			}
+			return e;
+		}
 };
 #endif
