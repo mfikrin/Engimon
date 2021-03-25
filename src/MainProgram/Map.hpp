@@ -257,30 +257,17 @@ public:
         bool sama = false;
         if (enemy.getPosition().getXPos() == player.getPosition().getXPos() && enemy.getPosition().getYPos() == player.getPosition().getYPos())
         {
-<<<<<<< HEAD
-            cout << enemy.getPosition().getXPos() << player.getPosition().getXPos() << enemy.getPosition().getYPos() << player.getPosition().getYPos();
-            return oldPosition;
-        }
-        else if (enemy.getPosition().getXPos() == player.getActiveEngimon().getPosition().getXPos() && enemy.getPosition().getYPos() == player.getActiveEngimon().getPosition().getYPos())
-        {
-            cout << enemy.getPosition().getXPos() << player.getActiveEngimon().getPosition().getXPos() << enemy.getPosition().getYPos() << player.getActiveEngimon().getPosition().getYPos();
-=======
             // cout << enemy.getPosition().getXPos() << player.getPosition().getXPos() << enemy.getPosition().getYPos() << player.getPosition().getYPos();
             return oldPosition;
         }
         else if (enemy.getPosition().getXPos() == player.getActiveEngimon().getPosition().getXPos() && enemy.getPosition().getYPos() ==player.getActiveEngimon().getPosition().getYPos())
         {
             // cout << enemy.getPosition().getXPos() << player.getPosition().getXPos() << enemy.getPosition().getYPos() << player.getPosition().getYPos();
->>>>>>> 96dd1d22f715585e88757db942d0fb34b117c038
             return oldPosition;
         }
         else if (newPosition.getXPos() < 0 || newPosition.getXPos() > 11 || newPosition.getYPos() < 0 || newPosition.getYPos() > 9)
         {
-<<<<<<< HEAD
-
-=======
             // cout << enemy.getPosition().getXPos() << player.getPosition().getXPos() << enemy.getPosition().getYPos() << player.getPosition().getYPos();
->>>>>>> 96dd1d22f715585e88757db942d0fb34b117c038
             return oldPosition;
         }
         else

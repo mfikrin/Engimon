@@ -288,7 +288,8 @@ public:
                             for (int j = 0; j < parent1.getSkills().size(); j++){
                                 if (skillOfNMasteryLevel[i].getSkillId() == parent1.getSkills()[j].getSkillId()){
                                     skillOfNMasteryLevelParentA.push_back(skillOfNMasteryLevel[i]);
-                                    
+                                    skillOfNMasteryLevel.erase(skillOfNMasteryLevel.begin()+i);
+                                    // listEngimonLiar.erase(listEngimonLiar.begin() + peta.EnemyNear(pemain, listEngimonLiar));
                                 }
                             }
                         }    
