@@ -120,8 +120,7 @@ public:
 	{
 		string name = inputPlayerName();
 		Engimon chosen = chooseEngimon();
-		Player temp = Player(name, chosen);
-		player = temp;
+		player = Player(name, chosen);
 	}
 
 	void renderMap(vector<EngimonEnemy> listEngimonLiar)

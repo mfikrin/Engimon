@@ -150,6 +150,10 @@ public:
     // CTOR
     Player(string name_, Engimon &active) : activeEngimon(Position(INIT_ACTIVEMON_X, INIT_ACTIVEMON_Y), active.getName(), active.getSpecies(), active.getId(), active.getElements())
     {
+        for(int i = 0; i < active.getSkills().size(); ++i){
+            active.getSkills()[i].printSkill();
+            activeEngimon.addSkill(active.getSkills()[i]);
+        }
         name = name_;
         position = Position(INIT_PLAYER_X, INIT_PLAYER_Y);
     }
@@ -157,6 +161,14 @@ public:
     Player(vector<Element> a) : activeEngimon(Position(0,0),"a","a",0,a){
         name = "";
         position = Position(1,0);
+    }
+
+    Player(const Player& other){
+        this->name = other.name;
+        this->position = other.position;
+        this->inv_engimon = other.inv_engimon;
+        this->inv_skill = other.inv_skill;
+        this->activeEngimon = other.activeEngimon;
     }
 
     void operator=(const Player& other){
