@@ -279,9 +279,26 @@ public:
                         
                     }
 
-                    while (){
-                        
+
+                    
+
+                    if (skillOfNMasteryLevel.size() > 1){
+                        vector<Skill> skillOfNMasteryLevelParentA;
+                        for (int i = 0; i < skillOfNMasteryLevel.size(); i++){
+                            for (int j = 0; j < parent1.getSkills().size(); j++){
+                                if (skillOfNMasteryLevel[i].getSkillId() == parent1.getSkills()[j].getSkillId()){
+                                    skillOfNMasteryLevelParentA.push_back(skillOfNMasteryLevel[i]);
+                                    skillOfNMasteryLevel.erase(skillOfNMasteryLevel.begin()+i);
+                                    // listEngimonLiar.erase(listEngimonLiar.begin() + peta.EnemyNear(pemain, listEngimonLiar));
+                                }
+                            }
+                        }    
+                    } else {
+
                     }
+                    while (childSkill.size() < 5 && parentSkill.size() != 0){
+
+                    } // childSkill.size() >= 5 atau parentSkill.size() = 0
                     
                     
 

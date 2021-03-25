@@ -1,4 +1,4 @@
-#include "../BookOfLore/BookOfLore.hpp"
+#include "BookOfLore.hpp"
 #include "../Player/Player.hpp"
 #include "../Battle/Battle.hpp"
 #include <iostream>

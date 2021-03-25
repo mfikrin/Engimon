@@ -38,7 +38,7 @@ public:
     // OTHER METHOD
     void Move(char direction)
     {
-        if ((direction == 'w' && position.getXPos() == 0) || (direction == 'a' && position.getYPos() == 0) || (direction == 's' && position.getXPos() == MAP_HEIGHT - 1) || (direction == 'd' && position.getXPos() == MAP_WIDTH - 1))
+        if ((direction == 'w' && position.getYPos() == 0) || (direction == 'a' && position.getXPos() == 0) || (direction == 's' && position.getXPos() == MAP_HEIGHT - 1) || (direction == 'd' && position.getXPos() == MAP_WIDTH - 1))
         {
             throw "KELUAR MAP CUY!!";
         }
@@ -112,7 +112,7 @@ public:
                     inv_skill.show_bag();
                 }
             } while (invent != "1" && invent != "2");
-        }else if(com == "q"){
+        }else if(com == "q" || com == "quit" || com == "exit"){
             cout << "GoodBye!" << endl;
             exit(0);
         }
