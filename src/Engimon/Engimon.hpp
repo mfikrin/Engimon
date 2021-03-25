@@ -114,6 +114,11 @@ public:
         parentNames[0] = p1;
         parentNames[1] = p2;
     }
+    void setParentSpecies(string parent1Species, string parent2Species)
+    {
+        parentSpecieses[0] = parent1Species;
+        parentSpecieses[1] = parent2Species;
+    }
     void addSkill(Skill s)
     {
         if (skills.size() < MAX_SKILLS){
