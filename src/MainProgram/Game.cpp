@@ -1,4 +1,4 @@
-#include "../BookOfLore/BookOfLore.hpp"
+#include "BookOfLore.hpp"
 #include "../Player/Player.hpp"
 #include <iostream>
 #include <string>
@@ -101,6 +101,7 @@ public:
 		cin >> command;
 		player.command(command);
 	}
+	
 };
 
 int main()
