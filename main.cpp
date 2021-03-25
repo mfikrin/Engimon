@@ -28,14 +28,19 @@ int main()
     peta.BacaFile();
     peta.Render(pemain, listEngimonLiar);
     char command;
+    int jumlahIterasi = 0;
     do
     {
         cin >> command;
         pemain.Move(command);                                                 // gerakan playernya
         listEngimonLiar = peta.MoveListEngimonEnemy(listEngimonLiar, pemain); //gerakan engimon liarnya
-        listEngimonLiar = peta.addEngimonEnemy(listEngimonLiar, pemain);      // tambahkan engimonliar
+        if (jumlahIterasi % 3 == 0 && listEngimonLiar.size() < 5)             // tambahin engimon setiap 3 move
+        {
+            listEngimonLiar = peta.addEngimonEnemy(listEngimonLiar, pemain); // tambahkan engimonliar
+        }
 
         peta.Render(pemain, listEngimonLiar);
+        jumlahIterasi++;
     } while (command != 'q');
     return 0;
 }
