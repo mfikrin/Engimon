@@ -4,10 +4,11 @@
 #include "../MainProgram/BookOfLore.hpp"
 #include "../Element/Element.hpp"
 #include "../Engimon/Engimon.hpp"
+#include "../Battle/Battle.hpp"
 class Breeding
 {
 public:
-    Engimon breeding(Player player, BookOfLore ensiklopedia, Engimon parent1, Engimon parent2)
+    Engimon breeding(Player player, BookOfLore ensiklopedia, Battle battle, Engimon parent1, Engimon parent2)
     {
         if (player.get_inv_engimon().get_nItem() == MAX_ENGIMON_INV) /* Inventory penuh */
         {
@@ -59,6 +60,8 @@ public:
                     vector<Element> parent1Element = parent1.getElements();
                     vector<Element> parent2Element = parent2.getElements();
                     vector<Element> childElement;
+                    vector<Skill> parentSkill;
+                    vector<Skill> childSkill;
                     string childName;
                     string childSpecies;
                     cout << "Masukkan nama anak!" << endl;
@@ -121,13 +124,13 @@ public:
                         { // Elemen kedua parent berbeda
                             if (parent1Element.size() == 1 && parent2Element.size() == 1)
                             {
-                                if (player.get_advantage(parent1Element[0], parent2Element[0]) > player.get_advantage(parent2Element[0], parent1Element[0]))
+                                if (battle.get_advantage(parent1Element[0], parent2Element[0]) > battle.get_advantage(parent2Element[0], parent1Element[0]))
                                 {
                                     childSpecies = parent1.getSpecies();
                                     childID = parent1.getId();
                                     childElement = parent1.getElements();
                                 }
-                                else if (player.get_advantage(parent1Element[0], parent2Element[0]) < player.get_advantage(parent2Element[0], parent1Element[0]))
+                                else if (battle.get_advantage(parent1Element[0], parent2Element[0]) < battle.get_advantage(parent2Element[0], parent1Element[0]))
                                 {
                                     childSpecies = parent2.getSpecies();
                                     childID = parent2.getId();
@@ -176,13 +179,13 @@ public:
                     { // Elemen kedua parent berbeda
                         if (parent1Element.size() == 1 && parent2Element.size() == 1)
                         {
-                            if (player.get_advantage(parent1Element[0], parent2Element[0]) > player.get_advantage(parent2Element[0], parent1Element[0]))
+                            if (battle.get_advantage(parent1Element[0], parent2Element[0]) > battle.get_advantage(parent2Element[0], parent1Element[0]))
                             {
                                 childSpecies = parent1.getSpecies();
                                 childID = parent1.getId();
                                 childElement = parent1.getElements();
                             }
-                            else if (player.get_advantage(parent1Element[0], parent2Element[0]) < player.get_advantage(parent2Element[0], parent1Element[0]))
+                            else if (battle.get_advantage(parent1Element[0], parent2Element[0]) < battle.get_advantage(parent2Element[0], parent1Element[0]))
                             {
                                 childSpecies = parent2.getSpecies();
                                 childID = parent2.getId();
@@ -226,6 +229,61 @@ public:
                             }
                         }
                     }
+
+                    /*--- MENENTUKAN SKILL CHILD ---*/
+                    // MENGOLEKSI SKILL PARENT1 KE DALAM PARENTSKILL
+                    for (int i = 0; i < parent1.getSkills().size(); i++)
+                    {
+                        parentSkill.push_back(parent1.getSkills()[i]);
+                    }
+
+                    // MENGOLEKSI SKILL PARENT2 KE DALAM PARENTSKILL
+
+                    for (int i = 0; i < parent2.getSkills().size(); i++)
+                    {
+                        // Mengecek apakah element dari elementParent2 sudah ada di elementParent
+                        bool present = false;
+                        for (int j = 0; j < parentSkill.size(); j++)
+                        {
+                            if (parent2.getSkills()[i].getSkillId() == parentSkill[j].getSkillId())
+                            {
+                                present = true;
+                            }
+                        }
+
+                        // Mengoleksi elementParent2 ke dalam elementParent
+                        if (!present)
+                        {
+                            parentSkill.push_back(parent2.getSkills()[i]);
+                        }
+                    }
+
+                    // Max Mastery Level Skill
+                    Skill maxMasteryLevelSkill = parentSkill[0];
+                    for (int i = 1; i < parentSkill.size(); i++)
+                    {
+                        if (maxMasteryLevelSkill.getMasteryLevel() < parentSkill[i].getMasteryLevel())
+                        {
+                            maxMasteryLevelSkill = parentSkill[i];
+                        }
+                        
+                    }
+                    // Mengumpulkan Skill Max Mastery Level
+                    vector<Skill> skillOfNMasteryLevel;
+                    for (int i = 0; i < parentSkill.size(); i++)
+                    {
+                        if (parentSkill[i].get asteryLevel()== )maxMasteryLevelSkill.getMasteryLevel()
+                        {
+                            /skillOfNMasteryLevel.push_back(parentSkill[i]);
+                        }
+                        
+                    }
+
+                    while (){
+                        
+                    }
+                    
+                    
 
                     // MENENTUKAN ID
                     int maxID = ensiklopedia.allEngimon()[0][0].getId();

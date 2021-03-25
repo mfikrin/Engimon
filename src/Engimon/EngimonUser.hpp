@@ -4,16 +4,28 @@
 #include "Engimon.hpp"
 #include "../Position/Position.hpp"
 
+vector<Element> listKosong;
+
 class EngimonUser : public Engimon
 {
 private:
     Position engimonUserPosition;
 
 public:
-    EngimonUser(const Position &p, string n, string sp, int i, const vector<Element> &el)
-        : Engimon(n, sp, i, el)
+    EngimonUser() : Engimon("","",0,listKosong){
+        this->engimonUserPosition = Position(0,0);
+    }
+    EngimonUser(const Position &p, string n, string sp, int i, const vector<Element> &el): Engimon(n, sp, i, el)
     {
         this->engimonUserPosition = p;
+    }
+
+    void operator=(const EngimonUser(& other)){
+        this->name = other.name;
+        this->species = other.species;
+        this->id = other.id;
+        this->elements = other.elements;
+        this->engimonUserPosition = other.engimonUserPosition;
     }
 
     void moveEngimonUser(const Position &p)

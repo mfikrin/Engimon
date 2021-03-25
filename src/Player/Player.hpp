@@ -18,7 +18,7 @@
 #include "../Inventory/Inventory.hpp"
 #include "../Engimon/Engimon.hpp"
 #include "../Skill/SkillItem.hpp"
-#include "../MainProgram/Map.hpp"
+//#include "../MainProgram/Map.hpp"
 #include "../Engimon/EngimonUser.hpp"
 #include "../Element/Element.hpp"
 #include "../MainProgram/BookOfLore.hpp"
@@ -87,7 +87,7 @@ public:
 
     void command(string com)
     {
-        if (com == "w" || com == "a" || com == "s" || "d")
+        if (com == "w" || com == "a" || com == "s" || com == "d")
         {
             Move(com[0]);
         }
@@ -112,59 +112,29 @@ public:
                     inv_skill.show_bag();
                 }
             } while (invent != "1" && invent != "2");
+        }else if(com == "q"){
+            cout << "GoodBye!" << endl;
+            exit(0);
         }
     }
-    // void showEngimonData(const EngimonUser &e)
-    // {
-    //     cout << "-==Data Engimon==-\n";
-    //     cout << "Nama: " << e.getName() << endl;
-    //     cout << "Spesies: " << e.getSpecies() << endl;
-    //     cout << "Element(s): ";
-    //     for (int i = 0; i < e.getElements().size(); i++)
-    //     {
-    //         cout << e.getElements()[i] << " ";
-    //     }
-    //     cout << endl;
-    //     cout << "Parents: <";
-    //     cout << "(" << e.getParentNames()[0] << e.getParentSpecieses[0] << "),";
-    //     cout << "(" << e.getParentNames()[1] << e.getParentSpecieses[1] << ")>" << endl;
-    //     cout << "Level: " << e.getLevel() << endl;
-    //     cout << "Exp: " << e.getExp() << endl;
-    //     cout << "Cumulative Exp: " << e.getCExp() << endl;
-    // }
-    // void handleShowEngimonData()
-    // {
-    //     inv_engimon.show_bag();
-    //     cout << "\ta\t[" << activeEngimon.getName() << "]" << endl
-    //          << " >> ";
-    //     string input;
-    //     cin >> input;
-    //     if (input == "a" || input == "A")
-    //     {
-    //         showEngimonData(activeEngimon);
-    //     }
-    //     else
-    //     {
-    //         // Menunggu Inventory. getEngimon -> showEngimonData
-    //     }
-    // }
-    // void changeActiveEngimon()
-    // {
-    //     // menunggu Inventory
-    //     if (inv_engimon.get_nItem() > 0)
-    //     {
-    //         inv_engimon.show_bag();
-    //         cout << "Input id : ";
-    //         int id;
-    //         cin >> id;
-    //         activeEngimon = inv_engimon.select_item(id);
-    //     }
-    //     else
-    //     {
-    //         cout << "GAME OVER" << endl;
-    //         exit(1);
-    //     }
-    // }
+
+    void changeActiveEngimon()
+    {
+        // menunggu Inventory
+        if (inv_engimon.get_nItem() > 0)
+        {
+            inv_engimon.show_bag();
+            cout << "Input id : ";
+            int id;
+            cin >> id;
+            activeEngimon = inv_engimon.select_item(id);
+        }
+        else
+        {
+            cout << "GAME OVER" << endl;
+            exit(1);
+        }
+    }
     //void showSkillItems(); // Nunggu Inventory
     // void useSkillItem(SkillItem &si, Engimon &e)
     // {
@@ -184,280 +154,23 @@ public:
         position = Position(INIT_PLAYER_X, INIT_PLAYER_Y);
     }
 
-    // METHOD BREEDING HILANG ???
-    //     else
-    //     {
-    //         if (true /* parent ga ada di inventory */)
-    //         {
-    //             cout << "Parent tidak ada di inventory" << endl;
-    //         }
-    //         else
-    //         {
-    //             vector<Element> elementParent;
-    //             vector<Element> elementParent1 = parent1.getElements();
-    //             vector<Element> elementParent2 = parent2.getElements();
+    Player(vector<Element> a) : activeEngimon(Position(0,0),"a","a",0,a){
+        name = "";
+        position = Position(1,0);
+    }
 
-    //             // Mengoleksi element parent 1 ke dalam elementParent
-    //             for (int i = 0; i < elementParent1.size(); i++)
-    //             {
-    //                 elementParent.push_back(elementParent1[i]);
-    //             }
+    void operator=(const Player& other){
+        this->name = other.name;
+        this->position = other.position;
+        this->inv_engimon = other.inv_engimon;
+        this->inv_skill = other.inv_skill;
+        this->activeEngimon = other.activeEngimon;
+    }
 
-    //             // Mengoleksi element parent 2 ke dalam elementParent
-    //             for (int i = 0; i < elementParent2.size(); i++)
-    //             {
-    //                 // Mengecek apakah element dari elementParent2 sudah ada di elementParent
-    //                 bool present = false;
-    //                 for (int j = 0; j < elementParent.size(); j++)
-    //                 {
-    //                     if (elementParent2[i] == elementParent[j])
-    //                     {
-    //                         present = true;
-    //                     }
-    //                 }
+    Inventory<EngimonUser, MAX_ENGIMON_INV> get_inv_engimon() {
+        return this->inv_engimon;
+    } 
 
-    //                 // Mengoleksi elementParent2 ke dalam elementParent
-    //                 if (!present)
-    //                 {
-    //                     elementParent.push_back(elementParent2[i]);
-    //                 }
-    //             }
-
-    //             if (elementParent.size() > 2)
-    //             {
-    //                 int duaElement = rand() % 2;
-    //                 if (duaElement)
-    //                 {
-    //                     int element1Index = rand() % elementParent.size();
-    //                     int element2Index = rand() % elementParent.size();
-    //                 }
-    //                 else
-    //                 {
-    //                     int elementIndex = rand() % elementParent.size();
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
-
-    // float get_advantage(Element e1, Element e2)
-    // {
-    //     if (e1 == Element::Fire)
-    //     {
-    //         switch (e2)
-    //         {
-    //         case Element::Fire:
-    //             return 1; // break;
-    //         case Element::Water:
-    //             return 0; // break;
-    //         case Element::Electric:
-    //             return 1; // break;
-    //         case Element::Ground:
-    //             return 0.5; // break;
-    //         case Element::Ice:
-    //             return 2; // break;
-    //         default:
-    //             return 0; // break; // Untuk No element (?)
-    //         }
-    //     }
-    //     else if (e1 == Element::Water)
-    //     {
-    //         switch (e2)
-    //         {
-    //         case Element::Fire:
-    //             return 2;
-    //         case Element::Water:
-    //             return 1;
-    //         case Element::Electric:
-    //             return 0;
-    //         case Element::Ground:
-    //             return 1;
-    //         case Element::Ice:
-    //             return 1;
-    //         default:
-    //             return 0; // break; // Untuk No element (?)
-    //         }
-    //     }
-    //     else if (e1 == Element::Electric)
-    //     {
-    //         switch (e2)
-    //         {
-    //         case Element::Fire:
-    //             return 1;
-    //         case Element::Water:
-    //             return 2;
-    //         case Element::Electric:
-    //             return 1;
-    //         case Element::Ground:
-    //             return 0;
-    //         case Element::Ice:
-    //             return 1.5;
-    //         default:
-    //             return 0;
-    //         }
-    //     }
-    //     else if (e1 == Element::Ground)
-    //     {
-    //         switch (e2)
-    //         {
-    //         case Element::Fire:
-    //             return 1.5;
-    //         case Element::Water:
-    //             return 1;
-    //         case Element::Electric:
-    //             return 2;
-    //         case Element::Ground:
-    //             return 1;
-    //         case Element::Ice:
-    //             return 0;
-    //         default:
-    //             return 0;
-    //         }
-    //     }
-    //     else if (e1 == Element::Ice)
-    //     {
-    //         switch (e2)
-    //         {
-    //         case Element::Fire:
-    //             return 0;
-    //         case Element::Water:
-    //             return 1;
-    //         case Element::Electric:
-    //             return 0.5;
-    //         case Element::Ground:
-    //             return 2;
-    //         case Element::Ice:
-    //             return 1;
-    //         default:
-    //             return 0;
-    //         }
-    //     }
-
-    //     // Untuk No element
-    //     // else if (e1 == Element::NoElement){
-    //     //     switch (e2)
-    //     //     {
-    //     //     case Element::Fire: return 0;
-    //     //     case Element::Water: return 0;
-    //     //     case Element::Electric: return 0;
-    //     //     case Element::Ground: return 0;
-    //     //     case Element::Ice: return 0;
-    //     //     default: return 0;
-    //     //     }
-    //     // }
-    // }
-
-    // void battle(EngimonEnemy enemy)
-    // {
-    //     vector<Element> element_active = activeEngimon.getElements();
-    //     vector<Element> element_enemy = enemy.getElements();
-
-    //     vector<float> temp_adv_active; //
-    //     vector<float> temp_adv_enemy;
-
-    //     for (int i = 0; i < element_active.size(); i++)
-    //     {
-    //         for (int j = 0; j < element_enemy.size(); j++)
-    //         {
-    //             temp_adv_active.push_back(get_advantage(element_active[i], element_enemy[j]));
-    //             temp_adv_enemy.push_back(get_advantage(element_enemy[j], element_active[i]));
-    //         }
-    //     }
-
-    //     float adv_user = *max_element(temp_adv_active.begin(), temp_adv_active.end());
-    //     float adv_enemy = *max_element(temp_adv_enemy.begin(), temp_adv_enemy.end());
-
-    //     vector<Skill> skill_user = activeEngimon.getSkills();
-
-    //     float sum_skill_user = 0;
-
-    //     for (int i = 0; i < skill_user.size(); i++)
-    //     {
-    //         sum_skill_user += (skill_user[i].getBasePower() * skill_user[i].getMasteryLevel());
-    //     }
-
-    //     vector<Skill> skill_enemy = enemy.getSkills();
-
-    //     float sum_skill_enemy = 0;
-
-    //     for (int i = 0; i < skill_enemy.size(); i++)
-    //     {
-    //         sum_skill_enemy += (skill_enemy[i].getBasePower() * skill_enemy[i].getMasteryLevel());
-    //     }
-
-    //     float power_user = activeEngimon.getLevel() * adv_user * sum_skill_user;
-    //     float power_enemy = enemy.getLevel() * adv_enemy * sum_skill_enemy;
-
-    //     cout << "POWER KEDUA ENGIMON" << endl;
-    //     cout << "Power Engimon User : " << power_user << endl;
-    //     cout << "Power Engimon Enemy : " << power_enemy << endl;
-
-    //     if (power_user > power_enemy)
-    //     {
-    //         int new_exp = activeEngimon.getExp() + (abs(activeEngimon.getLevel() - enemy.getLevel())) * 20; // rumus exp (bisa diubah lg rumusnya)
-
-    //         activeEngimon.setExp(new_exp);
-
-    //         // get random skill item (sesuai elemen musuh)
-
-    //         BookOfLore ensiklopedia;
-    //         vector<vector<Skill>> ensiklopediaSkill = ensiklopedia.allSkill();
-
-    //         vector<vector<Skill>> Skill_enemy;
-
-    //         for (int i = 0; i < element_enemy.size(); i++)
-    //         {
-    //             int idx = ensiklopedia.get_idx_skill(element_enemy[i]);
-    //             for (int j = 0; i < ensiklopediaSkill.size(); j++)
-    //             {
-    //                 if (idx == j)
-    //                 {
-    //                     Skill_enemy.push_back(ensiklopediaSkill[j]);
-    //                 }
-    //             }
-    //         }
-
-    //         int idxElement = rand() % Skill_enemy.size();
-    //         int idxSkill = rand() % Skill_enemy[idxElement].size();
-
-    //         Skill get_skill = Skill_enemy[idxElement][idxSkill];
-
-    //         Skill skill(get_skill.getSkillId(), get_skill.getMasteryLevel(), get_skill.getBasePower(), get_skill.getSkillName(), get_skill.getElement());
-
-    //         SkillItem skill_item(skill);
-
-    //         // Convert EngimonEnemy to EngimonUser
-    //         //EngimonUser getEnemy(enemy.getPosition(), enemy.getName(), enemy.getParentSpecieses(), enemy.getId(), enemy.getElements());
-    //         // ATRIBUT EngimonUSer yg position ga bisa
-
-    //         try
-    //         {
-    //             inv_skill.add_item(skill_item);
-    //             //inv_engimon.add_item(enemy);
-    //         }
-    //         catch (const SkillItem &e)
-    //         {
-    //             cout << "Inventory Skill Item penuh" << endl;
-    //         }
-    //         catch (const Engimon &e)
-    //         {
-    //             cout << "Inventory Engimon penuh" << endl;
-    //         }
-    //     }
-
-    //     else
-    //     {
-    //         // engimon mati
-    //         // activeEngimon = select(); // select ENgimon dr inventory
-    //         // inv_engimon.show_bag();
-    //         // cout << "Input id : ";
-    //         // int id;
-    //         // cin >> id;
-    //         // activeEngimon = inv_engimon.select_item(id);
-
-    //         changeActiveEngimon();
-    //     }
-    // }
 };
 
 #endif // PLAYER_HPP

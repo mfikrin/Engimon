@@ -34,6 +34,12 @@ public:
 		this->id_inven = 0;
 	}
 
+	void operator=(const Inventory<T,N>& other){
+		this->id_inven = other.id_inven;
+		this->n_item = other.n_item;
+		this->map_item = other.map_item;
+	}
+
 	int get_nItem()
 	{
 		return this->n_item;
@@ -102,18 +108,18 @@ public:
 		return available;
 	}
 
-	// T select_item(int id_inven)
-	// {
-	// 	EngimonUser e;
+	T select_item(int id_inven)
+	{
+		T e;
 
-	// 	for (auto &it : map_item)
-	// 	{
-	// 		if (it.first == id_inven)
-	// 		{
-	// 			e = it.second;
-	// 		}
-	// 	}
-	// 	return e;
-	// }
+		for (auto &it : map_item)
+		{
+			if (it.first == id_inven)
+			{
+				e = it.second;
+			}
+		}
+		return e;
+	}
 };
 #endif

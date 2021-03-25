@@ -116,8 +116,7 @@ public:
     }
     void addSkill(Skill s)
     {
-        if (skills.size() < MAX_SKILLS)
-        {
+        if (skills.size() < MAX_SKILLS){
             bool valid = true;
             for (int i = 0; i < skills.size(); i++)
             {
