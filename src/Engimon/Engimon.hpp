@@ -62,6 +62,32 @@ public:
         cExp = 0;
         id = i;
     }
+
+    Engimon(const Engimon& other){
+        this->id = other.id;
+        this->name = other.name;
+        this->species = other.species;
+        this->parentNames[0] = other.parentNames[0];
+        this->parentNames[1] = other.parentNames[1];
+        this->parentSpecieses[0] = other.parentSpecieses[0];
+        this->parentSpecieses[1] = other.parentSpecieses[1];
+        this->level = other.level;
+        this->exp = other.exp;
+        this->cExp = other.cExp;
+    }
+
+    void operator=(const Engimon& other){
+        this->id = other.id;
+        this->name = other.name;
+        this->species = other.species;
+        this->parentNames[0] = other.parentNames[0];
+        this->parentNames[1] = other.parentNames[1];
+        this->parentSpecieses[0] = other.parentSpecieses[0];
+        this->parentSpecieses[1] = other.parentSpecieses[1];
+        this->level = other.level;
+        this->exp = other.exp;
+        this->cExp = other.cExp;
+    }
     // Engimon (string n, const Engimon& p1, const Engimon& p2){
 
     // }
