@@ -1,5 +1,6 @@
 #include "../BookOfLore/BookOfLore.hpp"
 #include "../Player/Player.hpp"
+#include "../Battle/Battle.hpp"
 #include <iostream>
 #include <string>
 #include <time.h>
@@ -16,7 +17,8 @@ private:
 	Map map;
 
 public:
-	Game() : player(listKosong) , map("../Map/map.txt"){
+	Game() : player(listKosong), map("../Map/map.txt")
+	{
 		BookOfLore book;
 		ensiklopediaEngimon = book.allEngimon();
 		ensiklopediaSkill = book.allSkill();
@@ -92,14 +94,56 @@ public:
 		player = temp;
 	}
 
-	void renderMap(vector<EngimonEnemy> listEngimonLiar){
-		map.Render(player,listEngimonLiar);
+	void renderMap(vector<EngimonEnemy> listEngimonLiar)
+	{
+		map.Render(player, listEngimonLiar);
 	}
 
-	void inputCommand(){
+	void inputCommand()
+	{
 		string command;
 		cin >> command;
 		player.command(command);
+	}
+	vector<EngimonEnemy> spawnEngimon(vector<EngimonEnemy> listEngimonLiar, bool spawn)
+	{
+		listEngimonLiar = map.MoveListEngimonEnemy(listEngimonLiar, player);
+		if (spawn)
+		{
+			return map.addEngimonEnemy(listEngimonLiar, player);
+		}
+		else
+		{
+			return listEngimonLiar;
+		}
+	}
+
+	void battleEngimon(vector<EngimonEnemy> listEngimonLiar)
+	{
+		char command;
+		if (map.EnemyNear(player, listEngimonLiar) != 999)
+		{
+			cout << "APAKAH ANDA INGIN BATTLE ?" << endl;
+			cin >> command;
+			if (command == 'y')
+			{
+				int a = Battle::battleEngimon(player, listEngimonLiar[map.EnemyNear(player, listEngimonLiar)]);
+				if (a == 1)
+				{
+					cout << "menang" << endl;
+					listEngimonLiar.erase(listEngimonLiar.begin() + map.EnemyNear(player, listEngimonLiar));
+				}
+				else
+				{
+					cout << "kalah" << endl;
+				}
+			}
+			else
+			{
+				cout << "okay bubayy" << endl;
+				map.Render(player, listEngimonLiar);
+			}
+		}
 	}
 };
 
@@ -109,9 +153,21 @@ int main()
 	g.printLogo();
 	g.initialNameAndEngimon();
 	vector<EngimonEnemy> listEngimonLiar;
-	while(1){
+	int jumlahIterasi = 0;
+	while (1)
+	{
 		g.renderMap(listEngimonLiar);
 		g.inputCommand();
+		if (jumlahIterasi % 3 == 0 && listEngimonLiar.size() < 5) // tambahin engimon setiap 3 move
+		{
+			listEngimonLiar = g.spawnEngimon(listEngimonLiar, true);
+		}
+		else
+		{
+			listEngimonLiar = g.spawnEngimon(listEngimonLiar, false);
+		}
+		g.battleEngimon(listEngimonLiar);
+		jumlahIterasi++;
 	}
 	return 0;
 }

@@ -202,27 +202,27 @@ public:
             EngimonUser newEnemy(enemy.getPosition(), enemy.getName(), enemy.getSpecies(), enemy.getId(), enemy.getElements());
             // ATRIBUT EngimonUSer yg position ga bisa
 
-            try
-            {
-                inv_skill.add_item(skill_item);
-                inv_engimon.add_item(enemy);
-            }
-            catch (const SkillItem &e)
-            {
-                cout << "Inventory Skill Item penuh" << endl;
-            }
-            catch (const Engimon &e)
-            {
-                cout << "Inventory Engimon penuh" << endl;
-            }
+            // try
+            // {
+            //     inv_skill.add_item(skill_item);
+            //     inv_engimon.add_item(enemy);
+            // }
+            // catch (const SkillItem &e)
+            // {
+            //     cout << "Inventory Skill Item penuh" << endl;
+            // }
+            // catch (const Engimon &e)
+            // {
+            //     cout << "Inventory Engimon penuh" << endl;
+            // }
             // cout << "menang" << endl;
             // deleteEngimonEnemy
             return 1;
         }
         else
         {
-            cout << "kalah" << endl;
-            changeActiveEngimon();
+            // cout << "kalah" << endl;
+            // changeActiveEngimon();
             return 0;
         }
         // else
