@@ -10,11 +10,15 @@ class Game{
 private:
 	vector<vector<Engimon>> ensiklopediaEngimon;
 	vector<vector<Skill>> ensiklopediaSkill;
+	Player player;
+	Map map;
 public:
 	Game(){
 		BookOfLore book;
 		ensiklopediaEngimon = book.allEngimon();
 		ensiklopediaSkill = book.allSkill();
+		map = Map("map.txt");
+		map.BacaFile();
 	}
 
 	string inputPlayerName(){
@@ -35,18 +39,20 @@ public:
 			cout << i + 1 << ".";
 			ensiklopediaEngimon[i][0].printEngimon();
 		}
-		int pilihan;
+		string pilihan;
+		int pil;
 		do{
 			cin >> pilihan;
-			if(pilihan < 1 || pilihan > 5){
+			pil = pilihan[0] - '0';
+			if(pil < 1 || pil > 5){
 				cout << "Choose between 1-5!" << endl;
 			}
-		}while(pilihan < 1 || pilihan > 5);
-		Engimon chosen = ensiklopediaEngimon[pilihan-1][0];
+		}while(pil < 1 || pil > 5);
+		Engimon chosen = ensiklopediaEngimon[piln-1][0];
 		srand(time(NULL));
-		int randomSkillElement = rand() % ensiklopediaSkill[pilihan-1].size();
+		int randomSkillElement = rand() % ensiklopediaSkill[pil-1].size();
 		int randomBasicElement = rand() % ensiklopediaSkill[5].size();
-		chosen.addSkill(ensiklopediaSkill[pilihan-1][randomSkillElement]);
+		chosen.addSkill(ensiklopediaSkill[pil-1][randomSkillElement]);
 		chosen.addSkill(ensiklopediaSkill[5][randomBasicElement]);
 		cout << "Do you want to rename " << chosen.getName() << "?" << endl;
 		cout << "*type 'yes' or 'no'" << endl;
@@ -67,23 +73,25 @@ public:
 		cout << "You retrieve " << chosen.getName() << "!" << endl;
 		return chosen;
 	}
+
+	void initialNameAndEngimon(){
+		string name = inputPlayerName();
+		Engimon chosen = chooseEngimon();
+		player = Player(name,chosen);
+	}
 };
 
 int main(){
-	Game g;
-	g.printLogo();
-	string name = g.inputPlayerName();
-	Engimon active = g.chooseEngimon();
-	Player p(name,active);
-	Map m("map.txt");
-	char command;
-	vector<EngimonEnemy> listEngimonLiar;
-	m.BacaFile();
-	m.Render(p,listEngimonLiar);
-	do{
-		cin >> command;
-		p.Move(command);
-		m.Render(p,listEngimonLiar);
-	}while(command != 'q');
+	// Game g;
+	// g.printLogo();
+	// char command;
+	// vector<EngimonEnemy> listEngimonLiar;
+	// m.BacaFile();
+	// m.Render(p,listEngimonLiar);
+	// do{
+	// 	cin >> command;
+	// 	p.Move(command);
+	// 	m.Render(p,listEngimonLiar);
+	// }while(command != 'q');
 	return 0;
 }

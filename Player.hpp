@@ -6,6 +6,9 @@
 #define INIT_ACTIVEMON_X 0
 #define INIT_ACTIVEMON_Y 0
 
+#define MAP_HEIGHT 10 // ???
+#define MAP_WIDTH 12 /// ???
+
 #include <string.h>
 #include <stdlib.h>
 #include <algorithm>
@@ -35,7 +38,6 @@ public:
     // OTHER METHOD
     void Move(char direction)
     {
-        activeEngimon.moveEngimonUser(position);
         if ((direction == 'w' && position.getXPos() == 0) || (direction == 'a' && position.getYPos() == 0) || (direction == 's' && position.getXPos() == MAP_HEIGHT - 1) || (direction == 'd' && position.getXPos() == MAP_WIDTH - 1))
         {
             throw "KELUAR MAP CUY!!";
@@ -45,15 +47,19 @@ public:
             switch (direction)
             {
             case 'w':
+                activeEngimon.moveEngimonUser(position);
                 position.up();
                 break;
             case 'a':
+                activeEngimon.moveEngimonUser(position);
                 position.left();
                 break;
             case 's':
+                activeEngimon.moveEngimonUser(position);
                 position.down();
                 break;
             case 'd':
+                activeEngimon.moveEngimonUser(position);
                 position.right();
                 break;
             }
@@ -72,6 +78,28 @@ public:
     void showAllEngimons()
     {
         inv_engimon.show_bag();
+    }
+
+    void command(string com){
+        if (com == "w" || com == "a" || com == "s" || "d"){
+            Move(com[0]);
+        }else if (com == "i")
+        {
+            cout << "1. Engimon Inventory" << endl;
+            cout << "2. Skill Item Inventory" << endl;
+            string invent;
+            do{
+                cin >> invent;
+                if (invent != "1" && invent != "2"){
+                    cout << "Type 1 or 2!" << endl;
+                }else if (invent == "1")
+                {
+                    inv_engimon.show_bag();
+                }else{
+                    inv_skill.show_bag();
+                }
+            }while(invent != "1" && invent != "2");
+        }
     }
     // void showEngimonData(const EngimonUser &e)
     // {
@@ -139,13 +167,6 @@ public:
     {
         name = name_;
         position = Position(INIT_PLAYER_X, INIT_PLAYER_Y);
-        //vector<Element> apakek;
-        //apakek.push_back(Element::Fire);
-        //activeEngimon = EngimonUser(Position(0,0),"a","a",123,apakek);
-        //activeEngimon = EngimonUser(Position(0,0),active.getName(),active.getSpecies(),active.getId(),active.getElements());
-        // inventory = Inventory();
-        //activeEngimon = EngimonUser(Position(INIT_ACTIVEMON_X,INIT_ACTIVEMON_Y),active.getName(),active.getSpecies(),active.getId(),active.getElements());
-        //activeEngimon = EngimonUser(Position(0,0),active);
     }
 
 
