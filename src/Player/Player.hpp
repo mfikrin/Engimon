@@ -18,10 +18,10 @@
 #include "../Inventory/Inventory.hpp"
 #include "../Engimon/Engimon.hpp"
 #include "../Skill/SkillItem.hpp"
-#include "../Map/Map.hpp"
+#include "../MainProgram/Map.hpp"
 #include "../Engimon/EngimonUser.hpp"
 #include "../Element/Element.hpp"
-#include "../BookOfLore/BookOfLore.hpp"
+#include "../MainProgram/BookOfLore.hpp"
 
 // #include "MAP_SIZE.hpp"
 

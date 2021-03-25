@@ -1,7 +1,7 @@
 #ifndef BREEDING__HPP
 #define BREEDING__HPP
 #include "../Player/Player.hpp"
-#include "../BookOfLore/BookOfLore.hpp"
+#include "../MainProgram/BookOfLore.hpp"
 #include "../Element/Element.hpp"
 #include "../Engimon/Engimon.hpp"
 class Breeding

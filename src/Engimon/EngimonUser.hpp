@@ -1,7 +1,7 @@
 #ifndef _EngimonUser_hpp_
 #define _EngimonUser_hpp_
 
-#include "../Engimon/Engimon.hpp"
+#include "Engimon.hpp"
 #include "../Position/Position.hpp"
 
 class EngimonUser : public Engimon

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <time.h>
-#include "../Map/Map.hpp"
+#include "Map.hpp"
 using namespace std;
 
 class Game

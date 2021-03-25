@@ -13,27 +13,27 @@ public:
 		string filename;
 		if (el == Element::Fire)
 		{
-			filename = "Skill/skill_fire.txt";
+			filename = "../BookOfLore/Skill/skill_fire.txt";
 		}
 		else if (el == Element::Water)
 		{
-			filename = "Skill/skill_water.txt";
+			filename = "../BookOfLore/Skill/skill_water.txt";
 		}
 		else if (el == Element::Electric)
 		{
-			filename = "Skill/skill_electric.txt";
+			filename = "../BookOfLore/Skill/skill_electric.txt";
 		}
 		else if (el == Element::Ground)
 		{
-			filename = "Skill/skill_ground.txt";
+			filename = "../BookOfLore/Skill/skill_ground.txt";
 		}
 		else if (el == Element::Ice)
 		{
-			filename = "Skill/skill_ice.txt";
+			filename = "../BookOfLore/Skill/skill_ice.txt";
 		}
 		else if (el == Element::NoElement)
 		{
-			filename = "Skill/skill_basic.txt";
+			filename = "../BookOfLore/Skill/skill_basic.txt";
 		}
 		ifstream listSkill(filename);
 		string line;
@@ -109,25 +109,25 @@ public:
 		string filename;
 		if (el == Element::Fire)
 		{
-			filename = "engimon_fire.txt";
+			filename = "../BookOfLore/Engimon/engimon_fire.txt";
 		}
 		else if (el == Element::Water)
 		{
-			filename = "engimon_water.txt";
+			filename = "../BookOfLore/Engimon/engimon_water.txt";
 		}
 		else if (el == Element::Electric)
 		{
-			filename = "engimon_electric.txt";
+			filename = "../BookOfLore/Engimon/engimon_electric.txt";
 		}
 		else if (el == Element::Ground)
 		{
-			filename = "engimon_ground.txt";
+			filename = "../BookOfLore/Engimon/engimon_ground.txt";
 		}
 		else if (el == Element::Ice)
 		{
-			filename = "engimon_ice.txt";
+			filename = "../BookOfLore/Engimon/engimon_ice.txt";
 		}
-		cout << filename;
+
 		ifstream listEngimon(filename);
 		string line;
 		vector<Engimon> engimons;

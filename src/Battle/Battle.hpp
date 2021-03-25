@@ -4,7 +4,7 @@
 #include "../Engimon/Engimon.hpp"
 #include "../Engimon/EngimonEnemy.hpp"
 #include "../Element/Element.hpp"
-#include "../BookOfLore/BookOfLore.hpp"
+#include "../MainProgram/BookOfLore.hpp"
 #include <vector>
 
 class Battle

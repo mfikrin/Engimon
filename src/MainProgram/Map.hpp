@@ -8,7 +8,7 @@
 #include <time.h>
 
 #include "../Position/Position.hpp"
-#include "../BookOfLore/BookOfLore.hpp"
+#include "BookOfLore.hpp"
 #include "../Player/Player.hpp"
 #include <vector>
 #include "../Engimon/EngimonEnemy.hpp"

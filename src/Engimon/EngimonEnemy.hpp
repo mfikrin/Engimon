@@ -1,7 +1,7 @@
 #ifndef _EngimonEnemy_hpp_
 #define _EngimonEnemy_hpp_
 
-#include "../Engimon/Engimon.hpp"
+#include "Engimon.hpp"
 #include "../Position/Position.hpp"
 
 #include <vector>
