@@ -99,6 +99,8 @@ public:
 			return 4;
 		case Element::NoElement:
 			return 5;
+		default:
+			return -1;
 		}
 	}
 

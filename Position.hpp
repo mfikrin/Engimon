@@ -6,43 +6,50 @@
 
 using namespace std;
 
-class Position{
-    protected:
-        int x;
-        int y;
-        // Landscape landscape;
-        // Generic class entities
-    public:
-        Position() : x(0), y(0) {}
-        Position(int x_, int y_){
-            x = x_;
-            y = y_;
-        }
-        
-        // Getter X,Y 
-        int getXPos(){
-            return x;
-        }
-        int getYPos(){
-            return y;
-        }
+class Position
+{
+protected:
+    int x;
+    int y;
+    // Landscape landscape;
+    // Generic class entities
+public:
+    Position() : x(0), y(0) {}
+    Position(int x_, int y_)
+    {
+        x = x_;
+        y = y_;
+    }
 
-        void up(){
-            y--;
-        }
+    // Getter X,Y
+    int getXPos()
+    {
+        return x;
+    }
+    int getYPos()
+    {
+        return y;
+    }
 
-        void down(){
-            y++;
-        }
+    void up()
+    {
+        y--;
+    }
 
-        void left(){
-            x--;
-        }
+    void down()
+    {
+        y++;
+    }
 
-        void right(){
-            x++;
-        }
-        
+    void left()
+    {
+        x--;
+    }
+
+    void right()
+    {
+        x++;
+    }
 };
 
 #endif // _Position_hpp_

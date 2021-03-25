@@ -25,7 +25,8 @@ public:
     {
         return engimonUserPosition;
     }
-    void setPosition(Position p){
+    void setPosition(Position p)
+    {
         engimonUserPosition = p;
     }
 };

@@ -4,6 +4,7 @@
 #include "EngimonEnemy.hpp"
 #include "Position.hpp"
 #include "Engimon.hpp"
+#include "Battle.hpp"
 //#include "EngimonUser.hpp"
 #include <iostream>
 using namespace std;
@@ -32,14 +33,36 @@ int main()
     do
     {
         cin >> command;
-        pemain.Move(command);                                                 // gerakan playernya
+        pemain.Move(command);
         listEngimonLiar = peta.MoveListEngimonEnemy(listEngimonLiar, pemain); //gerakan engimon liarnya
         if (jumlahIterasi % 3 == 0 && listEngimonLiar.size() < 5)             // tambahin engimon setiap 3 move
         {
             listEngimonLiar = peta.addEngimonEnemy(listEngimonLiar, pemain); // tambahkan engimonliar
         }
-
         peta.Render(pemain, listEngimonLiar);
+        // Battle::battleEngimon(pemain, listEngimonLiar[0]);
+        if (peta.EnemyNear(pemain, listEngimonLiar) != 999)
+        {
+            cout << "APAKAH ANDA INGIN BATTLE ?" << endl;
+            cin >> command;
+            if (command == 'y')
+            {
+                int a = Battle::battleEngimon(pemain, listEngimonLiar[peta.EnemyNear(pemain, listEngimonLiar)]);
+                if (a == 1)
+                {
+                    cout << "menang" << endl;
+                    listEngimonLiar.erase(listEngimonLiar.begin() + peta.EnemyNear(pemain, listEngimonLiar));
+                }
+                else
+                {
+                    cout << "kalah" << endl;
+                }
+            }
+            else
+            {
+                cout << "okay bubayy" << endl;
+            }
+        }
         jumlahIterasi++;
     } while (command != 'q');
     return 0;

@@ -40,7 +40,7 @@ public:
         parentNames[1] = "none";
         parentSpecieses[0] = "none";
         parentSpecieses[1] = "none";
-        level = 0;
+        level = 1;
         exp = 0;
         cExp = 0;
         id = 0;
@@ -57,7 +57,7 @@ public:
         parentNames[1] = "none";
         parentSpecieses[0] = "none";
         parentSpecieses[1] = "none";
-        level = 0;
+        level = 1;
         exp = 0;
         cExp = 0;
         id = i;

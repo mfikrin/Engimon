@@ -2,7 +2,7 @@
 #define MAP_HPP
 #define MINIMUM_LEVEL 2
 #define MAP_HEIGHT 10 // ???
-#define MAP_WIDTH 12 /// ???
+#define MAP_WIDTH 12  /// ???
 #include <iostream>
 #include <fstream>
 #include <time.h>
@@ -350,6 +350,29 @@ public:
         {
             return Element::Ice;
         }
+    }
+
+    int EnemyNear(Player player, vector<EngimonEnemy> listEngimonLiar)
+    {
+        for (int i = 0; i < listEngimonLiar.size(); i++)
+        {
+            //
+            if (player.getPosition().getXPos() == listEngimonLiar[i].getPosition().getXPos())
+            {
+                if ((player.getPosition().getYPos() + 1 == listEngimonLiar[i].getPosition().getYPos()) || (player.getPosition().getYPos() - 1 == listEngimonLiar[i].getPosition().getYPos()))
+                {
+                    return i;
+                }
+            }
+            else if (player.getPosition().getYPos() == listEngimonLiar[i].getPosition().getYPos())
+            {
+                if ((player.getPosition().getXPos() + 1 == listEngimonLiar[i].getPosition().getXPos()) || (player.getPosition().getXPos() - 1 == listEngimonLiar[i].getPosition().getXPos()))
+                {
+                    return i;
+                }
+            }
+        }
+        return 999;
     }
 };
 
