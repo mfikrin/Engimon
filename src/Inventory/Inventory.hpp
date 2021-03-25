@@ -5,10 +5,10 @@
 #include <map>
 #include <iterator>
 #include <string>
-#include "../SkillItem.hpp"
-#include "../Engimon.hpp"
-#include "../EngimonEnemy.hpp"
-#include "../EngimonUser.hpp"
+#include "../Skill/SkillItem.hpp"
+#include "../Engimon/Engimon.hpp"
+#include "../Engimon/EngimonEnemy.hpp"
+#include "../Engimon/EngimonUser.hpp"
 
 #define MAX_INV 1000
 #define MAX_ENGIMON_INV 500

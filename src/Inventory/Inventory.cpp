@@ -1,8 +1,8 @@
 #include "Inventory.hpp"
-#include "../Engimon.hpp"
+#include "../Engimon/Engimon.hpp"
 #include <string>
-#include "../SkillItem.hpp"
-#include "../Skill.hpp"
+#include "../Skill/SkillItem.hpp"
+#include "../Skill/Skill.hpp"
 #include <iostream>
 #include <vector>
 

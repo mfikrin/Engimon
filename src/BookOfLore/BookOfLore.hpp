@@ -1,8 +1,8 @@
 #ifndef BOOKOF_LORE_HPP
 #define BOOKOF_LORE_HPP
 
-#include "Engimon.hpp"
-#include "Skill.hpp"
+#include "../Engimon/Engimon.hpp"
+#include "../Skill/Skill.hpp"
 #include <fstream>
 
 class BookOfLore
@@ -13,27 +13,27 @@ public:
 		string filename;
 		if (el == Element::Fire)
 		{
-			filename = "skill_fire.txt";
+			filename = "Skill/skill_fire.txt";
 		}
 		else if (el == Element::Water)
 		{
-			filename = "skill_water.txt";
+			filename = "Skill/skill_water.txt";
 		}
 		else if (el == Element::Electric)
 		{
-			filename = "skill_electric.txt";
+			filename = "Skill/skill_electric.txt";
 		}
 		else if (el == Element::Ground)
 		{
-			filename = "skill_ground.txt";
+			filename = "Skill/skill_ground.txt";
 		}
 		else if (el == Element::Ice)
 		{
-			filename = "skill_ice.txt";
+			filename = "Skill/skill_ice.txt";
 		}
 		else if (el == Element::NoElement)
 		{
-			filename = "skill_basic.txt";
+			filename = "Skill/skill_basic.txt";
 		}
 		ifstream listSkill(filename);
 		string line;
@@ -127,6 +127,7 @@ public:
 		{
 			filename = "engimon_ice.txt";
 		}
+		cout << filename;
 		ifstream listEngimon(filename);
 		string line;
 		vector<Engimon> engimons;

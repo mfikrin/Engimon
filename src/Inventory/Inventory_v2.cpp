@@ -1,14 +1,15 @@
 #include "Inventory_v2.hpp"
-#include "../Engimon.hpp"
+#include "../Engimon/Engimon.hpp"
 #include <string>
-#include "../SkillItem.hpp"
-#include "../Skill.hpp"
+#include "../Skill/SkillItem.hpp"
+#include "../Skill/Skill.hpp"
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
-int main(){
+int main()
+{
     vector<Element> elements;
     Engimon e1("digimon", "emon", 1, elements);
     Engimon e2("digimon2", "emon1", 1, elements);
@@ -26,9 +27,7 @@ int main(){
 
     cout << e1 << endl;
 
-    
-
-    Inventory<1000> inv ;
+    Inventory<1000> inv;
 
     cout << "MAX : " << inv.get_nMAX() << endl;
     try
@@ -39,19 +38,16 @@ int main(){
         inv.add_item(e3);
         inv.add_item(e4);
     }
-    catch(const Engimon& e)
+    catch (const Engimon &e)
     {
-        cout << "Ga cukup lg euy(Engimon)"  << endl;
+        cout << "Ga cukup lg euy(Engimon)" << endl;
     }
-    catch(const SkillItem& e)
+    catch (const SkillItem &e)
     {
         cout << "Ga cukup lg euy(Skill item)" << endl;
     }
-    
-    
-    
 
-    cout << "Banyak item : "<<inv.get_nItem() << endl;
+    cout << "Banyak item : " << inv.get_nItem() << endl;
     inv.show_bag();
 
     // cout << inv.search_id_engimon(1) << endl;

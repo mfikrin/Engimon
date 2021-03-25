@@ -1,8 +1,8 @@
 #ifndef _EngimonUser_hpp_
 #define _EngimonUser_hpp_
 
-#include "Engimon.hpp"
-#include "Position.hpp"
+#include "../Engimon/Engimon.hpp"
+#include "../Position/Position.hpp"
 
 class EngimonUser : public Engimon
 {

@@ -1,27 +1,31 @@
-#include "Map.hpp"
-#include "Player.hpp"
-#include "BookOfLore.hpp"
-#include "EngimonEnemy.hpp"
-#include "Position.hpp"
-#include "Engimon.hpp"
-#include "Battle.hpp"
+#include "../Map/Map.hpp"
+#include "../Player/Player.hpp"
+#include "../BookOfLore/BookOfLore.hpp"
+#include "../Engimon/EngimonEnemy.hpp"
+#include "../Position/Position.hpp"
+#include "../Engimon/Engimon.hpp"
+#include "../Battle/Battle.hpp"
 //#include "EngimonUser.hpp"
 #include <iostream>
 using namespace std;
 
 int main()
 {
+
     BookOfLore ensiklopedia;
+    cout << "anjay1";
     vector<vector<Engimon>> ensiklopediaEngimon = ensiklopedia.allEngimon();
+    cout << "anjay2";
     vector<vector<Skill>> ensiklopediaSkill = ensiklopedia.allSkill();
+    cout << "anjay3";
 
     int indexElementEngimon = rand() % ensiklopediaEngimon.size();
+    cout << indexElementEngimon << "size" << ensiklopediaEngimon.size() << ensiklopediaEngimon[indexElementEngimon].size() << "anjay4";
     int indexEngimon = rand() % ensiklopediaEngimon[indexElementEngimon].size();
-
+    cout << indexEngimon << "anjay5";
     Engimon dapet = ensiklopediaEngimon[indexElementEngimon][indexEngimon];
-
+    cout << "anjay6";
     Map peta("map.txt");
-
     vector<EngimonEnemy> listEngimonLiar;
 
     Player pemain("Randy", dapet);

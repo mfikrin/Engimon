@@ -14,14 +14,14 @@
 #include <algorithm>
 #include <iostream>
 
-#include "Position.hpp"
-#include "inventory/Inventory.hpp"
-#include "Engimon.hpp"
-#include "SkillItem.hpp"
-#include "Map.hpp"
-#include "EngimonUser.hpp"
-#include "Element.hpp"
-#include "BookOfLore.hpp"
+#include "../Position/Position.hpp"
+#include "../Inventory/Inventory.hpp"
+#include "../Engimon/Engimon.hpp"
+#include "../Skill/SkillItem.hpp"
+#include "../Map/Map.hpp"
+#include "../Engimon/EngimonUser.hpp"
+#include "../Element/Element.hpp"
+#include "../BookOfLore/BookOfLore.hpp"
 
 // #include "MAP_SIZE.hpp"
 

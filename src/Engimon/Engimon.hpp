@@ -5,8 +5,8 @@
 #include <string>
 #include <vector>
 
-#include "Skill.hpp"
-#include "Element.hpp"
+#include "../Skill/Skill.hpp"
+#include "../Element/Element.hpp"
 // #include "Nature.hpp"
 // #include "Ability.hpp"
 

@@ -1,24 +1,28 @@
 #ifndef SKILLITEM_HPP
 #define SKILLITEM_HPP
 
-#include "Engimon.hpp"
+#include "../Engimon/Engimon.hpp"
 #include <iostream>
 
 using namespace std;
 
 //string and vectors from engimon
 
-class SkillItem{
+class SkillItem
+{
 private:
 	int number;
 	Skill containedSkill;
+
 public:
-	SkillItem(const Skill& skill){
+	SkillItem(const Skill &skill)
+	{
 		number = 0;
 		containedSkill = skill;
 	}
 
-	int getNumber(){
+	int getNumber()
+	{
 		return number;
 	}
 
@@ -27,19 +31,23 @@ public:
 		return containedSkill.getSkillName();
 	}
 
-	void setNumber(int number){
+	void setNumber(int number)
+	{
 		this->number = number;
 	}
 
-	void addNumber(){
+	void addNumber()
+	{
 		number++;
 	}
 
-	int getId(){
+	int getId()
+	{
 		return containedSkill.getSkillId();
 	}
 
-	void learn(Engimon * chosen){
+	void learn(Engimon *chosen)
+	{
 		if (number > 0)
 		{
 			vector<Element> chosensElement = chosen->getElements();
@@ -58,7 +66,9 @@ public:
 			{
 				cout << "Not Compatible!" << endl;
 			}
-		}else{
+		}
+		else
+		{
 			cout << "Can't learn!" << endl;
 		}
 	}

@@ -7,14 +7,14 @@
 #include <fstream>
 #include <time.h>
 
-#include "Position.hpp"
-#include "BookOfLore.hpp"
-#include "Player.hpp"
+#include "../Position/Position.hpp"
+#include "../BookOfLore/BookOfLore.hpp"
+#include "../Player/Player.hpp"
 #include <vector>
-#include "EngimonEnemy.hpp"
-#include "Engimon.hpp"
-#include "Element.hpp"
-#include "Skill.hpp"
+#include "../Engimon/EngimonEnemy.hpp"
+#include "../Engimon/Engimon.hpp"
+#include "../Element/Element.hpp"
+#include "../Skill/Skill.hpp"
 
 using namespace std;
 

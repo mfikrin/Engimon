@@ -1,19 +1,22 @@
-#include "BookOfLore.hpp"
-#include "Player.hpp"
+#include "../BookOfLore"
+#include "../Player"
 #include <iostream>
 #include <string>
 #include <time.h>
-#include "Map.hpp"
+#include "../Map/Map.hpp"
 using namespace std;
 
-class Game{
+class Game
+{
 private:
 	vector<vector<Engimon>> ensiklopediaEngimon;
 	vector<vector<Skill>> ensiklopediaSkill;
 	Player player;
 	Map map;
+
 public:
-	Game(){
+	Game()
+	{
 		BookOfLore book;
 		ensiklopediaEngimon = book.allEngimon();
 		ensiklopediaSkill = book.allSkill();
@@ -21,18 +24,21 @@ public:
 		map.BacaFile();
 	}
 
-	string inputPlayerName(){
+	string inputPlayerName()
+	{
 		cout << "Input player's name: " << endl;
 		string name;
 		cin >> name;
 		return name;
 	}
 
-	void printLogo(){
+	void printLogo()
+	{
 		cout << "Welcome to Engimon Emerald!" << endl;
 	}
 
-	Engimon chooseEngimon(){
+	Engimon chooseEngimon()
+	{
 		cout << "Choose your first Engimon!" << endl;
 		for (int i = 0; i < 5; ++i)
 		{
@@ -41,30 +47,35 @@ public:
 		}
 		string pilihan;
 		int pil;
-		do{
+		do
+		{
 			cin >> pilihan;
 			pil = pilihan[0] - '0';
-			if(pil < 1 || pil > 5){
+			if (pil < 1 || pil > 5)
+			{
 				cout << "Choose between 1-5!" << endl;
 			}
-		}while(pil < 1 || pil > 5);
-		Engimon chosen = ensiklopediaEngimon[piln-1][0];
+		} while (pil < 1 || pil > 5);
+		Engimon chosen = ensiklopediaEngimon[piln - 1][0];
 		srand(time(NULL));
-		int randomSkillElement = rand() % ensiklopediaSkill[pil-1].size();
+		int randomSkillElement = rand() % ensiklopediaSkill[pil - 1].size();
 		int randomBasicElement = rand() % ensiklopediaSkill[5].size();
-		chosen.addSkill(ensiklopediaSkill[pil-1][randomSkillElement]);
+		chosen.addSkill(ensiklopediaSkill[pil - 1][randomSkillElement]);
 		chosen.addSkill(ensiklopediaSkill[5][randomBasicElement]);
 		cout << "Do you want to rename " << chosen.getName() << "?" << endl;
 		cout << "*type 'yes' or 'no'" << endl;
 		string yesOrNo;
-		do{
+		do
+		{
 			cin >> yesOrNo;
-			if(yesOrNo != "yes" && yesOrNo != "no"){
+			if (yesOrNo != "yes" && yesOrNo != "no")
+			{
 				cout << "Type 'yes' or 'no'!" << endl;
 			}
-		}while(yesOrNo != "yes" && yesOrNo != "no");
+		} while (yesOrNo != "yes" && yesOrNo != "no");
 
-		if(yesOrNo == "yes"){
+		if (yesOrNo == "yes")
+		{
 			cout << "Type your engimon's name: ";
 			string name;
 			cin >> name;
@@ -74,14 +85,16 @@ public:
 		return chosen;
 	}
 
-	void initialNameAndEngimon(){
+	void initialNameAndEngimon()
+	{
 		string name = inputPlayerName();
 		Engimon chosen = chooseEngimon();
-		player = Player(name,chosen);
+		player = Player(name, chosen);
 	}
 };
 
-int main(){
+int main()
+{
 	// Game g;
 	// g.printLogo();
 	// char command;
