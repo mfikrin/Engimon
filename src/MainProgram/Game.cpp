@@ -1,5 +1,5 @@
-#include "../BookOfLore"
-#include "../Player"
+#include "../BookOfLore/BookOfLore.hpp"
+#include "../Player/Player.hpp"
 #include <iostream>
 #include <string>
 #include <time.h>
@@ -11,16 +11,15 @@ class Game
 private:
 	vector<vector<Engimon>> ensiklopediaEngimon;
 	vector<vector<Skill>> ensiklopediaSkill;
+	vector<Element> listKosong;
 	Player player;
 	Map map;
 
 public:
-	Game()
-	{
+	Game() : player(listKosong) , map("../Map/map.txt"){
 		BookOfLore book;
 		ensiklopediaEngimon = book.allEngimon();
 		ensiklopediaSkill = book.allSkill();
-		map = Map("map.txt");
 		map.BacaFile();
 	}
 
@@ -53,10 +52,10 @@ public:
 			pil = pilihan[0] - '0';
 			if (pil < 1 || pil > 5)
 			{
-				cout << "Choose between 1-5!" << endl;
+				cout << "Choose between 1-5 !" << endl;
 			}
 		} while (pil < 1 || pil > 5);
-		Engimon chosen = ensiklopediaEngimon[piln - 1][0];
+		Engimon chosen = ensiklopediaEngimon[pil - 1][0];
 		srand(time(NULL));
 		int randomSkillElement = rand() % ensiklopediaSkill[pil - 1].size();
 		int randomBasicElement = rand() % ensiklopediaSkill[5].size();
@@ -89,22 +88,30 @@ public:
 	{
 		string name = inputPlayerName();
 		Engimon chosen = chooseEngimon();
-		player = Player(name, chosen);
+		Player temp = Player(name, chosen);
+		player = temp;
+	}
+
+	void renderMap(vector<EngimonEnemy> listEngimonLiar){
+		map.Render(player,listEngimonLiar);
+	}
+
+	void inputCommand(){
+		string command;
+		cin >> command;
+		player.command(command);
 	}
 };
 
 int main()
 {
-	// Game g;
-	// g.printLogo();
-	// char command;
-	// vector<EngimonEnemy> listEngimonLiar;
-	// m.BacaFile();
-	// m.Render(p,listEngimonLiar);
-	// do{
-	// 	cin >> command;
-	// 	p.Move(command);
-	// 	m.Render(p,listEngimonLiar);
-	// }while(command != 'q');
+	Game g;
+	g.printLogo();
+	g.initialNameAndEngimon();
+	vector<EngimonEnemy> listEngimonLiar;
+	while(1){
+		g.renderMap(listEngimonLiar);
+		g.inputCommand();
+	}
 	return 0;
 }

@@ -59,7 +59,6 @@ int main()
             {
                 cout << "okay bubayy" << endl;
             }
-            peta.Render(pemain, listEngimonLiar);
         }
         jumlahIterasi++;
     } while (command != 'q');
