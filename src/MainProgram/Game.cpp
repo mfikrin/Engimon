@@ -35,7 +35,37 @@ public:
 
 	void printLogo()
 	{
-		cout << "Welcome to Engimon Emerald!" << endl;
+		// cout << "Welcome to Engimon Emerald!" << endl;
+		cout << " __      __       .__                                ___________     " << endl;
+		cout << "/  \\    /  \\ ____ |  |   ____  ____   _____   ____   \\__    ___/___  " << endl;
+		cout << "\\   \\/\\/   // __ \\|  | _/ ___\\/  _ \\ /     \\_/ __ \\    |    | /  _ \\ " << endl;
+		cout << " \\        /\\  ___/|  |_\\  \\__(  <_> )  Y Y  \\  ___/    |    |(  <_> )" << endl;
+		cout << "  \\__/\\  /  \\___  >____/\\___  >____/|__|_|  /\\___  >   |____| \\____/ " << endl;
+		cout << "       \\/       \\/          \\/            \\/     \\/                  " << endl;
+
+		cout << "___________              .__                       " << endl;
+		cout << "\\_   _____/ ____    ____ |__| _____   ____   ____  " << endl;
+		cout << " |    __)_ /    \\  / ___\\|  |/     \\ /  _ \\ /    \\ " << endl;
+		cout << "/_______  /___|  /\\___  /|__|__|_|  /\\____/|___|  /" << endl;
+		cout << "        \\/     \\//_____/          \\/            \\/ " << endl;
+
+		cout << "___________              __                       " << endl;
+		cout << "\\_   _____/____    _____/  |_  ___________ ___.__." << endl;
+		cout << " |    __) \\__  \\ _/ ___\\   __\\/  _ \\_  __ <   |  |" << endl;
+		cout << " |     \\   / __ \\  \\___|  | (  <_> )  | \\/\\___  |" << endl;
+		cout << " \\___  /  (____  /\\___  >__|  \\____/|__|   / ____|" << endl;
+		cout << "     \\/        \\/     \\/                   \\/     " << endl;
+	}
+
+	void printLogoEnd()
+	{
+		cout << endl;
+		cout << "__________                         " << endl;
+		cout << "\\______   \\___.__. ____            " << endl;
+		cout << " |    |  _<   |  |/ __ \\           " << endl;
+		cout << " |    |   \\___  \\  ___/           " << endl;
+		cout << " |______  // ____|\\___  >  /\\ /\\ /\\" << endl;
+		cout << "        \\/ \\/         \\/   \\/ \\/ \\/" << endl;
 	}
 
 	Engimon chooseEngimon()
@@ -90,8 +120,7 @@ public:
 	{
 		string name = inputPlayerName();
 		Engimon chosen = chooseEngimon();
-		Player temp = Player(name, chooseEngimon());
-		player = temp;
+		player = Player(name, chosen);
 	}
 
 	void renderMap(vector<EngimonEnemy> listEngimonLiar)
@@ -123,19 +152,39 @@ public:
 		char command;
 		if (map.EnemyNear(player, listEngimonLiar) != 999)
 		{
+
 			cout << "APAKAH ANDA INGIN BATTLE ?" << endl;
 			cin >> command;
 			if (command == 'y')
 			{
+				vector<Element> elements;
+				EngimonUser e1(Position(0, 0), "s", "d", 1, elements);
+				//EngimonUser e2;
+				//EngimonUser e3;
+				//EngimonUser e4;
+
+				player.Add_inv_engimon(e1);
+				// player.get_inv_engimon().add_item(e2);
+				// player.get_inv_engimon().add_item(e3);
+				// player.get_inv_engimon().add_item(e4);
+
+				// cout << player.get_inv_engimon().get_nItem() << endl;
+
+				// player.get_inv_engimon().show_bag();
 				int a = Battle::battleEngimon(player, listEngimonLiar[map.EnemyNear(player, listEngimonLiar)]);
 				if (a == 1)
 				{
+					// cout << player.print_active_engimon();
 					cout << "menang" << endl;
+					player.changeActiveEngimon();
+					// cout << player.print_active_engimon();
+
 					listEngimonLiar.erase(listEngimonLiar.begin() + map.EnemyNear(player, listEngimonLiar));
 				}
 				else
 				{
 					cout << "kalah" << endl;
+					player.changeActiveEngimon();
 				}
 			}
 			else
@@ -152,22 +201,30 @@ int main()
 	Game g;
 	g.printLogo();
 	g.initialNameAndEngimon();
+
 	vector<EngimonEnemy> listEngimonLiar;
 	int jumlahIterasi = 0;
 	while (1)
 	{
-		g.renderMap(listEngimonLiar);
-		g.inputCommand();
-		if (jumlahIterasi % 3 == 0 && listEngimonLiar.size() < 5) // tambahin engimon setiap 3 move
+		try
 		{
-			listEngimonLiar = g.spawnEngimon(listEngimonLiar, true);
+			g.renderMap(listEngimonLiar);
+			g.inputCommand();
+			if (jumlahIterasi % 3 == 0 && listEngimonLiar.size() < 5) // tambahin engimon setiap 3 move
+			{
+				listEngimonLiar = g.spawnEngimon(listEngimonLiar, true);
+			}
+			else
+			{
+				listEngimonLiar = g.spawnEngimon(listEngimonLiar, false);
+			}
+			g.battleEngimon(listEngimonLiar);
+			jumlahIterasi++;
 		}
-		else
+		catch (OutOfBoundException &e)
 		{
-			listEngimonLiar = g.spawnEngimon(listEngimonLiar, false);
+			cout << e.what() << endl;
 		}
-		g.battleEngimon(listEngimonLiar);
-		jumlahIterasi++;
 	}
 	return 0;
 }

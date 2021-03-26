@@ -1,5 +1,6 @@
 #include "Inventory.hpp"
 #include "../Engimon/Engimon.hpp"
+#include "../Engimon/EngimonUser.hpp"
 #include <string>
 #include "../Skill/SkillItem.hpp"
 #include "../Skill/Skill.hpp"
@@ -11,20 +12,21 @@ using namespace std;
 int main()
 {
     vector<Element> elements;
-    Engimon e1("digimon", "emon", 1, elements);
-    Engimon e2("digimon2", "emon1", 1, elements);
-    Engimon e3("digimon3", "emon2", 1, elements);
-    Engimon e4("digimon4", "emon3", 1, elements);
+    EngimonUser e1;
+    EngimonUser e2;
+    EngimonUser e3;
+    EngimonUser e4;
+
     // Skill(int idSkill, int level, int basePWR, string skillName, Element el)
     Skill s1;
     Skill s2;
     SkillItem sk(s1);
     SkillItem sk_2(s2);
 
-    s1.printSkill();
+    //s1.printSkill();
 
-    cout << sk << endl;
-
+    //cout << sk << endl;
+    
     e1.printEngimon();
 
     cout << e1 << endl;
@@ -59,32 +61,32 @@ int main()
 
     inv_engimon.show_bag();
     // Inventory<SkillItem,MAX_SKILL_ITEM_INV> inv;
-    Inventory<SkillItem, 3> inv_skill_item;
+    // Inventory<SkillItem, 3> inv_skill_item;
 
-    try
-    {
-        inv_skill_item.add_item(sk);
-        inv_skill_item.add_item(sk_2);
-        inv_skill_item.add_item(sk);
-        inv_skill_item.add_item(sk_2);
-    }
-    catch (const SkillItem &e)
-    {
-        cout << "Ga cukup lg euy (skill)" << endl;
-    }
-    cout << inv_skill_item.get_nItem() << endl;
-    inv_skill_item.show_bag();
+    // try
+    // {
+    //     inv_skill_item.add_item(sk);
+    //     inv_skill_item.add_item(sk_2);
+    //     inv_skill_item.add_item(sk);
+    //     inv_skill_item.add_item(sk_2);
+    // }
+    // catch (const SkillItem &e)
+    // {
+    //     cout << "Ga cukup lg euy (skill)" << endl;
+    // }
+    // cout << inv_skill_item.get_nItem() << endl;
+    // inv_skill_item.show_bag();
 
-    inv_skill_item.delete_item(2);
-    cout << "item :" << inv_skill_item.get_nItem() << endl;
+    // inv_skill_item.delete_item(2);
+    // cout << "item :" << inv_skill_item.get_nItem() << endl;
 
-    inv_skill_item.add_item(sk);
-    cout << "item :" << inv_skill_item.get_nItem() << endl;
-    inv_skill_item.show_bag();
+    // inv_skill_item.add_item(sk);
+    // cout << "item :" << inv_skill_item.get_nItem() << endl;
+    // inv_skill_item.show_bag();
 
-    Engimon e = inv_engimon.select_item(100);
+    // Engimon e = inv_engimon.select_item(100);
 
-    cout << e.getName() << endl;
+    // cout << e.getName() << endl;
 
     // cout << "Skill item : " << inv_engimon[2]. << endl;
 }

@@ -22,6 +22,7 @@
 #include "../Engimon/EngimonUser.hpp"
 #include "../Element/Element.hpp"
 #include "../MainProgram/BookOfLore.hpp"
+#include "../Exception/Exception.hpp"
 
 // #include "MAP_SIZE.hpp"
 
@@ -38,12 +39,13 @@ public:
     // OTHER METHOD
     void Move(char direction)
     {
-        if ((direction == 'w' && position.getYPos() == 0) || (direction == 'a' && position.getXPos() == 0) || (direction == 's' && position.getXPos() == MAP_HEIGHT - 1) || (direction == 'd' && position.getXPos() == MAP_WIDTH - 1))
+        if ((direction == 'w' && position.getYPos() == 0) || (direction == 'a' && position.getXPos() == 0) || (direction == 's' && position.getYPos() == MAP_HEIGHT - 1) || (direction == 'd' && position.getXPos() == MAP_WIDTH - 1))
         {
-            throw "KELUAR MAP CUY!!";
+            throw OutOfBoundException();
         }
         else
         {
+
             switch (direction)
             {
             case 'w':
@@ -75,6 +77,10 @@ public:
     {
         return activeEngimon;
     }
+
+    // void print_active_engimon(){
+    //     cout << this->activeEngimon.getName() << endl;
+    // }
 
     Position getActiveEngimonPosition()
     {
@@ -148,15 +154,30 @@ public:
     //void switchActiveEngimon();
 
     // CTOR
-    Player(string name_, Engimon &active) : activeEngimon(Position(INIT_ACTIVEMON_X, INIT_ACTIVEMON_Y), active.getName(), active.getSpecies(), active.getId(), active.getElements())
+    // Player(string name_, Engimon &active) : activeEngimon(Position(INIT_ACTIVEMON_X, INIT_ACTIVEMON_Y), active.getName(), active.getSpecies(), active.getId(), active.getElements())
+    // {
+    //     name = name_;
+    //     position = Position(INIT_PLAYER_X, INIT_PLAYER_Y);
+    // }
+
+    Player(string name_, Engimon &active) : activeEngimon(active)
     {
         name = name_;
         position = Position(INIT_PLAYER_X, INIT_PLAYER_Y);
+        activeEngimon.setPosition(Position(INIT_ACTIVEMON_X,INIT_ACTIVEMON_Y));
     }
 
     Player(vector<Element> a) : activeEngimon(Position(0,0),"a","a",0,a){
         name = "";
         position = Position(1,0);
+    }
+
+    Player(const Player& other){
+        this->name = other.name;
+        this->position = other.position;
+        this->inv_engimon = other.inv_engimon;
+        this->inv_skill = other.inv_skill;
+        this->activeEngimon = other.activeEngimon;
     }
 
     void operator=(const Player& other){
@@ -167,10 +188,18 @@ public:
         this->activeEngimon = other.activeEngimon;
     }
 
-    Inventory<EngimonUser, MAX_ENGIMON_INV> get_inv_engimon() {
-        return this->inv_engimon;
-    } 
+    // Inventory<EngimonUser, MAX_ENGIMON_INV> get_inv_engimon() {
+    //     return this->inv_engimon;
+    // }
 
+    void Add_inv_engimon(EngimonUser& e1){
+        this->inv_engimon.add_item(e1);
+    }
+
+    void Add_inv_skill(SkillItem &s1)
+    {
+        this->inv_skill.add_item(s1);
+    }
 };
 
 #endif // PLAYER_HPP
