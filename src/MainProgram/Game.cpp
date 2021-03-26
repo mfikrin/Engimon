@@ -68,14 +68,15 @@ public:
 		cout << "        \\/ \\/         \\/   \\/ \\/ \\/" << endl;
 	}
 
-	void printCommandList(){
+	void printCommandList()
+	{
 		cout << "\n=--COMMAND LIST--=" << endl;
 		cout << " Move: w a s d" << endl;
 		cout << " Inventory: i" << endl;
 		cout << " Change Active Engimon: c / C / change" << endl;
 		cout << " quit: q / quit / exit" << endl;
-		cout << " >> "; 
-	} 
+		cout << " >> ";
+	}
 
 	Engimon chooseEngimon()
 	{
@@ -140,7 +141,7 @@ public:
 	void inputCommand()
 	{
 		printCommandList();
- 		string command;
+		string command;
 		cin >> command;
 		player.command(command);
 	}

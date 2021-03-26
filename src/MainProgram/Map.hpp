@@ -15,6 +15,7 @@
 #include "../Engimon/Engimon.hpp"
 #include "../Element/Element.hpp"
 #include "../Skill/Skill.hpp"
+#include "../Exception/Exception.hpp"
 
 using namespace std;
 
@@ -256,23 +257,27 @@ public:
     {
         bool sama = false;
         // jika letaknya sama dengan player
+        // try
+        // {
         if (newPosition.getXPos() == player.getPosition().getXPos() && newPosition.getYPos() == player.getPosition().getYPos())
         {
-            cout << "ini";
-            cout << newPosition.getXPos() << ";" << newPosition.getYPos() << ";" << player.getPosition().getXPos() << ";" << player.getPosition().getYPos() << ";" << oldPosition.getXPos() << ";" << oldPosition.getYPos();
-            // jika oldPosition
+            // throw WildEngimonPositionException();
+            // cout << "ini";
+            // cout << newPosition.getXPos() << ";" << newPosition.getYPos() << ";" << player.getPosition().getXPos() << ";" << player.getPosition().getYPos() << ";" << oldPosition.getXPos() << ";" << oldPosition.getYPos();
+            // // jika oldPosition
             // if (oldPosition.getXPos())
             return oldPosition;
         }
         // jika letaknya sama dengan active engimon
         else if (newPosition.getXPos() == player.getActiveEngimon().getPosition().getXPos() && newPosition.getYPos() == player.getActiveEngimon().getPosition().getYPos())
         {
-            cout << "sana";
-            cout << newPosition.getXPos() << ";" << newPosition.getYPos() << ";" << player.getPosition().getXPos() << ";" << player.getPosition().getYPos() << ";" << oldPosition.getXPos() << ";" << oldPosition.getYPos();
-            // jika letak oldPosition sekarang menjadi player
+            // cout << "sana";
+            // cout << newPosition.getXPos() << ";" << newPosition.getYPos() << ";" << player.getPosition().getXPos() << ";" << player.getPosition().getYPos() << ";" << oldPosition.getXPos() << ";" << oldPosition.getYPos();
+            // // jika letak oldPosition sekarang menjadi player
+
             if (oldPosition.getXPos() == player.getPosition().getXPos() && oldPosition.getYPos() == player.getPosition().getYPos())
             {
-                cout << "sini ini 1";
+                // cout << "sini ini 1";
                 // old Position ke newPosition menggunakan up
                 if (a == 0)
                 {
@@ -313,7 +318,7 @@ public:
                         oldPosition.down();
                     }
                 }
-                cout << oldPosition.getXPos() << ";" << oldPosition.getYPos();
+                // cout << oldPosition.getXPos() << ";" << oldPosition.getYPos();
                 // jika sekarang nabrak active engimon maka seharusnya -> engimon kebawah
                 return oldPosition;
             }
@@ -322,22 +327,22 @@ public:
         // jika akan nabrak tambok di kiri dan kanan
         else if (newPosition.getXPos() < 0 || newPosition.getXPos() > 11)
         {
-            cout << "sini";
-            cout << newPosition.getXPos() << ";" << newPosition.getYPos() << ";" << player.getPosition().getXPos() << ";" << player.getPosition().getYPos() << ";" << oldPosition.getXPos() << ";" << oldPosition.getYPos();
+            // cout << "sini";
+            // cout << newPosition.getXPos() << ";" << newPosition.getYPos() << ";" << player.getPosition().getXPos() << ";" << player.getPosition().getYPos() << ";" << oldPosition.getXPos() << ";" << oldPosition.getYPos();
 
             // jika posisi lamanya diambil player -> engimon harus pindah
             if (oldPosition.getXPos() == player.getPosition().getXPos() && oldPosition.getYPos() == player.getPosition().getYPos())
             {
-                cout << "sini ini 1";
+                // cout << "sini ini 1";
                 oldPosition.up();
-                cout << oldPosition.getXPos() << ";" << oldPosition.getYPos();
+                // cout << oldPosition.getXPos() << ";" << oldPosition.getYPos();
                 // jika sekarang nabrak active engimon maka seharusnya -> engimon kebawah
                 if (oldPosition.getXPos() == player.getActiveEngimon().getPosition().getXPos() && oldPosition.getYPos() == player.getActiveEngimon().getPosition().getYPos())
                 {
-                    cout << "sini sana 2";
+                    // cout << "sini sana 2";
                     oldPosition.down();
                     oldPosition.down();
-                    cout << oldPosition.getXPos() << ";" << oldPosition.getYPos();
+                    // cout << oldPosition.getXPos() << ";" << oldPosition.getYPos();
                     return oldPosition;
                 }
 
@@ -348,21 +353,21 @@ public:
         // jika akan nabrak tambok atas dan bawah
         else if (newPosition.getYPos() < 0 || newPosition.getYPos() > 9)
         {
-            cout << "sini";
-            cout << newPosition.getXPos() << ";" << newPosition.getYPos() << ";" << player.getPosition().getXPos() << ";" << player.getPosition().getYPos() << ";" << oldPosition.getXPos() << ";" << oldPosition.getYPos();
-            // jika posisi lamanya diambil player -> engimon harus pindah
+            // cout << "sini";
+            // cout << newPosition.getXPos() << ";" << newPosition.getYPos() << ";" << player.getPosition().getXPos() << ";" << player.getPosition().getYPos() << ";" << oldPosition.getXPos() << ";" << oldPosition.getYPos();
+            // // jika posisi lamanya diambil player -> engimon harus pindah
             if (oldPosition.getXPos() == player.getPosition().getXPos() && oldPosition.getYPos() == player.getPosition().getYPos())
             {
-                cout << "sini ini 2";
+                // cout << "sini ini 2";
                 oldPosition.right();
-                cout << oldPosition.getXPos() << ";" << oldPosition.getYPos();
+                // cout << oldPosition.getXPos() << ";" << oldPosition.getYPos();
                 // jika sekarang nabrak active engimon maka seharusnya -> engimon ke kiri
                 if (oldPosition.getXPos() == player.getActiveEngimon().getPosition().getXPos() && oldPosition.getYPos() == player.getActiveEngimon().getPosition().getYPos())
                 {
-                    cout << "sini sana 2";
+                    // cout << "sini sana 2";
                     oldPosition.left();
                     oldPosition.left();
-                    cout << oldPosition.getXPos() << ";" << oldPosition.getYPos();
+                    // cout << oldPosition.getXPos() << ";" << oldPosition.getYPos();
                     return oldPosition;
                 }
 
@@ -396,6 +401,13 @@ public:
         {
             return newPosition;
         }
+        // }
+
+        // catch (WildEngimonPositionException &e)
+        // {
+        //     cout << e.what() << endl;
+        //     return oldPosition;
+        // }
     }
 
     bool isPositionSama(Position enemy1, EngimonEnemy enemy2)
