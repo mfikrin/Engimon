@@ -130,6 +130,7 @@ public:
 	void initialNameAndEngimon()
 	{
 		string name = inputPlayerName();
+		cout << "Hello " << name << "!" << endl;
 		Engimon chosen = chooseEngimon();
 		player = Player(name, chosen);
 	}
