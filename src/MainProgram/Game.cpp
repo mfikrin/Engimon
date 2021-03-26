@@ -185,18 +185,22 @@ int main()
 	int jumlahIterasi = 0;
 	while (1)
 	{
-		g.renderMap(listEngimonLiar);
-		g.inputCommand();
-		if (jumlahIterasi % 3 == 0 && listEngimonLiar.size() < 5) // tambahin engimon setiap 3 move
-		{
-			listEngimonLiar = g.spawnEngimon(listEngimonLiar, true);
+		try{
+			g.renderMap(listEngimonLiar);
+			g.inputCommand();
+			if (jumlahIterasi % 3 == 0 && listEngimonLiar.size() < 5) // tambahin engimon setiap 3 move
+			{
+				listEngimonLiar = g.spawnEngimon(listEngimonLiar, true);
+			}
+			else
+			{
+				listEngimonLiar = g.spawnEngimon(listEngimonLiar, false);
+			}
+			g.battleEngimon(listEngimonLiar);
+			jumlahIterasi++;
+		}catch(OutOfBoundException& e){
+			cout << e.what() << endl;
 		}
-		else
-		{
-			listEngimonLiar = g.spawnEngimon(listEngimonLiar, false);
-		}
-		g.battleEngimon(listEngimonLiar);
-		jumlahIterasi++;
 	}
 	return 0;
 }

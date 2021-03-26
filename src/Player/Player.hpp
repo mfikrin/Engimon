@@ -22,6 +22,7 @@
 #include "../Engimon/EngimonUser.hpp"
 #include "../Element/Element.hpp"
 #include "../MainProgram/BookOfLore.hpp"
+#include "../Exception/Exception.hpp"
 
 // #include "MAP_SIZE.hpp"
 
@@ -40,7 +41,7 @@ public:
     {
         if ((direction == 'w' && position.getYPos() == 0) || (direction == 'a' && position.getXPos() == 0) || (direction == 's' && position.getYPos() == MAP_HEIGHT - 1) || (direction == 'd' && position.getXPos() == MAP_WIDTH - 1))
         {
-            throw "KELUAR MAP CUY!!";
+            throw OutOfBoundException();
         }
         else
         {
