@@ -123,6 +123,23 @@ public:
                 else
                 {
                     inv_skill.show_bag();
+                    if(inv_skill.get_nItem() > 0){
+                        cout << "Want to make your Active Engimon learn skills?" << endl;
+                        string confirmation;
+                        do{
+                            cin >> confirmation;
+                            if (confirmation == "yes"){
+                                cout << "Select the skill for your Engimon to learn!" << endl;
+                                int id;
+                                cin >> id;
+                                inv_skill.learn(activeEngimon,id);
+                            }else if (confirmation != "no"){
+                                cout << "Type 'yes' or 'no'!" << endl;
+                            }
+                        }while(confirmation != "yes" && confirmation != "no");
+                    }else{
+                        cout << "Nothing to see..." << endl;
+                    }
                 }
             } while (invent != "1" && invent != "2");
         }
@@ -184,6 +201,7 @@ public:
             cin >> id;
             activeEngimon = inv_engimon.select_item(id);
             //cout <<this->activeEngimon.getName() << endl;
+            cout << "aaa" << endl;
         }
         else
         {
@@ -220,14 +238,14 @@ public:
 
     void useSkillItem(SkillItem &si, Engimon &e)
     {
-        si.learn(&e);
+        si.learn(e);
 
         // UDAH BELUM YAK?????
     }
     void interact()
     {
-        cout << "Halo! \nAku " << this->activeEngimon.getName() << endl;
-        cout << "Engimon tipe ";
+        cout << "Hello! \nI'm " << this->activeEngimon.getName() << endl;
+        cout << "Engimon type ";
         int num_skills = this->activeEngimon.getElements().size();
         for (int i = 0; i < num_skills; i++)
         {
@@ -265,8 +283,16 @@ public:
             cout << s << "; ";
         }
         cout << "level " << this->activeEngimon.getLevel() << endl;
+        cout << "Skills:" << endl;
+        for (int i = 0; i < activeEngimon.getSkills().size(); i++)
+        {
+            cout << "-";
+            cout << activeEngimon.getSkills()[i].getSkillName() << ";" << "Power:" << activeEngimon.getSkills()[i].getPower()
+                 << ";" << "Mastery Level:" << activeEngimon.getSkills()[i].getMasteryLevel() << endl;
+        }
         cout << "EXP : " << this->activeEngimon.getExp() << "/" << MAX_EXP << endl
              << endl;
+        
     }
     //void switchActiveEngimon();
 

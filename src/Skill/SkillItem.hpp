@@ -54,7 +54,7 @@ public:
 		return containedSkill.getSkillId();
 	}
 
-	void learn(Engimon& chosen)
+	bool learn(Engimon& chosen)
 	{
 		if (number > 0)
 		{
@@ -73,10 +73,12 @@ public:
 			{
 				cout << "Not Compatible!" << endl;
 			}
+			return added;
 		}
 		else
 		{
 			cout << "Can't learn!" << endl;
+			return false;
 		}
 	}
 

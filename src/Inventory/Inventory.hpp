@@ -226,7 +226,7 @@ public:
 		{
 			if (it.first == id)
 			{
-				available == true;
+				available = true;
 				break;
 			}
 		}
@@ -250,7 +250,9 @@ public:
 
 	void learn(EngimonUser& e, int id_inven){
 		if (check_item_availability(id_inven)){
-			map_item[id_inven].learn(e);
+			if(map_item[id_inven].learn(e)){
+				delete_item(id_inven);
+			}
 		}else{
 			//throw mungkin
 		}
