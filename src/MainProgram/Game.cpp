@@ -161,13 +161,14 @@ public:
 		}
 	}
 
-	void battleEngimon(vector<EngimonEnemy> listEngimonLiar)
+	vector<EngimonEnemy> battleEngimon(vector<EngimonEnemy> listEngimonLiar)
 	{
 		char command;
 		if (map.EnemyNear(player, listEngimonLiar) != 999)
 		{
-
-			cout << "A Wild " << listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getName() << "(level " <<listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel() << ") " <<  "Appears!" << endl;
+			renderMap(listEngimonLiar);
+			cout << "A Wild " << listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getName() << "(level " << listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel() << ") "
+				 << "Appears!" << endl;
 			cout << "*Press y to proceed battle and other key to run" << endl;
 			cin >> command;
 			if (command == 'y')
@@ -193,9 +194,12 @@ public:
 					cout << "You retrieve " << listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getName() << "(level " << listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel() << ")!" << endl;
 					//cout << player.getActiveEngimon().getExp() << endl;
 					int inc_exp;
-					if (player.getActiveEngimon().getLevel() >= listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel()){
+					if (player.getActiveEngimon().getLevel() >= listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel())
+					{
 						inc_exp = 10;
-					}else{
+					}
+					else
+					{
 						inc_exp = ((abs(player.getActiveEngimon().getLevel() - listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel())) + 1) * 10;
 					}
 					//int inc_exps = 100;
@@ -236,15 +240,15 @@ public:
 					EngimonUser newEnemy(listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getPosition(), listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getName(), listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getSpecies(), listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getId(), listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getElements());
 
 					player.Add_inv_engimon(newEnemy);
-
 					listEngimonLiar.erase(listEngimonLiar.begin() + map.EnemyNear(player, listEngimonLiar));
+					cout << endl;
+					// cout << "yey" << endl;
 				}
 				else
 				{
 					cout << "Your Engimon is Fainted!" << endl;
 					player.changeActiveEngimon();
 				}
-				
 			}
 			else
 			{
@@ -252,6 +256,7 @@ public:
 				//map.Render(player, listEngimonLiar);
 			}
 		}
+		return listEngimonLiar;
 	}
 };
 
@@ -277,7 +282,7 @@ int main()
 			{
 				listEngimonLiar = g.spawnEngimon(listEngimonLiar, false);
 			}
-			g.battleEngimon(listEngimonLiar);
+			listEngimonLiar = g.battleEngimon(listEngimonLiar);
 			jumlahIterasi++;
 		}
 		catch (OutOfBoundException &e)

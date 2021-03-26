@@ -63,7 +63,8 @@ public:
         id = i;
     }
 
-    Engimon(const Engimon& other){
+    Engimon(const Engimon &other)
+    {
         this->id = other.id;
         this->name = other.name;
         this->species = other.species;
@@ -78,7 +79,8 @@ public:
         this->elements = other.elements;
     }
 
-    void operator=(const Engimon& other){
+    void operator=(const Engimon &other)
+    {
         this->id = other.id;
         this->name = other.name;
         this->species = other.species;
@@ -151,7 +153,8 @@ public:
     }
     void addSkill(Skill s)
     {
-        if (skills.size() < MAX_SKILLS){
+        if (skills.size() < MAX_SKILLS)
+        {
             bool valid = true;
             for (int i = 0; i < skills.size(); i++)
             {

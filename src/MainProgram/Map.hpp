@@ -149,6 +149,10 @@ public:
         // tambahkan skill
         enemy.addSkill(dapetSkill);
 
+        // tambahkan level enemy
+        int level = rand() % 5; // 12
+        enemy.setLevel(level);
+
         // TAMBAHKAN KE listEngimonLiar
         listEngimonLiar.push_back(enemy);
 
