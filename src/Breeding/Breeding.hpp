@@ -1,81 +1,100 @@
 #ifndef BREEDING__HPP
 #define BREEDING__HPP
-#include "../Player/Player.hpp"
-#include "../MainProgram/BookOfLore.hpp"
-#include "../Element/Element.hpp"
+// #include "../Player/Player.hpp"
+// #include "../MainProgram/BookOfLore.hpp"
+// #include "../Element/Element.hpp"
 #include "../Engimon/Engimon.hpp"
 #include "../Engimon/EngimonUser.hpp"
-#include "../Battle/Battle.hpp"
-class Breeding {
+// #include "../Battle/Battle.hpp"
+// #include "../BookOfLore/BookOfLore.hpp"
+// #include "../Position/Position.hpp"
+class Breeding
+{
 public:
-
-    bool parentAvailable(Player player, Engimon parentA, Engimon parentB){
+    bool parentAvailable(Player player, Engimon parentA, Engimon parentB)
+    {
         bool parent1Available = player.get_inv_engimon().check_item_availability(parentA.getId());
         bool parent2Available = player.get_inv_engimon().check_item_availability(parentB.getId());
-            if (!parent1Available) // parent1 ga ada di inventory
-            {
-                if (parent2Available) // parent2 ada di inventory
-                {
-                    cout << "Parent 1 tidak ada di inventory" << endl;
-                    return false;
-                }
-                else
-                { // parent2 ga ada di inventory juga
-                    cout << "Parent 1 dan Parent 2 tidak ada di inventory" << endl;
-                    return false;
-                }
-            }
-            else if (!parent2Available)
-            { // parent1 ada di inventory tapi parent2 ga ada
-                cout << "Parent 2 tidak ada di inventory" << endl;
-                return false;
-            } else {
-                return true;
-            }
-    }
-
-    bool parentLevelAbove30(Engimon parentA, Engimon parentB){
-        if (parentA.getLevel() < 30 || parentB.getLevel() < 30) // Salah satu parent berlevel kurang dari 30
+        if (!parent1Available) // parent1 ga ada di inventory
         {
-            if (parentA.getLevel() < 30){
-                if (parentB.getLevel() >= 30){
-                    cout << "Level Parent 1 kurang dari 30!" << endl;
-                    return false;
-                } else {
-                    cout << "Level Parent 1 dan Parent 2 kurang dari 30!" << endl;
-                    return false;
-                }
-            } else {
-                cout << "Level Parent 2 kurang dari 30!" << endl;
+            if (parent2Available) // parent2 ada di inventory
+            {
+                cout << "Parent 1 tidak ada di inventory" << endl;
                 return false;
             }
-        } else {
+            else
+            { // parent2 ga ada di inventory juga
+                cout << "Parent 1 dan Parent 2 tidak ada di inventory" << endl;
+                return false;
+            }
+        }
+        else if (!parent2Available)
+        { // parent1 ada di inventory tapi parent2 ga ada
+            cout << "Parent 2 tidak ada di inventory" << endl;
+            return false;
+        }
+        else
+        {
             return true;
         }
     }
 
-    vector<Element> collectParentElement(Engimon parentA, Engimon parentB){
+    bool parentLevelAbove30(Engimon parentA, Engimon parentB)
+    {
+        if (parentA.getLevel() < 30 || parentB.getLevel() < 30) // Salah satu parent berlevel kurang dari 30
+        {
+            if (parentA.getLevel() < 30)
+            {
+                if (parentB.getLevel() >= 30)
+                {
+                    cout << "Level Parent 1 kurang dari 30!" << endl;
+                    return false;
+                }
+                else
+                {
+                    cout << "Level Parent 1 dan Parent 2 kurang dari 30!" << endl;
+                    return false;
+                }
+            }
+            else
+            {
+                cout << "Level Parent 2 kurang dari 30!" << endl;
+                return false;
+            }
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    vector<Element> collectParentElement(Engimon parentA, Engimon parentB)
+    {
         vector<Element> parentAElement = parentA.getElements();
         vector<Element> parentBElement = parentB.getElements();
         vector<Element> parentElement;
         // MENGOLEKSI ELEMENT PARENT1 KE DALAM ELEMENTPARENT
-        for (int i = 0; i < parentAElement.size(); i++){
+        for (int i = 0; i < parentAElement.size(); i++)
+        {
             parentElement.push_back(parentAElement[i]);
         }
 
         // MENGOLEKSI ELEMENT PARENT2 KE DALAM ELEMENTPARENT
-        for (int i = 0; i < parentBElement.size(); i++){
+        for (int i = 0; i < parentBElement.size(); i++)
+        {
             // Mengecek apakah element dari elementParent2 sudah ada di elementParent
             bool present = false;
             for (int j = 0; j < parentElement.size(); j++)
             {
-                if (parentBElement[i] == parentElement[j]){
-                        present = true;
+                if (parentBElement[i] == parentElement[j])
+                {
+                    present = true;
                 }
             }
 
             // Mengoleksi elementParent2 ke dalam elementParent
-            if (!present){
+            if (!present)
+            {
                 parentElement.push_back(parentBElement[i]);
             }
         }
@@ -83,24 +102,40 @@ public:
         return parentElement;
     }
 
-    void breeding(Player player, BookOfLore ensiklopedia, Engimon parent1, Engimon parent2)
+    // EngimonUser breeding1(EngimonUser parent1, EngimonUser parent2)
+    // {
+    //     string childName;
+    //     Position P;
+    //     cout << "Masukkan nama anak!" << endl;
+    //     cin >> childName;
+    //     EngimonUser anak(P, childName, parent1.getSpecies(), 3, parent1.getElements());
+    //     return anak;
+    //     // anak.setName(childName);
+    // }
+    void breeding(Player player, Engimon parent1, Engimon parent2)
     {
-        // Sebelum pake breeding, cek dulu apakah inventory penuh// // // // // 
+        BookOfLore ensiklopedia;
+        // Sebelum pake breeding, cek dulu apakah inventory penuh// // // // //
         if (player.get_inv_engimon().get_nItem() == MAX_ENGIMON_INV) /* Inventory penuh */
         {
             cout << "Inventory penuh!" << endl;
-        } else {
+        }
+        else
+        {
             bool bothParentAvailable = parentAvailable(player, parent1, parent2);
             if (!bothParentAvailable) // parent1 ga ada di inventory
             {
                 // Parent availability udah di-handle di dalem fungsi parentAvailable()
-
-            } else {// parent1 dan parent2 ada di inventory
+            }
+            else
+            { // parent1 dan parent2 ada di inventory
                 bool bothParentLevelAbove30 = parentLevelAbove30(parent1, parent2);
                 if (!bothParentLevelAbove30) // Salah satu parent berlevel kurang dari 30
                 {
                     // Kasus level parent di bawah 30 udah di handel di dalam fungsi bothParentLevelAbove30()
-                } else { // Level kedua parent >= 30
+                }
+                else
+                { // Level kedua parent >= 30
                     int childID;
                     vector<Element> parentElement = collectParentElement(parent1, parent2);
                     vector<Element> parent1Element = parent1.getElements();
@@ -112,7 +147,7 @@ public:
                     string childSpecies;
                     cout << "Masukkan nama anak!" << endl;
                     cin >> childName;
-                    
+
                     // MEMBANDINGKAN ELEMENT KEDUA PARENT
                     if (parent1Element.size() == parent2Element.size())
                     {
@@ -272,37 +307,40 @@ public:
 
                     // Max Mastery Level Skill
                     Skill maxMasteryLevelSkill;
-                    while (childSkill.size() < 5 && parentSkill.size() != 0){
+                    while (childSkill.size() < 5 && parentSkill.size() != 0)
+                    {
                         // Mengambil Skill dengan Max Mastery Level
-                        maxMasteryLevelSkill = parentSkill[0]; 
+                        maxMasteryLevelSkill = parentSkill[0];
                         for (int i = 1; i < parentSkill.size(); i++)
                         {
                             if (maxMasteryLevelSkill.getMasteryLevel() < parentSkill[i].getMasteryLevel())
                             {
                                 maxMasteryLevelSkill = parentSkill[i];
                             }
-                            
                         }
                         // Mengumpulkan Skill Max Mastery Level
                         vector<Skill> skillOfNMasteryLevel;
                         for (int i = 0; i < parentSkill.size(); i++)
                         {
-                            if (parentSkill[i].getMasteryLevel()== maxMasteryLevelSkill.getMasteryLevel())
+                            if (parentSkill[i].getMasteryLevel() == maxMasteryLevelSkill.getMasteryLevel())
                             {
                                 skillOfNMasteryLevel.push_back(parentSkill[i]);
-                                parentSkill.erase(parentSkill.begin()+i);
+                                parentSkill.erase(parentSkill.begin() + i);
                             }
-                            
-                        }                    
+                        }
 
                         // Mengumpulkan Skill Max Mastery Level dari Parent A
-                        if (skillOfNMasteryLevel.size() > 1){
+                        if (skillOfNMasteryLevel.size() > 1)
+                        {
                             vector<Skill> skillOfNMasteryLevelParentA;
-                            for (int i = 0; i < skillOfNMasteryLevel.size(); i++){
-                                for (int j = 0; j < parent1.getSkills().size(); j++){
-                                    if (skillOfNMasteryLevel[i].getSkillId() == parent1.getSkills()[j].getSkillId()){
+                            for (int i = 0; i < skillOfNMasteryLevel.size(); i++)
+                            {
+                                for (int j = 0; j < parent1.getSkills().size(); j++)
+                                {
+                                    if (skillOfNMasteryLevel[i].getSkillId() == parent1.getSkills()[j].getSkillId())
+                                    {
                                         skillOfNMasteryLevelParentA.push_back(skillOfNMasteryLevel[i]);
-                                        skillOfNMasteryLevel.erase(skillOfNMasteryLevel.begin()+i);
+                                        skillOfNMasteryLevel.erase(skillOfNMasteryLevel.begin() + i);
                                     }
                                 }
                             }
@@ -314,21 +352,21 @@ public:
                             {
                                 childSkill.push_back(skillOfNMasteryLevel[i]);
                             }
-
-                        } else {
+                        }
+                        else
+                        {
                             childSkill.push_back(skillOfNMasteryLevel[0]);
                             skillOfNMasteryLevel.erase(skillOfNMasteryLevel.begin() + 0);
                         }
                     } // childSkill.size() >= 5 atau parentSkill.size() = 0
-                    
+
                     // Membuang skill ke-5 dan seterusnya
                     if (childSkill.size() > 4)
                     {
                         for (int i = 4; i < childSkill.size(); i++)
                         {
-                            childSkill.erase(childSkill.begin()+i);
+                            childSkill.erase(childSkill.begin() + i);
                         }
-                        
                     }
 
                     bool bothParentHave = false;
@@ -336,23 +374,25 @@ public:
                     {
                         int j = 0;
                         bool parent1Have = false;
-                        while (!parent1Have && j < parent1.getSkills().size()){
+                        while (!parent1Have && j < parent1.getSkills().size())
+                        {
                             if (parent1.getSkills()[j].getSkillId() == childSkill[i].getSkillId())
                             {
                                 parent1Have = true;
                             }
-                            
+
                             j++;
                         }
-                        
+
                         int k = 0;
                         bool parent2Have = false;
-                        while (!parent2Have && k < parent2.getSkills().size()){
+                        while (!parent2Have && k < parent2.getSkills().size())
+                        {
                             if (parent2.getSkills()[k].getSkillId() == childSkill[i].getSkillId())
                             {
                                 parent1Have = true;
                             }
-                            
+
                             k++;
                         }
 
@@ -362,19 +402,19 @@ public:
                             if (parent1.getSkills()[j].getMasteryLevel() == parent2.getSkills()[k].getMasteryLevel())
                             {
                                 childSkill[i].setMasteryLevel(parent1.getSkills()[j].getMasteryLevel() + 1);
-                            } else {
+                            }
+                            else
+                            {
                                 if (parent1.getSkills()[j].getMasteryLevel() > parent2.getSkills()[k].getMasteryLevel())
                                 {
                                     childSkill[i].setMasteryLevel(parent1.getSkills()[j].getMasteryLevel());
-                                } else {
+                                }
+                                else
+                                {
                                     childSkill[i].setMasteryLevel(parent2.getSkills()[k].getMasteryLevel());
                                 }
-                                
                             }
-                            
                         }
-                        
-                        
                     }
 
                     // MENENTUKAN ID
@@ -402,7 +442,7 @@ public:
                     EngimonUser childUser(child);
 
                     player.Add_inv_engimon(childUser);
-                    
+
                     parent1.setLevel(parent1.getLevel() - 30);
                     parent2.setLevel(parent2.getLevel() - 30);
                 }

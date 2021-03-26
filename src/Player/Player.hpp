@@ -5,6 +5,7 @@
 #define INIT_PLAYER_Y 0
 #define INIT_ACTIVEMON_X 0
 #define INIT_ACTIVEMON_Y 0
+#define MAX_ENGIMON_INV 500
 
 #define MAP_HEIGHT 10 // ???
 #define MAP_WIDTH 12  /// ???
@@ -23,7 +24,7 @@
 #include "../Element/Element.hpp"
 #include "../MainProgram/BookOfLore.hpp"
 #include "../Exception/Exception.hpp"
-
+// #include "../Breeding/Breeding.hpp"
 // #include "MAP_SIZE.hpp"
 
 class Player
@@ -89,10 +90,11 @@ public:
         return activeEngimon.getPosition();
     }
 
-    Inventory<EngimonUser> get_inv_engimon() {
+    Inventory<EngimonUser> get_inv_engimon()
+    {
         return this->inv_engimon;
     }
-     
+
     void showAllEngimons()
     {
         inv_engimon.show_bag();
@@ -128,6 +130,10 @@ public:
         }
         else if (com == "b")
         {
+            if (get_inv_engimon().get_nItem() > 500)
+            {
+                cout << "Inventory penuh!" << endl;
+            }
             Engimon engimon1;
             Engimon engimon2;
             cout << "do you wanna breed you engimon ?" << endl;
@@ -141,12 +147,27 @@ public:
                 cout << "select id engimon 1" << endl;
                 cin >> e1;
                 engimon1 = inv_engimon.select_item(e1);
-                int a = engimon1.getId();
+
                 cout << "select id engimon 2" << endl;
                 cin >> e2;
                 engimon2 = inv_engimon.select_item(e2);
-                int b = engimon2.getId();
-                cout << "id" << a << b << endl;
+
+                Position P1;
+                Position P2;
+                //MASUIH DUMMY DATA
+                EngimonUser user1(P1, engimon1.getName(), engimon1.getSpecies(), 1, engimon1.getElements());
+                user1.setLevel(6);
+                EngimonUser user2(P2, engimon2.getName(), engimon2.getSpecies(), 2, engimon2.getElements());
+                user2.setLevel(5);
+                string childName;
+                Position P;
+                cout << "Masukkan nama anak!" << endl;
+                cin >> childName;
+                EngimonUser anak(P, childName, user1.getSpecies(), 3, user1.getElements());
+                // EngimonUser user3 = Breeding::breeding1(user1, user2);
+                Add_inv_engimon(user1);
+                Add_inv_engimon(user2);
+                Add_inv_engimon(anak);
 
                 cout << "do you wanna breed you engimon again ?" << endl;
                 cout << "'y' for yes and 'n' for no " << endl;
@@ -218,12 +239,12 @@ public:
         }
     }
 
-    void useSkillItem(SkillItem &si, Engimon &e)
-    {
-        si.learn(&e);
+    // void useSkillItem(SkillItem &si, Engimon &e)
+    // {
+    //     si.learn(&e);
 
-        // UDAH BELUM YAK?????
-    }
+    //     // UDAH BELUM YAK?????
+    // }
     void interact()
     {
         cout << "Halo! \nAku " << this->activeEngimon.getName() << endl;

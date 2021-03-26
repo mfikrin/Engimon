@@ -81,9 +81,16 @@ public:
 		cout << " >> ";
 	}
 
-	Engimon chooseEngimon()
+	Engimon chooseEngimon(int iterasi)
 	{
-		cout << "Choose your first Engimon!" << endl;
+		if (iterasi == 1)
+		{
+			cout << "Choose your Active Engimon!" << endl;
+		}
+		else
+		{
+			cout << "Choose your Engimon!" << endl;
+		}
 		for (int i = 0; i < 5; ++i)
 		{
 			cout << i + 1 << ".";
@@ -133,16 +140,15 @@ public:
 	{
 		string name = inputPlayerName();
 		cout << "Hello " << name << "!" << endl;
+		Engimon chosen = chooseEngimon(1);
 		Position P1;
-		Engimon engimon1 = chooseEngimon();
-		EngimonUser user1(P1, engimon1.getName(), engimon1.getSpecies(), engimon1.getLevel(), engimon1.getElements());
+		Engimon engimon1 = chooseEngimon(2);
+		EngimonUser user1(P1, engimon1.getName(), engimon1.getSpecies(), 1, engimon1.getElements());
 		user1.setLevel(36);
 		Position P2;
-		Engimon engimon2 = chooseEngimon();
-		EngimonUser user2(P2, engimon2.getName(), engimon2.getSpecies(), engimon2.getLevel(), engimon2.getElements());
+		Engimon engimon2 = chooseEngimon(3);
+		EngimonUser user2(P2, engimon2.getName(), engimon2.getSpecies(), 2, engimon2.getElements());
 		user2.setLevel(35);
-
-		Engimon chosen = chooseEngimon();
 		player = Player(name, chosen);
 		player.Add_inv_engimon(user1);
 		player.Add_inv_engimon(user2);
