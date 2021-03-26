@@ -188,7 +188,12 @@ public:
 				{
 					cout << "menang" << endl;
 					//cout << player.getActiveEngimon().getExp() << endl;
-					int inc_exp = ((abs(player.getActiveEngimon().getLevel() - listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel())) + 1) * 10;
+					int inc_exp;
+					if (player.getActiveEngimon().getLevel() >= listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel()){
+						inc_exp = 10;
+					}else{
+						inc_exp = ((abs(player.getActiveEngimon().getLevel() - listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel())) + 1) * 10;
+					}
 					//int inc_exps = 100;
 					//cout << "inc : " << inc_exp << endl;
 					int new_exp = player.getActiveEngimon().getExp() + inc_exp;

@@ -196,7 +196,7 @@ public:
         if (exp >= MAX_EXP)
         {
             this->levelUp();
-            setExp(exp - MAX_EXP);
+            //setExp(exp - MAX_EXP);
         }
         if (cExp >= MAX_C_EXP)
         {
@@ -223,6 +223,7 @@ public:
     {
         this->exp += exp;
         this->cExp += exp;
+        updateStats();
     }
 
     void printEngimon()
