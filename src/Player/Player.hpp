@@ -201,7 +201,6 @@ public:
             cin >> id;
             activeEngimon = inv_engimon.select_item(id);
             //cout <<this->activeEngimon.getName() << endl;
-            cout << "aaa" << endl;
         }
         else
         {
@@ -215,9 +214,9 @@ public:
         if (inv_engimon.get_nItem() > 0)
         {
             //cout << this->activeEngimon.getName() << endl;
-            cout << "nama aktif engimon : " << this->activeEngimon.getName() << endl;
+            // cout << "nama aktif engimon : " << this->activeEngimon.getName() << endl;
             EngimonUser temp = this->activeEngimon;
-            cout << "nama aktif engimon temp : " << temp.getName() << endl;
+            // cout << "nama aktif engimon temp : " << temp.getName() << endl;
             inv_engimon.show_bag();
             cout << "Input id : ";
             int id;

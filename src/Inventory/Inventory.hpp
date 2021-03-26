@@ -70,7 +70,7 @@ public:
 			if (map_item.erase(id_inven)) // id ada
 			{
 				//cout << "yuhuu" << endl;
-				map_item.erase(id_inven);
+				// map_item.erase(id_inven);
 				this->n_item -= 1;
 				cout << "Item dengan ID " << id_inven << " telah dihapus" << endl;
 			}
@@ -101,7 +101,7 @@ public:
 		{
 			if (it.first == id)
 			{
-				available == true;
+				available = true;
 				break;
 			}
 		}
