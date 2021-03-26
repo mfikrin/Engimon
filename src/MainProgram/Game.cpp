@@ -169,13 +169,13 @@ public:
 			cin >> command;
 			if (command == 'y')
 			{
-				vector<Element> elements;
-				EngimonUser e1(Position(0, 0), "s", "d", 1, elements);
+				//vector<Element> elements;
+				//EngimonUser e1(Position(0, 0), "s", "d", 1, elements);
 				//EngimonUser e2;
 				//EngimonUser e3;
 				//EngimonUser e4;
 
-				player.Add_inv_engimon(e1);
+				//player.Add_inv_engimon(e1);
 				// player.get_inv_engimon().add_item(e2);
 				// player.get_inv_engimon().add_item(e3);
 				// player.get_inv_engimon().add_item(e4);
@@ -186,10 +186,47 @@ public:
 				int a = Battle::battleEngimon(player, listEngimonLiar[map.EnemyNear(player, listEngimonLiar)]);
 				if (a == 1)
 				{
-					// cout << player.print_active_engimon();
 					cout << "menang" << endl;
-					player.changeActiveEngimon();
-					// cout << player.print_active_engimon();
+					cout << player.getActiveEngimon().getExp() << endl;
+					int inc_exp = ((abs(player.getActiveEngimon().getLevel() - listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel())) + 1) * 10;
+					//int inc_exps = 100;
+					cout << "inc : " << inc_exp << endl;
+					int new_exp = player.getActiveEngimon().getExp() + inc_exp;
+					cout << "exp : " << new_exp << endl;
+					player.Add_exp(inc_exp);
+					cout << player.getActiveEngimon().getExp() << endl;
+					vector<Element> element_active = player.getActiveEngimon().getElements();							   // semua elemen dari engimon aktif
+					vector<Element> element_enemy = listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getElements(); // semua elemen dari engimon element
+
+					// get random skill item (sesuai elemen musuh)
+					BookOfLore ensiklopedia;
+					vector<vector<Skill>> ensiklopediaSkill = ensiklopedia.allSkill();
+					vector<vector<Skill>> Skill_enemy;
+					for (int i = 0; i < element_enemy.size(); i++)
+					{
+						// ambil index yang memuat element enemy
+						int idx = ensiklopedia.get_idx_skill(element_enemy[i]);
+						for (int j = 0; j < ensiklopediaSkill.size(); j++)
+						{
+							if (idx == j)
+							{
+								Skill_enemy.push_back(ensiklopediaSkill[j]);
+							}
+						}
+					}
+					int idxElement = rand() % Skill_enemy.size();
+					int idxSkill = rand() % Skill_enemy[idxElement].size();
+
+					Skill get_skill = Skill_enemy[idxElement][idxSkill];
+					Skill skill(get_skill.getSkillId(), get_skill.getMasteryLevel(), get_skill.getBasePower(), get_skill.getSkillName(), get_skill.getElement());
+
+					SkillItem skill_item(skill);
+
+					player.Add_inv_skill(skill_item);
+
+					EngimonUser newEnemy(listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getPosition(), listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getName(), listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getSpecies(), listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getId(), listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getElements());
+
+					player.Add_inv_engimon(newEnemy);
 
 					listEngimonLiar.erase(listEngimonLiar.begin() + map.EnemyNear(player, listEngimonLiar));
 				}
@@ -198,6 +235,7 @@ public:
 					cout << "kalah" << endl;
 					player.changeActiveEngimon();
 				}
+				
 			}
 			else
 			{

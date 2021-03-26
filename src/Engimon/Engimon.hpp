@@ -219,6 +219,12 @@ public:
         this->id = id;
     }
 
+    void Add_exp(int exp)
+    {
+        this->exp += exp;
+        this->cExp += exp;
+    }
+
     void printEngimon()
     {
         cout << "["
