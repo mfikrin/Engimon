@@ -163,9 +163,9 @@ public:
         // PRINT NILAI POWER
         float power_user = player.getActiveEngimon().getLevel() * adv_user + sum_skill_user;
         float power_enemy = enemy.getLevel() * adv_enemy + sum_skill_enemy;
-        cout << "POWER KEDUA ENGIMON" << endl;
-        cout << "Power Engimon User : " << power_user << endl;
-        cout << "Power Engimon Enemy : " << power_enemy << endl;
+        cout << "Match Result" << endl;
+        cout << player.getActiveEngimon().getName() << "'s Power : " << power_user << endl;
+        cout << enemy.getName() << "'s Power : " << power_enemy << endl;
 
         // JIKA USER MENANG
         if (power_user > power_enemy)

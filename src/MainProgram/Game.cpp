@@ -166,7 +166,8 @@ public:
 		if (map.EnemyNear(player, listEngimonLiar) != 999)
 		{
 
-			cout << "APAKAH ANDA INGIN BATTLE ?" << endl;
+			cout << "A Wild " << listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getName() << "(level " <<listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel() << ") " <<  "Appears!" << endl;
+			cout << "*Press y to proceed battle and other key to run" << endl;
 			cin >> command;
 			if (command == 'y')
 			{
@@ -187,7 +188,8 @@ public:
 				int a = Battle::battleEngimon(player, listEngimonLiar[map.EnemyNear(player, listEngimonLiar)]);
 				if (a == 1)
 				{
-					cout << "menang" << endl;
+					cout << "You Win!" << endl;
+					cout << "You retrieve " << listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getName() << "(level " << listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel() << ")!" << endl;
 					//cout << player.getActiveEngimon().getExp() << endl;
 					int inc_exp;
 					if (player.getActiveEngimon().getLevel() >= listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel()){
@@ -238,7 +240,7 @@ public:
 				}
 				else
 				{
-					cout << "kalah" << endl;
+					cout << "Your Engimon is Fainted!" << endl;
 					player.changeActiveEngimon();
 				}
 				
