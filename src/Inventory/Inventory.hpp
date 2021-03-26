@@ -70,7 +70,7 @@ public:
 			if (map_item.erase(id_inven)) // id ada
 			{
 				//cout << "yuhuu" << endl;
-				map_item.erase(id_inven);
+				// map_item.erase(id_inven);
 				this->n_item -= 1;
 				cout << "Item dengan ID " << id_inven << " telah dihapus" << endl;
 			}
@@ -101,7 +101,7 @@ public:
 		{
 			if (it.first == id)
 			{
-				available == true;
+				available = true;
 				break;
 			}
 		}
@@ -226,7 +226,7 @@ public:
 		{
 			if (it.first == id)
 			{
-				available == true;
+				available = true;
 				break;
 			}
 		}
@@ -250,7 +250,9 @@ public:
 
 	void learn(EngimonUser& e, int id_inven){
 		if (check_item_availability(id_inven)){
-			map_item[id_inven].learn(e);
+			if(map_item[id_inven].learn(e)){
+				delete_item(id_inven);
+			}
 		}else{
 			//throw mungkin
 		}
