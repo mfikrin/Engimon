@@ -1,5 +1,5 @@
-#ifndef _INVENTORY_HPP_
-#define _INVENTORY_HPP_
+#ifndef _INVENTORYV2_HPP_
+#define _INVENTORYV2_HPP_
 
 #include <iostream>
 #include <map>

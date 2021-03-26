@@ -117,9 +117,23 @@ public:
 			if (it.first == id_inven)
 			{
 				e = it.second;
+				delete_item(id_inven);
 			}
 		}
 		return e;
 	}
+
+	// void Add_inv_skill(SkillItem &s1)
+	// {
+	// 	for (auto &it : map_item)
+	// 	{
+	// 		SkillItem 
+	// 		if (it.second ==)
+	// 		// SkillItem namaskill = this->inv_skill[i]
+	// 		// if (this->[i].get){
+	// 	}
+
+	// 	//  this->inv_skill.add_item(s1);
+	// }
 };
 #endif
