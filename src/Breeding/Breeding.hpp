@@ -4,59 +4,105 @@
 #include "../MainProgram/BookOfLore.hpp"
 #include "../Element/Element.hpp"
 #include "../Engimon/Engimon.hpp"
+#include "../Engimon/EngimonUser.hpp"
 #include "../Battle/Battle.hpp"
-class Breeding
-{
+class Breeding {
 public:
-    Engimon breeding(Player player, BookOfLore ensiklopedia, Battle battle, Engimon parent1, Engimon parent2)
-    {
-        if (player.get_inv_engimon().get_nItem() == MAX_ENGIMON_INV) /* Inventory penuh */
-        {
-            cout << "Inventory penuh!" << endl;
-        }
-        else
-        {
-            bool parent1Available = player.get_inv_engimon().check_item_availability(parent1.getId());
-            bool parent2Available = player.get_inv_engimon().check_item_availability(parent2.getId());
+
+    bool parentAvailable(Player player, Engimon parentA, Engimon parentB){
+        bool parent1Available = player.get_inv_engimon().check_item_availability(parentA.getId());
+        bool parent2Available = player.get_inv_engimon().check_item_availability(parentB.getId());
             if (!parent1Available) // parent1 ga ada di inventory
             {
                 if (parent2Available) // parent2 ada di inventory
                 {
                     cout << "Parent 1 tidak ada di inventory" << endl;
+                    return false;
                 }
                 else
                 { // parent2 ga ada di inventory juga
                     cout << "Parent 1 dan Parent 2 tidak ada di inventory" << endl;
+                    return false;
                 }
             }
             else if (!parent2Available)
             { // parent1 ada di inventory tapi parent2 ga ada
                 cout << "Parent 2 tidak ada di inventory" << endl;
+                return false;
+            } else {
+                return true;
             }
-            else
-            {// parent1 dan parent2 ada di inventory
-                if (parent1.getLevel() < 30 || parent2.getLevel() < 30) // Salah satu parent berlevel kurang dari 30
-                {
-                    if (parent1.getLevel() < 30)
-                    {
-                        if (parent2.getLevel() >= 30)
-                        {
-                            cout << "Level Parent 1 kurang dari 30!" << endl;
-                        }
-                        else
-                        {
-                            cout << "Level Parent 1 dan Parent 2 kurang dari 30!" << endl;
-                        }
-                    }
-                    else
-                    {
-                        cout << "Level Parent 2 kurang dari 30!" << endl;
-                    }
+    }
+
+    bool parentLevelAbove30(Engimon parentA, Engimon parentB){
+        if (parentA.getLevel() < 30 || parentB.getLevel() < 30) // Salah satu parent berlevel kurang dari 30
+        {
+            if (parentA.getLevel() < 30){
+                if (parentB.getLevel() >= 30){
+                    cout << "Level Parent 1 kurang dari 30!" << endl;
+                    return false;
+                } else {
+                    cout << "Level Parent 1 dan Parent 2 kurang dari 30!" << endl;
+                    return false;
                 }
-                else
-                { // Level kedua parent >= 30
+            } else {
+                cout << "Level Parent 2 kurang dari 30!" << endl;
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    vector<Element> collectParentElement(Engimon parentA, Engimon parentB){
+        vector<Element> parentAElement = parentA.getElements();
+        vector<Element> parentBElement = parentB.getElements();
+        vector<Element> parentElement;
+        // MENGOLEKSI ELEMENT PARENT1 KE DALAM ELEMENTPARENT
+        for (int i = 0; i < parentAElement.size(); i++){
+            parentElement.push_back(parentAElement[i]);
+        }
+
+        // MENGOLEKSI ELEMENT PARENT2 KE DALAM ELEMENTPARENT
+        for (int i = 0; i < parentBElement.size(); i++){
+            // Mengecek apakah element dari elementParent2 sudah ada di elementParent
+            bool present = false;
+            for (int j = 0; j < parentElement.size(); j++)
+            {
+                if (parentBElement[i] == parentElement[j]){
+                        present = true;
+                }
+            }
+
+            // Mengoleksi elementParent2 ke dalam elementParent
+            if (!present){
+                parentElement.push_back(parentBElement[i]);
+            }
+        }
+
+        return parentElement;
+    }
+
+    void breeding(Player player, BookOfLore ensiklopedia, Engimon parent1, Engimon parent2)
+    {
+        // Sebelum pake breeding, cek dulu apakah inventory penuh// // // // // 
+        if (player.get_inv_engimon().get_nItem() == MAX_ENGIMON_INV) /* Inventory penuh */
+        {
+            cout << "Inventory penuh!" << endl;
+        } else {
+            bool bothParentAvailable = parentAvailable(player, parent1, parent2);
+            if (!bothParentAvailable) // parent1 ga ada di inventory
+            {
+                // Parent availability udah di-handle di dalem fungsi parentAvailable()
+
+            } else {// parent1 dan parent2 ada di inventory
+                bool bothParentLevelAbove30 = parentLevelAbove30(parent1, parent2);
+                if (!bothParentLevelAbove30) // Salah satu parent berlevel kurang dari 30
+                {
+                    // Kasus level parent di bawah 30 udah di handel di dalam fungsi bothParentLevelAbove30()
+                } else { // Level kedua parent >= 30
                     int childID;
-                    vector<Element> parentElement;
+                    vector<Element> parentElement = collectParentElement(parent1, parent2);
                     vector<Element> parent1Element = parent1.getElements();
                     vector<Element> parent2Element = parent2.getElements();
                     vector<Element> childElement;
@@ -66,33 +112,7 @@ public:
                     string childSpecies;
                     cout << "Masukkan nama anak!" << endl;
                     cin >> childName;
-
-                    // MENGOLEKSI ELEMENT PARENT1 KE DALAM ELEMENTPARENT
-                    for (int i = 0; i < parent1Element.size(); i++)
-                    {
-                        parentElement.push_back(parent1Element[i]);
-                    }
-
-                    // MENGOLEKSI ELEMENT PARENT2 KE DALAM ELEMENTPARENT
-                    for (int i = 0; i < parent2Element.size(); i++)
-                    {
-                        // Mengecek apakah element dari elementParent2 sudah ada di elementParent
-                        bool present = false;
-                        for (int j = 0; j < parentElement.size(); j++)
-                        {
-                            if (parent2Element[i] == parentElement[j])
-                            {
-                                present = true;
-                            }
-                        }
-
-                        // Mengoleksi elementParent2 ke dalam elementParent
-                        if (!present)
-                        {
-                            parentElement.push_back(parent2Element[i]);
-                        }
-                    }
-
+                    
                     // MEMBANDINGKAN ELEMENT KEDUA PARENT
                     if (parent1Element.size() == parent2Element.size())
                     {
@@ -100,13 +120,12 @@ public:
                         int i = 0;
                         while (i < parent1Element.size() && parentSimilarity)
                         {
-                            if (parent1Element[i] != parent2Element[i])
+                            if (parent1Element[i] != parent2Element[i]) // Kalau masih ada waktu bisa improve
                             {
                                 parentSimilarity = false;
                             }
                             i++;
                         }
-
                         if (parentSimilarity) // Kedua parent ber-element sama
                         {
                             int speciesRandomizer = rand() % 2;
@@ -124,21 +143,18 @@ public:
                         { // Elemen kedua parent berbeda
                             if (parent1Element.size() == 1 && parent2Element.size() == 1)
                             {
-                                if (battle.get_advantage(parent1Element[0], parent2Element[0]) > battle.get_advantage(parent2Element[0], parent1Element[0]))
+                                if (Battle::get_advantage(parent1Element[0], parent2Element[0]) > Battle::get_advantage(parent2Element[0], parent1Element[0]))
                                 {
                                     childSpecies = parent1.getSpecies();
-                                    childID = parent1.getId();
                                     childElement = parent1.getElements();
                                 }
-                                else if (battle.get_advantage(parent1Element[0], parent2Element[0]) < battle.get_advantage(parent2Element[0], parent1Element[0]))
+                                else if (Battle::get_advantage(parent1Element[0], parent2Element[0]) < Battle::get_advantage(parent2Element[0], parent1Element[0]))
                                 {
                                     childSpecies = parent2.getSpecies();
-                                    childID = parent2.getId();
                                     childElement = parent2.getElements();
                                 }
                                 else
                                 { // Element advantage sama
-
                                     int indexRandomizer = rand() % ensiklopedia.allEngimon().size();
                                     int speciesRandomizer = rand() % ensiklopedia.allEngimon()[indexRandomizer].size();
                                     childSpecies = ensiklopedia.allEngimon()[indexRandomizer][speciesRandomizer].getSpecies();
@@ -176,24 +192,21 @@ public:
                         }
                     }
                     else
-                    { // Elemen kedua parent berbeda
+                    { // Element kedua parent berbeda
                         if (parent1Element.size() == 1 && parent2Element.size() == 1)
                         {
-                            if (battle.get_advantage(parent1Element[0], parent2Element[0]) > battle.get_advantage(parent2Element[0], parent1Element[0]))
+                            if (Battle::get_advantage(parent1Element[0], parent2Element[0]) > Battle::get_advantage(parent2Element[0], parent1Element[0]))
                             {
                                 childSpecies = parent1.getSpecies();
-                                childID = parent1.getId();
                                 childElement = parent1.getElements();
                             }
-                            else if (battle.get_advantage(parent1Element[0], parent2Element[0]) < battle.get_advantage(parent2Element[0], parent1Element[0]))
+                            else if (Battle::get_advantage(parent1Element[0], parent2Element[0]) < Battle::get_advantage(parent2Element[0], parent1Element[0]))
                             {
                                 childSpecies = parent2.getSpecies();
-                                childID = parent2.getId();
                                 childElement = parent2.getElements();
                             }
                             else
                             { // Element advantage sama
-
                                 int indexRandomizer = rand() % ensiklopedia.allEngimon().size();
                                 int speciesRandomizer = rand() % ensiklopedia.allEngimon()[indexRandomizer].size();
                                 childSpecies = ensiklopedia.allEngimon()[indexRandomizer][speciesRandomizer].getSpecies();
@@ -238,10 +251,9 @@ public:
                     }
 
                     // MENGOLEKSI SKILL PARENT2 KE DALAM PARENTSKILL
-
                     for (int i = 0; i < parent2.getSkills().size(); i++)
                     {
-                        // Mengecek apakah element dari elementParent2 sudah ada di elementParent
+                        // Mengecek apakah skill dari skillParent2 sudah ada di skillParent
                         bool present = false;
                         for (int j = 0; j < parentSkill.size(); j++)
                         {
@@ -386,11 +398,13 @@ public:
                     {
                         child.addSkill(childSkill[i]);
                     }
+
+                    EngimonUser childUser(child);
+
+                    player.Add_inv_engimon(childUser);
                     
                     parent1.setLevel(parent1.getLevel() - 30);
                     parent2.setLevel(parent2.getLevel() - 30);
-
-                    return child;
                 }
             }
         }
