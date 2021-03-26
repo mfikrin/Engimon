@@ -88,6 +88,11 @@ public:
     {
         return activeEngimon.getPosition();
     }
+
+    Inventory<EngimonUser, MAX_ENGIMON_INV> get_inv_engimon() {
+        return this->inv_engimon;
+    }
+     
     void showAllEngimons()
     {
         inv_engimon.show_bag();
