@@ -78,6 +78,10 @@ public:
         return activeEngimon;
     }
 
+    // void print_active_engimon(){
+    //     cout << this->activeEngimon.getName() << endl;
+    // }
+
     Position getActiveEngimonPosition()
     {
         return activeEngimon.getPosition();
@@ -184,10 +188,18 @@ public:
         this->activeEngimon = other.activeEngimon;
     }
 
-    Inventory<EngimonUser, MAX_ENGIMON_INV> get_inv_engimon() {
-        return this->inv_engimon;
-    } 
+    // Inventory<EngimonUser, MAX_ENGIMON_INV> get_inv_engimon() {
+    //     return this->inv_engimon;
+    // }
 
+    void Add_inv_engimon(EngimonUser& e1){
+        this->inv_engimon.add_item(e1);
+    }
+
+    void Add_inv_skill(SkillItem &s1)
+    {
+        this->inv_skill.add_item(s1);
+    }
 };
 
 #endif // PLAYER_HPP

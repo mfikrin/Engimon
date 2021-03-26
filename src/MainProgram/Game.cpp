@@ -152,19 +152,41 @@ public:
 		char command;
 		if (map.EnemyNear(player, listEngimonLiar) != 999)
 		{
+			
+
+
 			cout << "APAKAH ANDA INGIN BATTLE ?" << endl;
 			cin >> command;
 			if (command == 'y')
 			{
+				vector<Element> elements;
+				EngimonUser e1(Position (0,0), "s", "d", 1, elements);
+				//EngimonUser e2;
+				//EngimonUser e3;
+				//EngimonUser e4;
+
+				player.Add_inv_engimon(e1);
+				// player.get_inv_engimon().add_item(e2);
+				// player.get_inv_engimon().add_item(e3);
+				// player.get_inv_engimon().add_item(e4);
+
+				// cout << player.get_inv_engimon().get_nItem() << endl;
+
+				// player.get_inv_engimon().show_bag();
 				int a = Battle::battleEngimon(player, listEngimonLiar[map.EnemyNear(player, listEngimonLiar)]);
 				if (a == 1)
 				{
+					// cout << player.print_active_engimon();
 					cout << "menang" << endl;
+					player.changeActiveEngimon();
+					// cout << player.print_active_engimon();
+
 					listEngimonLiar.erase(listEngimonLiar.begin() + map.EnemyNear(player, listEngimonLiar));
 				}
 				else
 				{
 					cout << "kalah" << endl;
+					player.changeActiveEngimon();
 				}
 			}
 			else
@@ -181,6 +203,7 @@ int main()
 	Game g;
 	g.printLogo();
 	g.initialNameAndEngimon();
+	
 	vector<EngimonEnemy> listEngimonLiar;
 	int jumlahIterasi = 0;
 	while (1)

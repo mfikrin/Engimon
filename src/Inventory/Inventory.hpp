@@ -55,6 +55,7 @@ public:
 		{
 			this->id_inven += 1;
 			map_item.insert(pair<int, T>(id_inven, item));
+			cout << "MAsuk" << endl;
 			this->n_item += 1;
 		}
 		else
