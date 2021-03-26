@@ -144,9 +144,11 @@ public:
 
         // PENJUMLAH SKIL USERR
         vector<Skill> skill_user = player.getActiveEngimon().getSkills();
+        cout << "jumlah" << skill_user.size();
         float sum_skill_user = 0;
         for (int i = 0; i < skill_user.size(); i++)
         {
+            cout << "skillUser " << skill_user[i].getBasePower() << skill_user[i].getMasteryLevel() << endl;
             sum_skill_user += (skill_user[i].getBasePower() * skill_user[i].getMasteryLevel());
         }
 

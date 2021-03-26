@@ -90,7 +90,7 @@ public:
 	{
 		string name = inputPlayerName();
 		Engimon chosen = chooseEngimon();
-		Player temp = Player(name, chosen);
+		Player temp = Player(name, chooseEngimon());
 		player = temp;
 	}
 
