@@ -129,11 +129,13 @@ public:
         // menunggu Inventory
         if (inv_engimon.get_nItem() > 0)
         {
+            //cout << this->activeEngimon.getName() << endl;
             inv_engimon.show_bag();
             cout << "Input id : ";
             int id;
             cin >> id;
             activeEngimon = inv_engimon.select_item(id);
+            //cout <<this->activeEngimon.getName() << endl;
         }
         else
         {
@@ -199,6 +201,11 @@ public:
     void Add_inv_skill(SkillItem &s1)
     {
         this->inv_skill.add_item(s1);
+    }
+
+    void Add_exp(int exp)
+    {
+        this->activeEngimon.Add_exp(exp);
     }
 };
 

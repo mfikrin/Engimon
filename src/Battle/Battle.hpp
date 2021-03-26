@@ -170,75 +170,13 @@ public:
         // JIKA USER MENANG
         if (power_user > power_enemy)
         {
-            // rumus exp (bisa diubah lg rumusnya)
-            int new_exp = player.getActiveEngimon().getExp() + (abs(player.getActiveEngimon().getLevel() - enemy.getLevel())) * 20;
-            player.getActiveEngimon().setExp(new_exp);
-
-            // get random skill item (sesuai elemen musuh)
-            BookOfLore ensiklopedia;
-            vector<vector<Skill>> ensiklopediaSkill = ensiklopedia.allSkill();
-
-            vector<vector<Skill>> Skill_enemy;
-            for (int i = 0; i < element_enemy.size(); i++)
-            {
-                // ambil index yang memuat element enemy
-                int idx = ensiklopedia.get_idx_skill(element_enemy[i]);
-                for (int j = 0; j < ensiklopediaSkill.size(); j++)
-                {
-                    if (idx == j)
-                    {
-                        Skill_enemy.push_back(ensiklopediaSkill[j]);
-                    }
-                }
-            }
-            // AMBIL SKILL SECARA ACAK
-            int idxElement = rand() % Skill_enemy.size();
-            int idxSkill = rand() % Skill_enemy[idxElement].size();
-
-            Skill get_skill = Skill_enemy[idxElement][idxSkill];
-            Skill skill(get_skill.getSkillId(), get_skill.getMasteryLevel(), get_skill.getBasePower(), get_skill.getSkillName(), get_skill.getElement());
-
-            SkillItem skill_item(skill);
-
-            // Convert EngimonEnemy to EngimonUser
-            EngimonUser newEnemy(enemy.getPosition(), enemy.getName(), enemy.getSpecies(), enemy.getId(), enemy.getElements());
-            // ATRIBUT EngimonUSer yg position ga bisa
-
-            // try
-            // {
-            //     inv_skill.add_item(skill_item);
-            //     inv_engimon.add_item(enemy);
-            // }
-            // catch (const SkillItem &e)
-            // {
-            //     cout << "Inventory Skill Item penuh" << endl;
-            // }
-            // catch (const Engimon &e)
-            // {
-            //     cout << "Inventory Engimon penuh" << endl;
-            // }
-            // cout << "menang" << endl;
-            // deleteEngimonEnemy
             return 1;
         }
         else
         {
-            // cout << "kalah" << endl;
-            // changeActiveEngimon();
             return 0;
         }
-        // else
-        // {
-        //     // engimon mati
-        //     // activeEngimon = select(); // select ENgimon dr inventory
-        //     // inv_engimon.show_bag();
-        //     // cout << "Input id : ";
-        //     // int id;
-        //     // cin >> id;
-        //     // activeEngimon = inv_engimon.select_item(id);
-
-        //     changeActiveEngimon();
-        // }
+    
     }
 };
 
