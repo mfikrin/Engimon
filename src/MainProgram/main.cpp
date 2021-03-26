@@ -61,6 +61,7 @@ int main()
             }
             peta.Render(pemain, listEngimonLiar);
         }
+
         jumlahIterasi++;
     } while (command != 'q');
     return 0;

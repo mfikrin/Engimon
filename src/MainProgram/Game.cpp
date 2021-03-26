@@ -73,6 +73,7 @@ public:
 		cout << "\n=--COMMAND LIST--=" << endl;
 		cout << " Move: w a s d" << endl;
 		cout << " Inventory: i" << endl;
+		cout << " Breeding: b " << endl;
 		cout << " Change Active Engimon: c / C / change" << endl;
 		cout << " Show Active Engimon: show / sae" << endl;
 		cout << " Interact: talk / int" << endl;

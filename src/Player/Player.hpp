@@ -34,7 +34,6 @@ protected:
     Inventory<EngimonUser, MAX_ENGIMON_INV> inv_engimon;
     Inventory<SkillItem, MAX_SKILL_ITEM_INV> inv_skill;
     EngimonUser activeEngimon;
-    
 
 public:
     // OTHER METHOD
@@ -79,8 +78,10 @@ public:
         return activeEngimon;
     }
 
-    void print_active_engimon(){
-        cout << "Nama: " << this->activeEngimon.getName() << endl << endl;
+    void print_active_engimon()
+    {
+        cout << "Nama: " << this->activeEngimon.getName() << endl
+             << endl;
     }
 
     Position getActiveEngimonPosition()
@@ -119,14 +120,48 @@ public:
                     inv_skill.show_bag();
                 }
             } while (invent != "1" && invent != "2");
-        }else if(com == "show" || com == "sae"){
+        }
+        else if (com == "b")
+        {
+            Engimon engimon1;
+            Engimon engimon2;
+            cout << "do you wanna breed you engimon ?" << endl;
+            cout << "'y' for yes and 'n' for no " << endl;
+            string breed;
+            int e1, e2;
+            cin >> breed;
+            while (breed != "n")
+            {
+                inv_engimon.show_bag();
+                cout << "select id engimon 1" << endl;
+                cin >> e1;
+                engimon1 = inv_engimon.select_item(e1);
+                int a = engimon1.getId();
+                cout << "select id engimon 2" << endl;
+                cin >> e2;
+                engimon2 = inv_engimon.select_item(e2);
+                int b = engimon2.getId();
+                cout << "id" << a << b << endl;
+
+                cout << "do you wanna breed you engimon again ?" << endl;
+                cout << "'y' for yes and 'n' for no " << endl;
+                cin >> breed;
+            }
+        }
+        else if (com == "show" || com == "sae")
+        {
             print_active_engimon();
-        }else if(com == "talk" || com == "int"){
+        }
+        else if (com == "talk" || com == "int")
+        {
             interact();
-        }else if(com == "c" || com == "C" || com == "Change"){
+        }
+        else if (com == "c" || com == "C" || com == "Change")
+        {
             changeActive();
         }
-        else if(com == "q" || com == "quit" || com == "exit"){
+        else if (com == "q" || com == "quit" || com == "exit")
+        {
             cout << "GoodBye!" << endl;
             exit(0);
         }
@@ -134,7 +169,7 @@ public:
 
     void changeActiveEngimon()
     {
-        
+
         if (inv_engimon.get_nItem() > 0)
         {
             //cout << this->activeEngimon.getName() << endl;
@@ -152,7 +187,8 @@ public:
         }
     }
 
-    void changeActive(){
+    void changeActive()
+    {
         if (inv_engimon.get_nItem() > 0)
         {
             //cout << this->activeEngimon.getName() << endl;
@@ -183,47 +219,49 @@ public:
 
         // UDAH BELUM YAK?????
     }
-    void interact(){
+    void interact()
+    {
         cout << "Halo! \nAku " << this->activeEngimon.getName() << endl;
         cout << "Engimon tipe ";
-        int num_skills = this->activeEngimon.getElements().size(); 
-        for (int i=0; i<num_skills; i++){
+        int num_skills = this->activeEngimon.getElements().size();
+        for (int i = 0; i < num_skills; i++)
+        {
             string s = "";
             switch (this->activeEngimon.getElements()[i])
             {
             case Element::NoElement:
                 s = "None";
                 break;
-            
+
             case Element::Fire:
                 s = "Fire";
                 break;
-            
+
             case Element::Water:
                 s = "Water";
                 break;
-            
+
             case Element::Electric:
                 s = "Electric";
                 break;
-            
+
             case Element::Ground:
                 s = "Ground";
                 break;
-            
+
             case Element::Ice:
                 s = "Ice";
                 break;
-            
+
             default:
-                s="";
+                s = "";
                 break;
             }
             cout << s << "; ";
         }
         cout << "level " << this->activeEngimon.getLevel() << endl;
-        cout << "EXP : " << this->activeEngimon.getExp() << "/" << MAX_EXP << endl << endl;
-
+        cout << "EXP : " << this->activeEngimon.getExp() << "/" << MAX_EXP << endl
+             << endl;
     }
     //void switchActiveEngimon();
 
@@ -238,15 +276,17 @@ public:
     {
         name = name_;
         position = Position(INIT_PLAYER_X, INIT_PLAYER_Y);
-        activeEngimon.setPosition(Position(INIT_ACTIVEMON_X,INIT_ACTIVEMON_Y));
+        activeEngimon.setPosition(Position(INIT_ACTIVEMON_X, INIT_ACTIVEMON_Y));
     }
 
-    Player(vector<Element> a) : activeEngimon(Position(0,0),"a","a",0,a){
+    Player(vector<Element> a) : activeEngimon(Position(0, 0), "a", "a", 0, a)
+    {
         name = "";
-        position = Position(1,0);
+        position = Position(1, 0);
     }
 
-    Player(const Player& other){
+    Player(const Player &other)
+    {
         this->name = other.name;
         this->position = other.position;
         this->inv_engimon = other.inv_engimon;
@@ -254,7 +294,8 @@ public:
         this->activeEngimon = other.activeEngimon;
     }
 
-    void operator=(const Player& other){
+    void operator=(const Player &other)
+    {
         this->name = other.name;
         this->position = other.position;
         this->inv_engimon = other.inv_engimon;
@@ -266,7 +307,8 @@ public:
     //     return this->inv_engimon;
     // }
 
-    void Add_inv_engimon(EngimonUser& e1){
+    void Add_inv_engimon(EngimonUser &e1)
+    {
         this->inv_engimon.add_item(e1);
     }
 
