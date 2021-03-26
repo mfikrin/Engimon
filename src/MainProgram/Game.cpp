@@ -73,6 +73,8 @@ public:
 		cout << " Move: w a s d" << endl;
 		cout << " Inventory: i" << endl;
 		cout << " Change Active Engimon: c / C / change" << endl;
+		cout << " Show Active Engimon: show / sae" << endl;
+		cout << " Interact: talk / int" << endl;
 		cout << " quit: q / quit / exit" << endl;
 		cout << " >> "; 
 	} 
