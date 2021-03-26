@@ -133,8 +133,19 @@ public:
 	{
 		string name = inputPlayerName();
 		cout << "Hello " << name << "!" << endl;
+		Position P1;
+		Engimon engimon1 = chooseEngimon();
+		EngimonUser user1(P1, engimon1.getName(), engimon1.getSpecies(), engimon1.getLevel(), engimon1.getElements());
+		user1.setLevel(36);
+		Position P2;
+		Engimon engimon2 = chooseEngimon();
+		EngimonUser user2(P2, engimon2.getName(), engimon2.getSpecies(), engimon2.getLevel(), engimon2.getElements());
+		user2.setLevel(35);
+
 		Engimon chosen = chooseEngimon();
 		player = Player(name, chosen);
+		player.Add_inv_engimon(user1);
+		player.Add_inv_engimon(user2);
 	}
 
 	void renderMap(vector<EngimonEnemy> listEngimonLiar)
