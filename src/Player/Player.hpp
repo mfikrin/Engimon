@@ -34,6 +34,7 @@ protected:
     Inventory<EngimonUser, MAX_ENGIMON_INV> inv_engimon;
     Inventory<SkillItem, MAX_SKILL_ITEM_INV> inv_skill;
     EngimonUser activeEngimon;
+    
 
 public:
     // OTHER METHOD
@@ -122,7 +123,10 @@ public:
             print_active_engimon();
         }else if(com == "talk" || com == "int"){
             interact();
-        }else if(com == "q" || com == "quit" || com == "exit"){
+        }else if(com == "c" || com == "C" || com == "Change"){
+            changeActive();
+        }
+        else if(com == "q" || com == "quit" || com == "exit"){
             cout << "GoodBye!" << endl;
             exit(0);
         }
@@ -130,7 +134,7 @@ public:
 
     void changeActiveEngimon()
     {
-        // menunggu Inventory
+        
         if (inv_engimon.get_nItem() > 0)
         {
             //cout << this->activeEngimon.getName() << endl;
@@ -147,6 +151,32 @@ public:
             exit(1);
         }
     }
+
+    void changeActive(){
+        if (inv_engimon.get_nItem() > 0)
+        {
+            //cout << this->activeEngimon.getName() << endl;
+            cout << "nama aktif engimon : " << this->activeEngimon.getName() << endl;
+            EngimonUser temp = this->activeEngimon;
+            cout << "nama aktif engimon temp : " << temp.getName() << endl;
+            inv_engimon.show_bag();
+            cout << "Input id : ";
+            int id;
+            cin >> id;
+            activeEngimon = inv_engimon.select_item(id);
+            inv_engimon.add_item(temp);
+
+            inv_engimon.show_bag();
+
+            //cout <<this->activeEngimon.getName() << endl;
+        }
+        else
+        {
+            cout << "GAME OVER" << endl;
+            exit(1);
+        }
+    }
+
     void useSkillItem(SkillItem &si, Engimon &e)
     {
         si.learn(&e);
@@ -242,7 +272,17 @@ public:
 
     void Add_inv_skill(SkillItem &s1)
     {
-        this->inv_skill.add_item(s1);
+        // for (auto &it : map_item)
+        // {
+        //     if (it.second == s1)
+        //     {
+        //         it.second.
+        //     }
+        //     // SkillItem namaskill = this->inv_skill[i]
+        //     // if (this->[i].get){
+        // }
+
+        //  this->inv_skill.add_item(s1);
     }
 
     void Add_exp(int exp)
