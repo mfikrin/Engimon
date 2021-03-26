@@ -95,7 +95,7 @@ public:
 			os << "|Element:No Element";
 		}
 		os << "|Power:" << skill_item.containedSkill.getPower();
-		os << "|Mastery Level:" << skill_item.containedSkill.getMasteryLevel() << "]";
+		os << "|Number:" << skill_item.number << "]";
 		
 		return os;
 	}

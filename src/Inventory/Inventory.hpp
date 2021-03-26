@@ -55,7 +55,6 @@ public:
 		{
 			this->id_inven += 1;
 			map_item.insert(pair<int, T>(id_inven, item));
-			//cout << "MAsuk" << endl;
 			this->n_item += 1;
 		}
 		else
@@ -63,19 +62,6 @@ public:
 			throw item;
 		}
 	}
-
-	// void add_item(SkillItem item){
-	// 	if (this->n_item < this->max_inv)
-	// 	{
-	// 		this->id_inven += 1;
-	// 		map_item.insert(pair<int, T>(id_inven, item));
-	// 		this->n_item += 1;
-	// 	}
-	// 	else
-	// 	{
-	// 		throw item;
-	// 	}
-	// }
 
 	void delete_item(int id_inven)
 	{
