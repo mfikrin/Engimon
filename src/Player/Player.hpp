@@ -38,12 +38,13 @@ public:
     // OTHER METHOD
     void Move(char direction)
     {
-        if ((direction == 'w' && position.getYPos() == 0) || (direction == 'a' && position.getXPos() == 0) || (direction == 's' && position.getXPos() == MAP_HEIGHT - 1) || (direction == 'd' && position.getXPos() == MAP_WIDTH - 1))
+        if ((direction == 'w' && position.getYPos() == 0) || (direction == 'a' && position.getXPos() == 0) || (direction == 's' && position.getYPos() == MAP_HEIGHT - 1) || (direction == 'd' && position.getXPos() == MAP_WIDTH - 1))
         {
             throw "KELUAR MAP CUY!!";
         }
         else
         {
+
             switch (direction)
             {
             case 'w':
