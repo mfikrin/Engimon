@@ -19,6 +19,9 @@ public:
     {
         this->engimonUserPosition = p;
     }
+    EngimonUser(const Engimon& otherEngimon) : Engimon(otherEngimon){
+        this->engimonUserPosition = Position(0,0);
+    }
 
     void operator=(const EngimonUser(& other)){
         this->name = other.name;
@@ -26,6 +29,7 @@ public:
         this->id = other.id;
         this->elements = other.elements;
         this->engimonUserPosition = other.engimonUserPosition;
+        this->skills = other.skills;
     }
 
     void moveEngimonUser(const Position &p)

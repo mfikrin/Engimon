@@ -148,14 +148,17 @@ public:
     //void switchActiveEngimon();
 
     // CTOR
-    Player(string name_, Engimon &active) : activeEngimon(Position(INIT_ACTIVEMON_X, INIT_ACTIVEMON_Y), active.getName(), active.getSpecies(), active.getId(), active.getElements())
+    // Player(string name_, Engimon &active) : activeEngimon(Position(INIT_ACTIVEMON_X, INIT_ACTIVEMON_Y), active.getName(), active.getSpecies(), active.getId(), active.getElements())
+    // {
+    //     name = name_;
+    //     position = Position(INIT_PLAYER_X, INIT_PLAYER_Y);
+    // }
+
+    Player(string name_, Engimon &active) : activeEngimon(active)
     {
-        for(int i = 0; i < active.getSkills().size(); ++i){
-            active.getSkills()[i].printSkill();
-            activeEngimon.addSkill(active.getSkills()[i]);
-        }
         name = name_;
         position = Position(INIT_PLAYER_X, INIT_PLAYER_Y);
+        activeEngimon.setPosition(Position(INIT_ACTIVEMON_X,INIT_ACTIVEMON_Y));
     }
 
     Player(vector<Element> a) : activeEngimon(Position(0,0),"a","a",0,a){

@@ -74,6 +74,8 @@ public:
         this->level = other.level;
         this->exp = other.exp;
         this->cExp = other.cExp;
+        this->skills = other.skills;
+        this->elements = other.elements;
     }
 
     void operator=(const Engimon& other){
@@ -87,6 +89,8 @@ public:
         this->level = other.level;
         this->exp = other.exp;
         this->cExp = other.cExp;
+        this->skills = other.skills;
+        this->elements = other.elements;
     }
     // Engimon (string n, const Engimon& p1, const Engimon& p2){
 
