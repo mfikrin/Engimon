@@ -78,9 +78,9 @@ public:
         return activeEngimon;
     }
 
-    // void print_active_engimon(){
-    //     cout << this->activeEngimon.getName() << endl;
-    // }
+    void print_active_engimon(){
+        cout << "Nama: " << this->activeEngimon.getName() << endl << endl;
+    }
 
     Position getActiveEngimonPosition()
     {
@@ -118,6 +118,10 @@ public:
                     inv_skill.show_bag();
                 }
             } while (invent != "1" && invent != "2");
+        }else if(com == "show" || com == "sae"){
+            print_active_engimon();
+        }else if(com == "talk" || com == "int"){
+            interact();
         }else if(com == "q" || com == "quit" || com == "exit"){
             cout << "GoodBye!" << endl;
             exit(0);
@@ -129,11 +133,13 @@ public:
         // menunggu Inventory
         if (inv_engimon.get_nItem() > 0)
         {
+            //cout << this->activeEngimon.getName() << endl;
             inv_engimon.show_bag();
             cout << "Input id : ";
             int id;
             cin >> id;
             activeEngimon = inv_engimon.select_item(id);
+            //cout <<this->activeEngimon.getName() << endl;
         }
         else
         {
@@ -141,16 +147,54 @@ public:
             exit(1);
         }
     }
-    //void showSkillItems(); // Nunggu Inventory
-    // void useSkillItem(SkillItem &si, Engimon &e)
-    // {
-    //     si.learn(&e);
+    void useSkillItem(SkillItem &si, Engimon &e)
+    {
+        si.learn(&e);
 
-    //     // UDAH BELUM YAK?????
-    // }
-    //Engimon breed(const Engimon& a, const Engimon& b);
-    // void battle(const Map& m);
-    //void interact();
+        // UDAH BELUM YAK?????
+    }
+    void interact(){
+        cout << "Halo! \nAku " << this->activeEngimon.getName() << endl;
+        cout << "Engimon tipe ";
+        int num_skills = this->activeEngimon.getElements().size(); 
+        for (int i=0; i<num_skills; i++){
+            string s = "";
+            switch (this->activeEngimon.getElements()[i])
+            {
+            case Element::NoElement:
+                s = "None";
+                break;
+            
+            case Element::Fire:
+                s = "Fire";
+                break;
+            
+            case Element::Water:
+                s = "Water";
+                break;
+            
+            case Element::Electric:
+                s = "Electric";
+                break;
+            
+            case Element::Ground:
+                s = "Ground";
+                break;
+            
+            case Element::Ice:
+                s = "Ice";
+                break;
+            
+            default:
+                s="";
+                break;
+            }
+            cout << s << "; ";
+        }
+        cout << "level " << this->activeEngimon.getLevel() << endl;
+        cout << "EXP : " << this->activeEngimon.getExp() << "/" << MAX_EXP << endl << endl;
+
+    }
     //void switchActiveEngimon();
 
     // CTOR
@@ -199,6 +243,11 @@ public:
     void Add_inv_skill(SkillItem &s1)
     {
         this->inv_skill.add_item(s1);
+    }
+
+    void Add_exp(int exp)
+    {
+        this->activeEngimon.Add_exp(exp);
     }
 };
 

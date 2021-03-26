@@ -196,7 +196,7 @@ public:
         if (exp >= MAX_EXP)
         {
             this->levelUp();
-            setExp(exp - MAX_EXP);
+            //setExp(exp - MAX_EXP);
         }
         if (cExp >= MAX_C_EXP)
         {
@@ -217,6 +217,13 @@ public:
     void setId(int id)
     {
         this->id = id;
+    }
+
+    void Add_exp(int exp)
+    {
+        this->exp += exp;
+        this->cExp += exp;
+        updateStats();
     }
 
     void printEngimon()
@@ -271,7 +278,7 @@ public:
 
     friend ostream &operator<<(ostream &os, const Engimon &engimon)
     {
-        os << "[" << engimon.name << "]";
+        os << "[" << engimon.name << "|Level " << engimon.level << "|Experience : " << engimon.exp << "]";
         return os;
     }
 };

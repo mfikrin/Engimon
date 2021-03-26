@@ -41,6 +41,7 @@ public:
     int getBasePower() { return this->numerikBasePower; }
     string getSkillName() { return this->skillName; }
     Element getElement() { return element; }
+    int getPower() { return this->power; }
 
     void printSkill()
     {
