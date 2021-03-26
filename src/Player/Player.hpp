@@ -125,21 +125,28 @@ public:
                 else
                 {
                     inv_skill.show_bag();
-                    if(inv_skill.get_nItem() > 0){
+                    if (inv_skill.get_nItem() > 0)
+                    {
                         cout << "Want to make your Active Engimon learn skills?" << endl;
                         string confirmation;
-                        do{
+                        do
+                        {
                             cin >> confirmation;
-                            if (confirmation == "yes"){
+                            if (confirmation == "yes")
+                            {
                                 cout << "Select the skill for your Engimon to learn!" << endl;
                                 int id;
                                 cin >> id;
-                                inv_skill.learn(activeEngimon,id);
-                            }else if (confirmation != "no"){
+                                inv_skill.learn(activeEngimon, id);
+                            }
+                            else if (confirmation != "no")
+                            {
                                 cout << "Type 'yes' or 'no'!" << endl;
                             }
-                        }while(confirmation != "yes" && confirmation != "no");
-                    }else{
+                        } while (confirmation != "yes" && confirmation != "no");
+                    }
+                    else
+                    {
                         cout << "Nothing to see..." << endl;
                     }
                 }
@@ -256,18 +263,13 @@ public:
         }
     }
 
-<<<<<<< HEAD
-    // void useSkillItem(SkillItem &si, Engimon &e)
-    // {
-    //     si.learn(&e);
-=======
     void useSkillItem(SkillItem &si, Engimon &e)
     {
         si.learn(e);
->>>>>>> e21df23400a37d7cd0fde3561a62080fa4427daf
 
-    //     // UDAH BELUM YAK?????
-    // }
+        //     // UDAH BELUM YAK?????
+        // }'
+    }
     void interact()
     {
         cout << "Hello! \nI'm " << this->activeEngimon.getName() << endl;
@@ -313,12 +315,13 @@ public:
         for (int i = 0; i < activeEngimon.getSkills().size(); i++)
         {
             cout << "-";
-            cout << activeEngimon.getSkills()[i].getSkillName() << ";" << "Power:" << activeEngimon.getSkills()[i].getPower()
-                 << ";" << "Mastery Level:" << activeEngimon.getSkills()[i].getMasteryLevel() << endl;
+            cout << activeEngimon.getSkills()[i].getSkillName() << ";"
+                 << "Power:" << activeEngimon.getSkills()[i].getPower()
+                 << ";"
+                 << "Mastery Level:" << activeEngimon.getSkills()[i].getMasteryLevel() << endl;
         }
         cout << "EXP : " << this->activeEngimon.getExp() << "/" << MAX_EXP << endl
              << endl;
-        
     }
     //void switchActiveEngimon();
 
@@ -389,6 +392,8 @@ public:
     {
         this->activeEngimon.Add_exp(exp);
     }
-};
+}
+
+;
 
 #endif // PLAYER_HPP
