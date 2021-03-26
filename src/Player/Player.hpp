@@ -31,8 +31,8 @@ class Player
 protected:
     string name;
     Position position;
-    Inventory<EngimonUser, MAX_ENGIMON_INV> inv_engimon;
-    Inventory<SkillItem, MAX_SKILL_ITEM_INV> inv_skill;
+    Inventory<EngimonUser> inv_engimon;
+    Inventory<SkillItem> inv_skill;
     EngimonUser activeEngimon;
 
 public:
@@ -89,7 +89,7 @@ public:
         return activeEngimon.getPosition();
     }
 
-    Inventory<EngimonUser, MAX_ENGIMON_INV> get_inv_engimon() {
+    Inventory<EngimonUser> get_inv_engimon() {
         return this->inv_engimon;
     }
      
@@ -330,6 +330,7 @@ public:
         // }
 
         //  this->inv_skill.add_item(s1);
+        this->inv_skill.add_item(s1);
     }
 
     void Add_exp(int exp)

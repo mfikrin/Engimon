@@ -17,8 +17,12 @@ private:
 public:
 	SkillItem(const Skill &skill)
 	{
-		number = 0;
+		number = 1;
 		containedSkill = skill;
+	}
+
+	SkillItem(){
+		number = 1;
 	}
 
 	int getNumber()
@@ -41,24 +45,27 @@ public:
 		number++;
 	}
 
+	void reduceNumber(){
+		number--;
+	}
+
 	int getId()
 	{
 		return containedSkill.getSkillId();
 	}
 
-	void learn(Engimon *chosen)
+	void learn(Engimon& chosen)
 	{
 		if (number > 0)
 		{
-			vector<Element> chosensElement = chosen->getElements();
+			vector<Element> chosensElement = chosen.getElements();
 			bool added = false;
 			for (int i = 0; i < chosensElement.size(); ++i)
 			{
 				if (chosensElement[i] == containedSkill.getElement() || containedSkill.getElement() == Element::NoElement)
 				{
-					chosen->addSkill(containedSkill);
+					chosen.addSkill(containedSkill);
 					added = true;
-					number--;
 					break;
 				}
 			}
