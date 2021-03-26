@@ -50,13 +50,52 @@ public:
     {
         return this->max_inv;
     }
-    void add_item(T item)
+    void add_item(EngimonUser item)
     {
         if (this->n_item < this->max_inv)
         {
+            // m.insert(make_pair("Noob", map<int, int>()));
+            // m["Noob"].insert(make_pair(0, 5));
+
             this->id_inven += 1;
-            map_item.insert(pair<int, T>(id_inven, item));
+            map_item.insert(make_pair(this->id_inven, map<EngimonUser,int>())); 
+            int n_T = 1;
+            map_item[this->id_inven].insert(make_pair(item,n_T));
             this->n_item += 1;
+        }
+        else
+        {
+            throw item;
+        }
+    }
+
+    bool check_key(map<T,int> map, T key){
+        if (map.find(key) == map.end()){
+            return false;
+        }
+        return true;
+    }
+    
+
+    void add_item(SkillItem item)
+    {
+        if (this->n_item < this->max_inv)
+        {
+            // m.insert(make_pair("Noob", map<int, int>()));
+            // m["Noob"].insert(make_pair(0, 5));
+            
+            this->id_inven += 1;
+            if (!(check_key(map_item[this->id_inven],item)))
+                map_item.insert(make_pair(this->id_inven, map<SkillItem, int>()));
+                int n_T = item.getNumber();
+                map_item[this->id_inven].insert(make_pair(item, n_T));
+                this->n_item += 1;
+            else{
+                int n_current = item.getNumber();
+                int n_new = n_current + 1;
+                map_item[item] = n_new;
+            }
+            
         }
         else
         {
