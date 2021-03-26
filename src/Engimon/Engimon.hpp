@@ -278,7 +278,7 @@ public:
 
     friend ostream &operator<<(ostream &os, const Engimon &engimon)
     {
-        os << "[" << engimon.name << "]";
+        os << "[" << engimon.name << "|Level " << engimon.level << "|Experience : " << engimon.exp << "]";
         return os;
     }
 };
