@@ -55,7 +55,7 @@ public:
 		{
 			this->id_inven += 1;
 			map_item.insert(pair<int, T>(id_inven, item));
-			cout << "MAsuk" << endl;
+			//cout << "MAsuk" << endl;
 			this->n_item += 1;
 		}
 		else
@@ -70,7 +70,7 @@ public:
 		{
 			if (map_item.erase(id_inven)) // id ada
 			{
-				cout << "yuhuu" << endl;
+				//cout << "yuhuu" << endl;
 				map_item.erase(id_inven);
 				this->n_item -= 1;
 				cout << "Item dengan ID " << id_inven << " telah dihapus" << endl;

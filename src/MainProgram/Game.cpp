@@ -187,14 +187,14 @@ public:
 				if (a == 1)
 				{
 					cout << "menang" << endl;
-					cout << player.getActiveEngimon().getExp() << endl;
+					//cout << player.getActiveEngimon().getExp() << endl;
 					int inc_exp = ((abs(player.getActiveEngimon().getLevel() - listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getLevel())) + 1) * 10;
 					//int inc_exps = 100;
-					cout << "inc : " << inc_exp << endl;
+					//cout << "inc : " << inc_exp << endl;
 					int new_exp = player.getActiveEngimon().getExp() + inc_exp;
-					cout << "exp : " << new_exp << endl;
+					//cout << "exp : " << new_exp << endl;
 					player.Add_exp(inc_exp);
-					cout << player.getActiveEngimon().getExp() << endl;
+					//cout << player.getActiveEngimon().getExp() << endl;
 					vector<Element> element_active = player.getActiveEngimon().getElements();							   // semua elemen dari engimon aktif
 					vector<Element> element_enemy = listEngimonLiar[map.EnemyNear(player, listEngimonLiar)].getElements(); // semua elemen dari engimon element
 
@@ -240,7 +240,7 @@ public:
 			else
 			{
 				cout << "okay bubayy" << endl;
-				map.Render(player, listEngimonLiar);
+				//map.Render(player, listEngimonLiar);
 			}
 		}
 	}
