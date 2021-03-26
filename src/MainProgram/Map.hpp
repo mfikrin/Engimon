@@ -27,7 +27,6 @@ private:
     Position playerPosition;
     Position activeEngimonPosition;
     Position engimonPosition;
-
 public:
     Map(string namaFile)
     {
