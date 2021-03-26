@@ -34,7 +34,7 @@ public:
                 cout << "Parent 2 tidak ada di inventory" << endl;
             }
             else
-            {                                                           // parent1 dan parent2 ada di inventory
+            {// parent1 dan parent2 ada di inventory
                 if (parent1.getLevel() < 30 || parent2.getLevel() < 30) // Salah satu parent berlevel kurang dari 30
                 {
                     if (parent1.getLevel() < 30)
@@ -259,48 +259,111 @@ public:
                     }
 
                     // Max Mastery Level Skill
-                    Skill maxMasteryLevelSkill = parentSkill[0];
-                    for (int i = 1; i < parentSkill.size(); i++)
-                    {
-                        if (maxMasteryLevelSkill.getMasteryLevel() < parentSkill[i].getMasteryLevel())
+                    Skill maxMasteryLevelSkill;
+                    while (childSkill.size() < 5 && parentSkill.size() != 0){
+                        // Mengambil Skill dengan Max Mastery Level
+                        maxMasteryLevelSkill = parentSkill[0]; 
+                        for (int i = 1; i < parentSkill.size(); i++)
                         {
-                            maxMasteryLevelSkill = parentSkill[i];
+                            if (maxMasteryLevelSkill.getMasteryLevel() < parentSkill[i].getMasteryLevel())
+                            {
+                                maxMasteryLevelSkill = parentSkill[i];
+                            }
+                            
                         }
-                        
-                    }
-                    // Mengumpulkan Skill Max Mastery Level
-                    vector<Skill> skillOfNMasteryLevel;
-                    for (int i = 0; i < parentSkill.size(); i++)
-                    {
-                        if (parentSkill[i].get asteryLevel()== )maxMasteryLevelSkill.getMasteryLevel()
+                        // Mengumpulkan Skill Max Mastery Level
+                        vector<Skill> skillOfNMasteryLevel;
+                        for (int i = 0; i < parentSkill.size(); i++)
                         {
-                            /skillOfNMasteryLevel.push_back(parentSkill[i]);
-                        }
-                        
-                    }
+                            if (parentSkill[i].getMasteryLevel()== maxMasteryLevelSkill.getMasteryLevel())
+                            {
+                                skillOfNMasteryLevel.push_back(parentSkill[i]);
+                                parentSkill.erase(parentSkill.begin()+i);
+                            }
+                            
+                        }                    
 
-
-                    
-
-                    if (skillOfNMasteryLevel.size() > 1){
-                        vector<Skill> skillOfNMasteryLevelParentA;
-                        for (int i = 0; i < skillOfNMasteryLevel.size(); i++){
-                            for (int j = 0; j < parent1.getSkills().size(); j++){
-                                if (skillOfNMasteryLevel[i].getSkillId() == parent1.getSkills()[j].getSkillId()){
-                                    skillOfNMasteryLevelParentA.push_back(skillOfNMasteryLevel[i]);
-                                    skillOfNMasteryLevel.erase(skillOfNMasteryLevel.begin()+i);
-                                    // listEngimonLiar.erase(listEngimonLiar.begin() + peta.EnemyNear(pemain, listEngimonLiar));
+                        // Mengumpulkan Skill Max Mastery Level dari Parent A
+                        if (skillOfNMasteryLevel.size() > 1){
+                            vector<Skill> skillOfNMasteryLevelParentA;
+                            for (int i = 0; i < skillOfNMasteryLevel.size(); i++){
+                                for (int j = 0; j < parent1.getSkills().size(); j++){
+                                    if (skillOfNMasteryLevel[i].getSkillId() == parent1.getSkills()[j].getSkillId()){
+                                        skillOfNMasteryLevelParentA.push_back(skillOfNMasteryLevel[i]);
+                                        skillOfNMasteryLevel.erase(skillOfNMasteryLevel.begin()+i);
+                                    }
                                 }
                             }
-                        }    
-                    } else {
+                            for (int i = 0; i < skillOfNMasteryLevelParentA.size(); i++)
+                            {
+                                childSkill.push_back(skillOfNMasteryLevelParentA[i]);
+                            }
+                            for (int i = 0; i < skillOfNMasteryLevel.size(); i++)
+                            {
+                                childSkill.push_back(skillOfNMasteryLevel[i]);
+                            }
 
-                    }
-                    while (childSkill.size() < 5 && parentSkill.size() != 0){
-
+                        } else {
+                            childSkill.push_back(skillOfNMasteryLevel[0]);
+                            skillOfNMasteryLevel.erase(skillOfNMasteryLevel.begin() + 0);
+                        }
                     } // childSkill.size() >= 5 atau parentSkill.size() = 0
                     
-                    
+                    // Membuang skill ke-5 dan seterusnya
+                    if (childSkill.size() > 4)
+                    {
+                        for (int i = 4; i < childSkill.size(); i++)
+                        {
+                            childSkill.erase(childSkill.begin()+i);
+                        }
+                        
+                    }
+
+                    bool bothParentHave = false;
+                    for (int i = 0; i < childSkill.size(); i++)
+                    {
+                        int j = 0;
+                        bool parent1Have = false;
+                        while (!parent1Have && j < parent1.getSkills().size()){
+                            if (parent1.getSkills()[j].getSkillId() == childSkill[i].getSkillId())
+                            {
+                                parent1Have = true;
+                            }
+                            
+                            j++;
+                        }
+                        
+                        int k = 0;
+                        bool parent2Have = false;
+                        while (!parent2Have && k < parent2.getSkills().size()){
+                            if (parent2.getSkills()[k].getSkillId() == childSkill[i].getSkillId())
+                            {
+                                parent1Have = true;
+                            }
+                            
+                            k++;
+                        }
+
+                        bothParentHave = parent1Have && parent2Have;
+                        if (bothParentHave)
+                        {
+                            if (parent1.getSkills()[j].getMasteryLevel() == parent2.getSkills()[k].getMasteryLevel())
+                            {
+                                childSkill[i].setMasteryLevel(parent1.getSkills()[j].getMasteryLevel() + 1);
+                            } else {
+                                if (parent1.getSkills()[j].getMasteryLevel() > parent2.getSkills()[k].getMasteryLevel())
+                                {
+                                    childSkill[i].setMasteryLevel(parent1.getSkills()[j].getMasteryLevel());
+                                } else {
+                                    childSkill[i].setMasteryLevel(parent2.getSkills()[k].getMasteryLevel());
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        
+                    }
 
                     // MENENTUKAN ID
                     int maxID = ensiklopedia.allEngimon()[0][0].getId();
@@ -317,7 +380,13 @@ public:
                     childID = maxID + 1;
 
                     Engimon child(childName, childSpecies, childID, childElement);
-
+                    child.setParentNames(parent1.getName(), parent2.getName());
+                    child.setParentSpecies(parent1.getSpecies(), parent2.getSpecies());
+                    for (int i = 0; i < childSkill.size(); i++)
+                    {
+                        child.addSkill(childSkill[i]);
+                    }
+                    
                     parent1.setLevel(parent1.getLevel() - 30);
                     parent2.setLevel(parent2.getLevel() - 30);
 
